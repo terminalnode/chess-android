@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Newton Schack</string>
+  <string name="newtonLogoDescription">En bild föreställandes Sir Isaac Newton som håller en Java-kopp</string>
+  <string name="splashTitleChess">S c h a c k</string>
+  <string name="splashTitleNewton">N e w t o n</string>
+</resources>

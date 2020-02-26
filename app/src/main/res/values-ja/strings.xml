@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">ニュートン チェス</string>
+  <string name="splashTitleNewton">ニ ュ ー ト ン</string>
+  <string name="splashTitleChess">チ ェ ス</string>
+  <string name="newtonLogoDescription">ジャバカップを持っているサー・アイザック・ニュートンの画像</string>
+</resources>
