@@ -1,3 +1,6 @@
 <resources>
   <string name="app_name">Newton Chess</string>
+  <string name="splashTitleNewton">N e w t o n</string>
+  <string name="splashTitleChess">C h e s s</string>
+  <string name="newtonLogoDescription">An image showing Sir Isaac Newton holding a Java cup</string>
 </resources>

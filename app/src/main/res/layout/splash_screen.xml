@@ -1,20 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/splashConstraintLayout"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:background="@color/colorBackground">
 
-  <EditText
-    android:id="@+id/editText"
+  <ImageView
+    android:id="@+id/splashLogo"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:ems="10"
-    android:inputType="textPersonName"
-    android:text="Splash screen"
-    app:layout_constraintBottom_toBottomOf="parent"
+    android:contentDescription="@string/newtonLogoDescription"
+    app:layout_constraintBottom_toTopOf="@+id/splashLogoGuideline"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/newton_java_logo" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/splashLogoGuideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.60" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/splashTextGuideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.75" />
+
+  <TextView
+    android:id="@+id/splashTextNewton"
+    style="@style/TitleText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/splashTitleNewton"
+    android:textAlignment="center"
+    app:layout_constraintBottom_toTopOf="@+id/splashTextGuideline"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <TextView
+    android:id="@+id/splashTextChess"
+    style="@style/TitleText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/splashTitleChess"
+    android:textAlignment="center"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/splashTextGuideline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
