@@ -24,20 +24,21 @@
     android:layout_marginEnd="96dp"
     android:text="@string/next"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/editText" />
+    app:layout_constraintTop_toBottomOf="@+id/passwordEditBox" />
 
   <Button
-    android:id="@+id/button"
+    android:id="@+id/logInButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="96dp"
     android:layout_marginTop="52dp"
+    android:onClick="loginButtonPress"
     android:text="Log In"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/editText" />
+    app:layout_constraintTop_toBottomOf="@+id/passwordEditBox" />
 
   <EditText
-    android:id="@+id/editText"
+    android:id="@+id/passwordEditBox"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="99dp"
@@ -50,7 +51,7 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <EditText
-    android:id="@+id/editText2"
+    android:id="@+id/userNameEditBox"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="99dp"
