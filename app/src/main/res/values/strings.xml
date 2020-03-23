@@ -3,4 +3,8 @@
   <string name="splashTitleNewton">N e w t o n</string>
   <string name="splashTitleChess">C h e s s</string>
   <string name="newtonLogoDescription">An image showing Sir Isaac Newton holding a Java cup</string>
+
+  <string name="title_activity_login_screen">LoginScreen</string>
+  <string name="dummy_button">Dummy Button</string>
+  <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
