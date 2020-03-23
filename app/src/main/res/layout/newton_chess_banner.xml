@@ -32,6 +32,7 @@
     android:text="@string/splashTitleNewton"
     android:textColor="@color/colorPrimary"
     android:textSize="30sp"
+    android:textStyle="bold"
     app:layout_constraintBottom_toTopOf="@+id/bannerTextGuideline"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/bannerLogoImageView" />
@@ -43,6 +44,7 @@
     android:text="@string/splashTitleChess"
     android:textColor="@color/colorPrimary"
     android:textSize="30sp"
+    android:textStyle="bold"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/bannerLogoImageView"
     app:layout_constraintTop_toTopOf="@+id/bannerTextGuideline" />
