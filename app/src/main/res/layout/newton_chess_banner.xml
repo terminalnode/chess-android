@@ -4,60 +4,48 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/splashConstraintLayout"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/colorBackground">
+  android:layout_height="match_parent">
 
   <ImageView
-    android:id="@+id/splashLogo"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:id="@+id/imageView"
+    android:layout_width="90dp"
+    android:layout_height="90dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
     android:contentDescription="@string/newtonLogoDescription"
-    app:layout_constraintBottom_toTopOf="@+id/splashLogoGuideline"
-    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:srcCompat="@drawable/newton_java_logo" />
 
   <androidx.constraintlayout.widget.Guideline
-    android:id="@+id/splashLogoGuideline"
+    android:id="@+id/guideline"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    app:layout_constraintGuide_percent="0.60" />
-
-  <androidx.constraintlayout.widget.Guideline
-    android:id="@+id/splashTextGuideline"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:layout_constraintGuide_percent="0.75" />
+    app:layout_constraintGuide_begin="50dp" />
 
   <TextView
-    android:id="@+id/splashTextNewton"
-    style="@style/TitleText"
+    android:id="@+id/textView2"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:shadowColor="@color/colorPrimaryDark"
     android:text="@string/splashTitleNewton"
-    android:textAlignment="center"
     android:textColor="@color/colorPrimary"
-    app:layout_constraintBottom_toTopOf="@+id/splashTextGuideline"
+    android:textSize="20dp"
+    app:layout_constraintBottom_toTopOf="@+id/guideline"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintStart_toEndOf="@+id/imageView" />
 
   <TextView
-    android:id="@+id/splashTextChess"
-    style="@style/TitleText"
+    android:id="@+id/textView3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:shadowColor="@color/colorPrimaryDark"
     android:text="@string/splashTitleChess"
-    android:textAlignment="center"
     android:textColor="@color/colorPrimary"
+    android:textSize="20dp"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/splashTextGuideline" />
-
+    app:layout_constraintStart_toEndOf="@+id/imageView"
+    app:layout_constraintTop_toTopOf="@+id/guideline" />
 </androidx.constraintlayout.widget.ConstraintLayout>
