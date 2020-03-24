@@ -16,10 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class LoginScreenCredentialsFragment extends Fragment {
 
   @Override
-  public View onCreateView(
-      LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState
-  ) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     return inflater.inflate(R.layout.login_screen_credentials_fragment, container, false);
   }
@@ -27,11 +24,10 @@ public class LoginScreenCredentialsFragment extends Fragment {
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
+    // Set up listeners
     view.findViewById(R.id.signUpButton)
-        .setOnClickListener(v -> NavHostFragment.findNavController(LoginScreenCredentialsFragment.this)
-        .navigate(R.id.action_FirstFragment_to_SecondFragment));
+        .setOnClickListener(this::signUpButtonPress);
 
-    // Set login button listener
     view.findViewById(R.id.logInButton)
         .setOnClickListener(this::loginButtonPress);
   }
@@ -79,5 +75,11 @@ public class LoginScreenCredentialsFragment extends Fragment {
           Snackbar.LENGTH_LONG
       ).show();
     }
+  }
+
+  private void signUpButtonPress(View view) {
+    NavHostFragment
+        .findNavController(LoginScreenCredentialsFragment.this)
+        .navigate(R.id.action_FirstFragment_to_SecondFragment);
   }
 }
