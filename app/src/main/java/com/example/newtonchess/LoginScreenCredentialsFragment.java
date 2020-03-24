@@ -13,7 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.newtonchess.api.ApiLogin;
 import com.google.android.material.snackbar.Snackbar;
 
-public class FirstFragment extends Fragment {
+public class LoginScreenCredentialsFragment extends Fragment {
 
   @Override
   public View onCreateView(
@@ -21,14 +21,14 @@ public class FirstFragment extends Fragment {
       Bundle savedInstanceState
   ) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_first, container, false);
+    return inflater.inflate(R.layout.login_screen_credentials_fragment, container, false);
   }
 
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
     view.findViewById(R.id.signUpButton)
-        .setOnClickListener(v -> NavHostFragment.findNavController(FirstFragment.this)
+        .setOnClickListener(v -> NavHostFragment.findNavController(LoginScreenCredentialsFragment.this)
         .navigate(R.id.action_FirstFragment_to_SecondFragment));
 
     // Set login button listener
