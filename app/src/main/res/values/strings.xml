@@ -17,6 +17,13 @@
   <string name="missingPasswordSnackbar">You forgot to enter a password.</string>
   <string name="incorrectLoginCredentialsSnackbar">Incorrect username and/or password.</string>
 
+  <!-- Main Menu -->
+  <string name="mainmenuWelcome">Welcome, {insertPlayerNameHere}</string>
+  <string name="activeGamesButton">Active Games</string>
+  <string name="startNewGameButton">Start New Game</string>
+  <string name="friendsListButton">Friends List</string>
+
+
   <string name="title_activity_login_screen">LoginScreen</string>
   <string name="dummy_button">Dummy Button</string>
   <string name="dummy_content">DUMMY\nCONTENT</string>

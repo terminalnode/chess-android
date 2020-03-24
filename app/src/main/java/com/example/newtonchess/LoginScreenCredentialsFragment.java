@@ -1,5 +1,6 @@
 package com.example.newtonchess;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,10 @@ public class LoginScreenCredentialsFragment extends Fragment {
       ).show();
 
     } else {
-      // TODO Replace this with something useful, such as switching to the main menu
+
+      Intent mainMenuIntent = new Intent(getContext(), MainMenuActivity.class);
+      startActivity(mainMenuIntent);
+
       Snackbar.make(
           view,
           "Login successful placeholder!!!",
