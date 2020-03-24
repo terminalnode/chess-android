@@ -9,4 +9,8 @@
   <string name="signupButtonText">Registrera</string>
   <string name="usernameTextFieldHint">Användarnamn</string>
   <string name="passwordTextFieldHint">Lösenord</string>
+  <string name="missingUsernamePasswordSnackbar">Ange användarnamn och lösenord för att fortsätta.</string>
+  <string name="missingUsernameSnackbar">Du glömde att ange ett användarnamn.</string>
+  <string name="missingPasswordSnackbar">Du glömde att ange ett lösenord.</string>
+  <string name="incorrectLoginCredentialsSnackbar">Felaktigt användarnamn eller lösenord.</string>
 </resources>

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,15 +30,5 @@ public class FirstFragment extends Fragment {
             .navigate(R.id.action_FirstFragment_to_SecondFragment);
       }
     });
-  }
-
-  public void loginButtonPress(View view) {
-    EditText userNameTextBox = (EditText) view.findViewById(R.id.userNameEditBox);
-    String username = userNameTextBox.getText().toString();
-
-    EditText passwordTextBox = (EditText) view.findViewById(R.id.passwordEditBox);
-    String password = passwordTextBox.getText().toString();
-
-    System.out.println(username + " " + password);
   }
 }

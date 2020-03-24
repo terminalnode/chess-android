@@ -12,6 +12,10 @@
   <string name="signupButtonText">Sign up</string>
   <string name="usernameTextFieldHint">Username</string>
   <string name="passwordTextFieldHint">Password</string>
+  <string name="missingUsernamePasswordSnackbar">Please enter a username and password to continue.</string>
+  <string name="missingUsernameSnackbar">You forgot to enter a username.</string>
+  <string name="missingPasswordSnackbar">You forgot to enter a password.</string>
+  <string name="incorrectLoginCredentialsSnackbar">Incorrect username and/or password.</string>
 
   <string name="title_activity_login_screen">LoginScreen</string>
   <string name="dummy_button">Dummy Button</string>

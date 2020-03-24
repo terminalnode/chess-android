@@ -9,4 +9,8 @@
   <string name="signupButtonText">登録</string>
   <string name="usernameTextFieldHint">ユーザー名</string>
   <string name="passwordTextFieldHint">パスワード</string>
+  <string name="missingUsernamePasswordSnackbar">続けるためにロユーザー名とパスワードを入力してください</string>
+  <string name="missingPasswordSnackbar">パスワードを入力してください</string>
+  <string name="missingUsernameSnackbar">"ユーザー名を入力してください "</string>
+  <string name="incorrectLoginCredentialsSnackbar">"ユーザー名それかパスワードに間違いがあります "</string>
 </resources>
