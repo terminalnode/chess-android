@@ -7,7 +7,7 @@
   tools:context=".FirstFragment">
 
   <TextView
-    android:id="@+id/textview_first"
+    android:id="@+id/loginScreenTitle"
     android:layout_width="165dp"
     android:layout_height="48dp"
     android:layout_marginTop="140dp"
@@ -20,7 +20,7 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <Button
-    android:id="@+id/button_first"
+    android:id="@+id/signUpButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="100dp"
@@ -43,7 +43,6 @@
     android:width="@dimen/loginScreenButtonWidth"
     android:height="@dimen/loginScreenButtonHeight"
     android:background="@color/colorPrimaryDark"
-    android:onClick="loginButtonPress"
     android:text="@string/loginButtonText"
     android:textAllCaps="false"
     android:textColor="@color/colorComplementary"
@@ -63,7 +62,10 @@
     android:hint="@string/passwordTextFieldHint"
     android:inputType="textPassword"
     android:textColor="@color/colorPrimary"
+    android:textColorHighlight="@color/colorComplementary"
     android:textColorHint="@color/colorPrimaryDark"
+    android:textColorLink="@color/colorComplementary"
+    android:textCursorDrawable="@color/colorComplementary"
     android:textSize="@dimen/loginScreenTextFieldFontSize"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -80,11 +82,14 @@
     android:hint="@string/usernameTextFieldHint"
     android:inputType="textEmailAddress"
     android:textColor="@color/colorPrimary"
+    android:textColorHighlight="@color/colorComplementary"
     android:textColorHint="@color/colorPrimaryDark"
+    android:textColorLink="@color/colorComplementary"
+    android:textCursorDrawable="@color/colorComplementary"
     android:textSize="@dimen/loginScreenTextFieldFontSize"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textview_first" />
+    app:layout_constraintTop_toBottomOf="@+id/loginScreenTitle" />
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/verticalMidpoint"
