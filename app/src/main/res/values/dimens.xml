@@ -9,4 +9,7 @@
   <dimen name="loginScreenButtonWidth">180dp</dimen>
   <dimen name="loginScreenTextFieldFontSize">25sp</dimen>
   <dimen name="loginScreenTextFieldWidth">250dp</dimen>
+
+  <!-- Play screen -->
+  <dimen name="playScreenOpponentText">30sp</dimen>
 </resources>
