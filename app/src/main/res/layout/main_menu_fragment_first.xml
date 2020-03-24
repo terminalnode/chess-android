@@ -7,46 +7,59 @@
   tools:context=".MainMenuFirstFragment">
 
   <TextView
-    android:id="@+id/textview_first"
+    android:id="@+id/welcomeTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/mainmenuWelcome"
     android:textSize="25sp"
+    android:textColor="@color/colorPrimary"
     android:textStyle="bold"
-    app:layout_constraintBottom_toTopOf="@+id/new_game"
+    app:layout_constraintBottom_toTopOf="@+id/newGameButton"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <Button
-    android:id="@+id/button_first"
+    android:id="@+id/activeGamesButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/activeGamesButton"
-    app:layout_constraintBottom_toTopOf="@+id/new_game"
+    android:background="@color/colorPrimaryDark"
+    android:textColor="@color/colorComplementary"
+    android:width="@dimen/loginScreenButtonWidth"
+    android:height="@dimen/loginScreenButtonHeight"
+    app:layout_constraintBottom_toTopOf="@+id/newGameButton"
     app:layout_constraintEnd_toEndOf="@+id/guideline"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/textview_first" />
+    app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
 
   <Button
-    android:id="@+id/friends_list"
+    android:id="@+id/friendsListButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/friendsListButton"
-    app:layout_constraintBottom_toTopOf="@+id/new_game"
+    android:background="@color/colorPrimaryDark"
+    android:textColor="@color/colorComplementary"
+    android:width="@dimen/loginScreenButtonWidth"
+    android:height="@dimen/loginScreenButtonHeight"
+    app:layout_constraintBottom_toTopOf="@+id/newGameButton"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="@+id/guideline"
-    app:layout_constraintTop_toBottomOf="@id/textview_first" />
+    app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
 
   <Button
-    android:id="@+id/new_game"
+    android:id="@+id/newGameButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/startNewGameButton"
+    android:background="@color/colorPrimaryDark"
+    android:textColor="@color/colorComplementary"
+    android:width="@dimen/loginScreenButtonWidth"
+    android:height="@dimen/loginScreenButtonHeight"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/textview_first" />
+    app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline"

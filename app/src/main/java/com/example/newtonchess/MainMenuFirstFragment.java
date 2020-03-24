@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class MainMenuFirstFragment extends Fragment {
 
   @Override
@@ -23,12 +25,48 @@ public class MainMenuFirstFragment extends Fragment {
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        NavHostFragment.findNavController(MainMenuFirstFragment.this)
-            .navigate(R.id.action_FirstFragment_to_SecondFragment);
-      }
-    });
+    // Set up listeners
+    view.findViewById(R.id.activeGamesButton)
+        .setOnClickListener(this::activeGamesButtonPress);
+
+    view.findViewById(R.id.newGameButton)
+        .setOnClickListener(this::newGameButtonPress);
+
+    view.findViewById(R.id.friendsListButton)
+        .setOnClickListener(this::friendsButtonPress);
   }
+
+  private void activeGamesButtonPress(View view) {
+    NavHostFragment.findNavController(MainMenuFirstFragment.this)
+        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+
+    Snackbar.make(
+        view,
+        R.string.activeGamesButtonPressed,
+        Snackbar.LENGTH_LONG
+    ).show();
+
+
+  }
+
+  private void newGameButtonPress(View view) {
+
+    Snackbar.make(
+        view,
+        R.string.newGameButtonPressed,
+        Snackbar.LENGTH_LONG
+    ).show();
+
+  }
+
+  private void friendsButtonPress(View view) {
+
+    Snackbar.make(
+        view,
+        R.string.friendsListButtonPressed,
+        Snackbar.LENGTH_LONG
+    ).show();
+
+  }
+
 }

@@ -23,6 +23,10 @@
   <string name="startNewGameButton">Start New Game</string>
   <string name="friendsListButton">Friends List</string>
 
+  <string name="friendsListButtonPressed">You have pressed the Friends List Button</string>
+  <string name="activeGamesButtonPressed">You have pressed the Active Games Button</string>
+  <string name="newGameButtonPressed">You have pressed the New Game Button</string>
+
 
   <string name="title_activity_login_screen">LoginScreen</string>
   <string name="dummy_button">Dummy Button</string>
