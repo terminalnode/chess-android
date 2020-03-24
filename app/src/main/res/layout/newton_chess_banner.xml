@@ -5,13 +5,13 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="100dp">
+  android:layout_height="110dp">
 
   <ImageView
     android:id="@+id/bannerLogoImageView"
     android:layout_width="90dp"
     android:layout_height="90dp"
-    android:layout_marginStart="10dp"
+    android:layout_marginStart="20dp"
     android:layout_marginTop="10dp"
     android:contentDescription="@string/newtonLogoDescription"
     app:layout_constraintStart_toStartOf="parent"
@@ -23,14 +23,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    app:layout_constraintGuide_begin="50dp" />
+    app:layout_constraintGuide_percent="0.5" />
 
   <TextView
     android:id="@+id/bannerTextNewton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/splashTitleNewton"
-    android:textColor="@color/colorPrimary"
+    android:text="@string/titleNewton"
+    android:textColor="@color/colorPrimaryDark"
     android:textSize="30sp"
     android:textStyle="bold"
     app:layout_constraintBottom_toTopOf="@+id/bannerTextGuideline"
@@ -41,8 +41,8 @@
     android:id="@+id/bannerTextChess"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/splashTitleChess"
-    android:textColor="@color/colorPrimary"
+    android:text="@string/titleChess"
+    android:textColor="@color/colorPrimaryDark"
     android:textSize="30sp"
     android:textStyle="bold"
     app:layout_constraintEnd_toEndOf="parent"

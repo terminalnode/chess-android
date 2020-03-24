@@ -2,13 +2,7 @@ package com.example.newtonchess;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 
 public class LoginScreenActivity extends AppCompatActivity {
 
@@ -17,6 +11,8 @@ public class LoginScreenActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login_screen);
 
+    /*
+    // Keeping this commented out for reference on how to use the snackbar
 
     FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
@@ -26,6 +22,7 @@ public class LoginScreenActivity extends AppCompatActivity {
             .setAction("Action", null).show();
       }
     });
+   */
   }
 
 

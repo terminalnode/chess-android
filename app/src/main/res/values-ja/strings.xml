@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">ニュートン チェス</string>
-  <string name="splashTitleNewton">ニ ュ ー ト ン</string>
-  <string name="splashTitleChess">チ ェ ス</string>
+  <string name="appName">ニュートン チェス</string>
+  <string name="titleNewton">ニ ュ ー ト ン</string>
+  <string name="titleChess">チ ェ ス</string>
   <string name="newtonLogoDescription">ジャバカップを持っているサー・アイザック・ニュートンの画像</string>
+  <string name="loginScreenTitle">ログイン</string>
+  <string name="loginButtonText">ログイン</string>
+  <string name="signupButtonText">登録</string>
+  <string name="usernameTextFieldHint">ユーザー名</string>
+  <string name="passwordTextFieldHint">パスワード</string>
 </resources>

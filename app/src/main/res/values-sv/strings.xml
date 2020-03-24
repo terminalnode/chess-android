@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Newton Schack</string>
+  <string name="appName">Newton Schack</string>
   <string name="newtonLogoDescription">En bild föreställandes Sir Isaac Newton som håller en Java-kopp</string>
-  <string name="splashTitleChess">S c h a c k</string>
-  <string name="splashTitleNewton">N e w t o n</string>
+  <string name="titleChess">S c h a c k</string>
+  <string name="titleNewton">N e w t o n</string>
+  <string name="loginScreenTitle">Inloggning</string>
+  <string name="loginButtonText">Logga in</string>
+  <string name="signupButtonText">Registrera</string>
+  <string name="usernameTextFieldHint">Användarnamn</string>
+  <string name="passwordTextFieldHint">Lösenord</string>
 </resources>
