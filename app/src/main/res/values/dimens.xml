@@ -5,8 +5,8 @@
   <dimen name="fab_margin">16dp</dimen>
 
   <!-- Login screen -->
-  <dimen name="loginScreenButtonHeight">60dp</dimen>
-  <dimen name="loginScreenButtonWidth">160dp</dimen>
+  <dimen name="loginScreenButtonHeight">70dp</dimen>
+  <dimen name="loginScreenButtonWidth">180dp</dimen>
   <dimen name="loginScreenTextFieldFontSize">25sp</dimen>
   <dimen name="loginScreenTextFieldWidth">250dp</dimen>
 </resources>
