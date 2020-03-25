@@ -11,6 +11,10 @@ public class ApiLogin {
 
     UserData cc = new UserData("Calle Carlsson");
 
+    cc.addFriend("Alpha", 128);
+    cc.addFriend("Bravo", 256);
+    cc.addFriend("Gamma", 512);
+
     return cc;
 
   }
