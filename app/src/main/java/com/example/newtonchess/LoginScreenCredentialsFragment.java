@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.newtonchess.api.ApiLogin;
+import com.example.newtonchess.api.UserData;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoginScreenCredentialsFragment extends Fragment {
@@ -70,7 +71,11 @@ public class LoginScreenCredentialsFragment extends Fragment {
 
     } else {
 
+      UserData loggedInUserData = ApiLogin.getUserData(404);
+
       Intent mainMenuIntent = new Intent(getContext(), MainMenuActivity.class);
+      mainMenuIntent.putExtra("UserData", loggedInUserData);
+
       startActivity(mainMenuIntent);
 
       Snackbar.make(

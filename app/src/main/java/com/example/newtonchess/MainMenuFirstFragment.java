@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.newtonchess.api.UserData;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainMenuFirstFragment extends Fragment {
@@ -37,6 +38,14 @@ public class MainMenuFirstFragment extends Fragment {
 
     view.findViewById(R.id.logoutButton)
         .setOnClickListener(this::logoutButtonPress);
+
+    UserData tempUserData = ((MainMenuActivity) getActivity()).getLoggedInUserData();
+
+    Snackbar.make(
+        view,
+        "Hello, " + tempUserData.getUserName(),
+        Snackbar.LENGTH_LONG
+    ).show();
   }
 
   private void activeGamesButtonPress(View view) {
