@@ -57,8 +57,22 @@
     android:width="@dimen/loginScreenButtonWidth"
     android:height="@dimen/loginScreenButtonHeight"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/guideline"
     app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
+
+  <Button
+    android:id="@+id/logoutButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/logoutButton"
+    android:background="@color/colorPrimaryDark"
+    android:textColor="@color/colorComplementary"
+    android:width="@dimen/loginScreenButtonWidth"
+    android:height="@dimen/loginScreenButtonHeight"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/guideline"
     app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
 
   <androidx.constraintlayout.widget.Guideline

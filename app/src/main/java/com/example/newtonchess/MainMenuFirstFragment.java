@@ -34,6 +34,9 @@ public class MainMenuFirstFragment extends Fragment {
 
     view.findViewById(R.id.friendsListButton)
         .setOnClickListener(this::friendsButtonPress);
+
+    view.findViewById(R.id.logoutButton)
+        .setOnClickListener(this::logoutButtonPress);
   }
 
   private void activeGamesButtonPress(View view) {
@@ -64,6 +67,16 @@ public class MainMenuFirstFragment extends Fragment {
     Snackbar.make(
         view,
         R.string.friendsListButtonPressed,
+        Snackbar.LENGTH_LONG
+    ).show();
+
+  }
+
+  private void logoutButtonPress(View view) {
+
+    Snackbar.make(
+        view,
+        R.string.logoutButtonPressed,
         Snackbar.LENGTH_LONG
     ).show();
 
