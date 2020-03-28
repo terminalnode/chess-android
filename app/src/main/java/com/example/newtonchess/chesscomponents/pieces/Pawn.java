@@ -1,11 +1,13 @@
 package com.example.newtonchess.chesscomponents.pieces;
 
+import com.example.newtonchess.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends Piece {
-  protected Pawn(int x, int y) {
-    super(x, y);
+  public Pawn(int x, int y, PieceColor color) {
+    super(x, y, color);
   }
 
   @Override
@@ -21,6 +23,17 @@ public class Pawn extends Piece {
     }
 
     return moves;
+  }
+
+  @Override
+  public int getDrawableId() {
+    return color == PieceColor.WHITE ?
+        R.drawable.wp : R.drawable.bp;
+  }
+
+  @Override
+  public PieceType getPieceType() {
+    return PieceType.PAWN;
   }
 
   @Override

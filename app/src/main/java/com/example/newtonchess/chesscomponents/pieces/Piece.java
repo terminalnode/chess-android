@@ -4,20 +4,25 @@ import java.util.List;
 
 public abstract class Piece {
   int x, y;
+  PieceColor color;
   boolean isWhite;
   boolean hasMoved;
 
 
   //----- Constructor ----//
-  Piece(int x, int y) {
+  Piece(int x, int y, PieceColor color) {
     this.x = x;
     this.y = y;
+    this.color = color;
     this.hasMoved = false;
+    isWhite = color == PieceColor.WHITE;
   }
 
 
   //----- Abstract methods ----//
   public abstract List<int[]> getMoves();
+  public abstract int getDrawableId();
+  public abstract PieceType getPieceType();
 
 
   //----- Methods -----//
@@ -53,14 +58,6 @@ public abstract class Piece {
 
   public int getY() {
     return y;
-  }
-
-  public boolean isWhite() {
-    return isWhite;
-  }
-
-  public void setWhite(boolean white) {
-    isWhite = white;
   }
 
   public boolean isHasMoved() {

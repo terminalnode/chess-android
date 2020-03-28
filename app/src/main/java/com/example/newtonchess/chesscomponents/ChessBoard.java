@@ -8,17 +8,30 @@ package com.example.newtonchess.chesscomponents;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.chesscomponents.pieces.Bishop;
+import com.example.newtonchess.chesscomponents.pieces.King;
+import com.example.newtonchess.chesscomponents.pieces.Knight;
+import com.example.newtonchess.chesscomponents.pieces.Pawn;
+import com.example.newtonchess.chesscomponents.pieces.Piece;
+import com.example.newtonchess.chesscomponents.pieces.PieceColor;
+import com.example.newtonchess.chesscomponents.pieces.Queen;
+import com.example.newtonchess.chesscomponents.pieces.Rook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChessBoard extends View {
   Paint currentPaint, darkPaint, lightPaint;
   int x0, y0, squareSize;
   boolean flipped;
+  List<Piece> pieces;
 
   /**
    * Modified version of a default View constructor, which calls upon the built-in
@@ -32,6 +45,33 @@ public class ChessBoard extends View {
     lightPaint = new Paint();
     currentPaint = lightPaint;
     flipped = false;
+    pieces = new ArrayList<>();
+
+    // Add white pieces
+    for (int x = 0; x < 8; x++) {
+      pieces.add(new Pawn(x, 1, PieceColor.WHITE));
+    }
+    pieces.add(new Rook(0, 0, PieceColor.WHITE));
+    pieces.add(new Rook(7, 0, PieceColor.WHITE));
+    pieces.add(new Knight(1, 0, PieceColor.WHITE));
+    pieces.add(new Knight(6, 0, PieceColor.WHITE));
+    pieces.add(new Bishop(2, 0, PieceColor.WHITE));
+    pieces.add(new Bishop(5, 0, PieceColor.WHITE));
+    pieces.add(new Queen(3, 0, PieceColor.WHITE));
+    pieces.add(new King(4, 0, PieceColor.WHITE));
+
+    // Add black pieces
+    for (int x = 0; x < 8; x++) {
+      pieces.add(new Pawn(x, 6, PieceColor.BLACK));
+    }
+    pieces.add(new Rook(0, 7, PieceColor.BLACK));
+    pieces.add(new Rook(7, 7, PieceColor.BLACK));
+    pieces.add(new Knight(1, 7, PieceColor.BLACK));
+    pieces.add(new Knight(6, 7, PieceColor.BLACK));
+    pieces.add(new Bishop(2, 7, PieceColor.BLACK));
+    pieces.add(new Bishop(5, 7, PieceColor.BLACK));
+    pieces.add(new Queen(3, 7, PieceColor.BLACK));
+    pieces.add(new King(4, 7, PieceColor.BLACK));
 
     darkPaint.setColor(getResources().getColor(R.color.darkSquare));
     lightPaint.setColor(getResources().getColor(R.color.lightSquare));
@@ -71,6 +111,21 @@ public class ChessBoard extends View {
             currentPaint
         );
       }
+    }
+
+    // Loop over the pieces and place them on the board
+    for (Piece piece : pieces) {
+      int xCoordinate = getXCoordinate(piece.getX());
+      int yCoordinate = getYCoordinate(piece.getY());
+      Drawable drawable =getContext().getResources().getDrawable(piece.getDrawableId());
+
+      drawable.setBounds(
+          xCoordinate,
+          yCoordinate,
+          xCoordinate + squareSize,
+          yCoordinate + squareSize
+      );
+      drawable.draw(canvas);
     }
   }
 
