@@ -17,4 +17,8 @@
   <string name="playScreenOpponentName">だれも！</string>
   <string name="mainmenuWelcome">いらっしゃい、%1$s！</string>
   <string name="userUnknown">無名</string>
+  <string name="logoutButton">サインアウト</string>
+  <string name="startNewGameButton">勝負を始まる</string>
+  <string name="activeGamesButton">未了勝負</string>
+  <string name="friendsListButton">友達リスト</string>
 </resources>
