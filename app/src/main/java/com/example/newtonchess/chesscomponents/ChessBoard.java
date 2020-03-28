@@ -33,6 +33,7 @@ public class ChessBoard extends View {
   Paint currentPaint, darkPaint, lightPaint;
   int x0, y0, squareSize;
   boolean flipped;
+  boolean highlightSquare;
   List<Piece> pieces;
 
   /**
@@ -47,36 +48,47 @@ public class ChessBoard extends View {
     lightPaint = new Paint();
     currentPaint = lightPaint;
     flipped = false;
-    pieces = new ArrayList<>();
-
-    // Add white pieces
-    for (int x = 0; x < 8; x++) {
-      pieces.add(new Pawn(x, 1, PieceColor.WHITE));
+    highlightSquare = false;
+    if (pieces == null) {
+      pieces = new ArrayList<>();
+      generatePieces();
     }
-    pieces.add(new Rook(0, 0, PieceColor.WHITE));
-    pieces.add(new Rook(7, 0, PieceColor.WHITE));
-    pieces.add(new Knight(1, 0, PieceColor.WHITE));
-    pieces.add(new Knight(6, 0, PieceColor.WHITE));
-    pieces.add(new Bishop(2, 0, PieceColor.WHITE));
-    pieces.add(new Bishop(5, 0, PieceColor.WHITE));
-    pieces.add(new Queen(3, 0, PieceColor.WHITE));
-    pieces.add(new King(4, 0, PieceColor.WHITE));
 
-    // Add black pieces
-    for (int x = 0; x < 8; x++) {
-      pieces.add(new Pawn(x, 6, PieceColor.BLACK));
-    }
-    pieces.add(new Rook(0, 7, PieceColor.BLACK));
-    pieces.add(new Rook(7, 7, PieceColor.BLACK));
-    pieces.add(new Knight(1, 7, PieceColor.BLACK));
-    pieces.add(new Knight(6, 7, PieceColor.BLACK));
-    pieces.add(new Bishop(2, 7, PieceColor.BLACK));
-    pieces.add(new Bishop(5, 7, PieceColor.BLACK));
-    pieces.add(new Queen(3, 7, PieceColor.BLACK));
-    pieces.add(new King(4, 7, PieceColor.BLACK));
-
+    // Set light and dark tile colors
     darkPaint.setColor(ContextCompat.getColor(context, R.color.darkSquare));
     lightPaint.setColor(ContextCompat.getColor(context, R.color.lightSquare));
+  }
+
+  private void generatePieces() {
+    // Add pawns
+    for (int x = 0; x < 8; x++) {
+      pieces.add(new Pawn(x, 1, PieceColor.WHITE));
+      pieces.add(new Pawn(x, 6, PieceColor.BLACK));
+    }
+
+    // Add rooks
+    pieces.add(new Rook(0, 0, PieceColor.WHITE));
+    pieces.add(new Rook(7, 0, PieceColor.WHITE));
+    pieces.add(new Rook(0, 7, PieceColor.BLACK));
+    pieces.add(new Rook(7, 7, PieceColor.BLACK));
+
+    // Add knights
+    pieces.add(new Knight(1, 0, PieceColor.WHITE));
+    pieces.add(new Knight(6, 0, PieceColor.WHITE));
+    pieces.add(new Knight(1, 7, PieceColor.BLACK));
+    pieces.add(new Knight(6, 7, PieceColor.BLACK));
+
+    // Add bishops
+    pieces.add(new Bishop(2, 0, PieceColor.WHITE));
+    pieces.add(new Bishop(5, 0, PieceColor.WHITE));
+    pieces.add(new Bishop(2, 7, PieceColor.BLACK));
+    pieces.add(new Bishop(5, 7, PieceColor.BLACK));
+
+    // Add kings and queens
+    pieces.add(new King(4, 0, PieceColor.WHITE));
+    pieces.add(new King(4, 7, PieceColor.BLACK));
+    pieces.add(new Queen(3, 0, PieceColor.WHITE));
+    pieces.add(new Queen(3, 7, PieceColor.BLACK));
   }
 
   /**
