@@ -10,6 +10,12 @@
   <dimen name="loginScreenTextFieldFontSize">25sp</dimen>
   <dimen name="loginScreenTextFieldWidth">250dp</dimen>
 
+  <!-- Main menu screen -->
+  <dimen name="mainMenuHeaderTextSize">35sp</dimen>
+  <dimen name="mainMenuButtonHeight">70dp</dimen>
+  <dimen name="mainMenuButtonWidth">180dp</dimen>
+  <dimen name="mainMenuButtonTextSize">25sp</dimen>
+
   <!-- Play screen -->
   <dimen name="playScreenOpponentText">30sp</dimen>
 </resources>
