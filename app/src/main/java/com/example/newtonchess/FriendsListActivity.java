@@ -28,26 +28,15 @@ public class FriendsListActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_friends_list);
 
-    System.out.println("Print A");
-
     this.loggedInUserData = getIntent().getParcelableExtra("UserData");
 
-    System.out.println("Print B");
-
     final ListView listView = (ListView) findViewById(R.id.listView);
-    if (listView == null) {
-      System.out.println("ListView is null");
-    }
 
-    System.out.println("Print C");
-
-    final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, this.loggedInUserData.getFriendList());
-
-    System.out.println("Print D");
+    final StableArrayAdapter adapter = new StableArrayAdapter(this, R.id.textView2, this.loggedInUserData.getFriendList());
 
     listView.setAdapter(adapter);
 
-    System.out.println("Print E");
+
 
   }
 
@@ -60,13 +49,11 @@ public class FriendsListActivity extends AppCompatActivity {
 
     public StableArrayAdapter(Context context, int textViewResourceId,
                               List<Friend> objects) {
-      super(context, textViewResourceId, objects);
-      System.out.println("Adapter Constructor A");
+      super(context,R.layout.custom_list_view , textViewResourceId, objects);
 
       for (int i = 0; i < objects.size(); ++i) {
         mIdMap.put(objects.get(i), i);
       }
-      System.out.println("Adapter Constructor B");
     }
 
 
