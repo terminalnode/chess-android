@@ -16,4 +16,5 @@
   <string name="playScreenOpponentLabel">相手：</string>
   <string name="playScreenOpponentName">だれも！</string>
   <string name="mainmenuWelcome">いらっしゃい、%1$s！</string>
+  <string name="userUnknown">無名</string>
 </resources>

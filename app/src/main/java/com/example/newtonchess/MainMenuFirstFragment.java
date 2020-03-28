@@ -43,9 +43,11 @@ public class MainMenuFirstFragment extends Fragment {
 
     UserData tempUserData = ((MainMenuActivity) getActivity()).getLoggedInUserData();
 
-    ((TextView) view.findViewById(R.id.welcomeTextView))
-        .setText("Welcome, " + tempUserData.getUserName());
-
+    TextView welcomeTextView = view.findViewById(R.id.welcomeTextView);
+    String welcomeTextString = tempUserData == null ?
+        getString(R.string.mainmenuWelcome, getString(R.string.userUnknown)) :
+        getString(R.string.mainmenuWelcome, tempUserData.getUserName());
+    welcomeTextView.setText(welcomeTextString);
   }
 
   private void activeGamesButtonPress(View view) {

@@ -16,4 +16,5 @@
   <string name="playScreenOpponentLabel">Motståndare:</string>
   <string name="playScreenOpponentName">Ingen!</string>
   <string name="mainmenuWelcome">Välkommen, %1$s!</string>
+  <string name="userUnknown">anonym</string>
 </resources>
