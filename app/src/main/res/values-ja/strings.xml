@@ -13,4 +13,7 @@
   <string name="missingPasswordSnackbar">パスワードを入力してください</string>
   <string name="missingUsernameSnackbar">"ユーザー名を入力してください "</string>
   <string name="incorrectLoginCredentialsSnackbar">"ユーザー名それかパスワードに間違いがあります "</string>
+  <string name="playScreenOpponentLabel">相手：</string>
+  <string name="playScreenOpponentName">だれも！</string>
+  <string name="mainmenuWelcome">いらっしゃい、%1$s！</string>
 </resources>

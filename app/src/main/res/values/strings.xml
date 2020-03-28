@@ -18,7 +18,7 @@
   <string name="incorrectLoginCredentialsSnackbar">Incorrect username and/or password.</string>
 
   <!-- Main Menu -->
-  <string name="mainmenuWelcome">Welcome, {insertPlayerNameHere}</string>
+  <string name="mainmenuWelcome">Welcome, %1$s!</string>
   <string name="activeGamesButton">Active Games</string>
   <string name="startNewGameButton">Start New Game</string>
   <string name="friendsListButton">Friends List</string>

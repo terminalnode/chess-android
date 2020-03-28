@@ -13,4 +13,7 @@
   <string name="missingUsernameSnackbar">Du glömde att ange ett användarnamn.</string>
   <string name="missingPasswordSnackbar">Du glömde att ange ett lösenord.</string>
   <string name="incorrectLoginCredentialsSnackbar">Felaktigt användarnamn eller lösenord.</string>
+  <string name="playScreenOpponentLabel">Motståndare:</string>
+  <string name="playScreenOpponentName">Ingen!</string>
+  <string name="mainmenuWelcome">Välkommen, %1$s!</string>
 </resources>
