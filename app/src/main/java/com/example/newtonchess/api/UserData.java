@@ -45,6 +45,14 @@ public class UserData implements Parcelable {
     return userName;
   }
 
+  public List<Friend> getFriendList() {
+    return this.friendList;
+  }
+
+  public void addFriendToList(Friend newFriend) {
+    this.friendList.add(newFriend);
+  }
+
   //----- Creator -----//
   public static final Creator<UserData> CREATOR = new Creator<UserData>() {
     @Override

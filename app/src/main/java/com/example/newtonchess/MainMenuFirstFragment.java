@@ -44,7 +44,7 @@ public class MainMenuFirstFragment extends Fragment {
 
     ((TextView) view.findViewById(R.id.welcomeTextView))
         .setText("Welcome, " + tempUserData.getUserName());
-    
+
   }
 
   private void activeGamesButtonPress(View view) {

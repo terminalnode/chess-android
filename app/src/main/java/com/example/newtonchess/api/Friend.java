@@ -3,7 +3,7 @@ package com.example.newtonchess.api;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-class Friend implements Parcelable {
+public class Friend implements Parcelable {
   private String name;
   private int userId;
   private int gameId;
@@ -19,7 +19,7 @@ class Friend implements Parcelable {
     this.gameId = gameId;
   }
 
-  protected Friend(Parcel in) {
+  public Friend(Parcel in) {
     userId = in.readInt();
     gameId = in.readInt();
     name = in.readString();
