@@ -1,5 +1,6 @@
 package com.example.newtonchess;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,11 +75,12 @@ public class MainMenuFirstFragment extends Fragment {
 
   private void friendsButtonPress(View view) {
 
-    Snackbar.make(
-        view,
-        R.string.friendsListButtonPressed,
-        Snackbar.LENGTH_LONG
-    ).show();
+    UserData tempUserData = ((MainMenuActivity) getActivity()).getLoggedInUserData();
+
+    Intent friendListIntent = new Intent(getContext(), FriendsListActivity.class);
+    friendListIntent.putExtra("UserData", tempUserData);
+
+    startActivity(friendListIntent);
 
   }
 
