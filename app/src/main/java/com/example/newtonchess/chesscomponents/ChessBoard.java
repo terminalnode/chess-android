@@ -3,6 +3,7 @@
  github user eviiit's material-chess-android repository:
  https://github.com/evijit/material-chess-android
  */
+
 package com.example.newtonchess.chesscomponents;
 
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.example.newtonchess.R;
 import com.example.newtonchess.chesscomponents.pieces.Bishop;
@@ -73,8 +75,8 @@ public class ChessBoard extends View {
     pieces.add(new Queen(3, 7, PieceColor.BLACK));
     pieces.add(new King(4, 7, PieceColor.BLACK));
 
-    darkPaint.setColor(getResources().getColor(R.color.darkSquare));
-    lightPaint.setColor(getResources().getColor(R.color.lightSquare));
+    darkPaint.setColor(ContextCompat.getColor(context, R.color.darkSquare));
+    lightPaint.setColor(ContextCompat.getColor(context, R.color.lightSquare));
   }
 
   /**
@@ -117,15 +119,17 @@ public class ChessBoard extends View {
     for (Piece piece : pieces) {
       int xCoordinate = getXCoordinate(piece.getX());
       int yCoordinate = getYCoordinate(piece.getY());
-      Drawable drawable =getContext().getResources().getDrawable(piece.getDrawableId());
+      Drawable drawable = ContextCompat.getDrawable(getContext(), piece.getDrawableId());
 
-      drawable.setBounds(
-          xCoordinate,
-          yCoordinate,
-          xCoordinate + squareSize,
-          yCoordinate + squareSize
-      );
-      drawable.draw(canvas);
+      if (drawable != null) {
+        drawable.setBounds(
+            xCoordinate,
+            yCoordinate,
+            xCoordinate + squareSize,
+            yCoordinate + squareSize
+        );
+        drawable.draw(canvas);
+      }
     }
   }
 
