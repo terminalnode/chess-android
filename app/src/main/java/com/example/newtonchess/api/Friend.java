@@ -25,6 +25,11 @@ public class Friend implements Parcelable {
     name = in.readString();
   }
 
+  @Override
+  public String toString() {
+    return name;
+  }
+
   //----- Creator -----//
   public static final Creator<Friend> CREATOR = new Creator<Friend>() {
     @Override
