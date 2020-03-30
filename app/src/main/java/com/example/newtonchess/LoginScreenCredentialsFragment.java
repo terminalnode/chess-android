@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.ApiPlayer;
@@ -17,7 +16,6 @@ import com.example.newtonchess.api.UserData;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,23 +46,6 @@ public class LoginScreenCredentialsFragment extends Fragment {
     EditText passwordTextBox = getView().findViewById(R.id.passwordEditBox);
     String username = userNameTextBox.getText().toString();
     String password = passwordTextBox.getText().toString();
-
-    /* API call example
-       Fetches first entry from user list and fills in username and password box.
-       Not very useful in and of itself, but once we get some stuff into the API...
-
-    Call<List<PlayerEntity>> call = ApiPlayer.getAll();
-    call.enqueue(new Callback<List<PlayerEntity>>() {
-      @Override
-      public void onResponse(Call<List<PlayerEntity>> call, Response<List<PlayerEntity>> response) {
-        userNameTextBox.setText(response.body().get(0).getName());
-        passwordTextBox.setText(response.body().get(0).getPassword());
-      }
-      @Override
-      public void onFailure(Call<List<PlayerEntity>> call, Throwable t) {
-      }
-    });
-    */
 
     // Verify that login credentials were filled in and correct.
     if (username.isEmpty() && password.isEmpty()) {
@@ -113,8 +94,40 @@ public class LoginScreenCredentialsFragment extends Fragment {
   }
 
   private void signUpButtonPress(View view) {
-    NavHostFragment
-        .findNavController(LoginScreenCredentialsFragment.this)
-        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+    // Find the text boxes
+    EditText userNameTextBox = getView().findViewById(R.id.userNameEditBox);
+    EditText passwordTextBox = getView().findViewById(R.id.passwordEditBox);
+
+    // Create the new user
+    PlayerEntity newPlayer = new PlayerEntity();
+    newPlayer.setName(userNameTextBox.getText().toString());
+    newPlayer.setPassword(passwordTextBox.getText().toString());
+    newPlayer.setId(0);
+
+    System.out.println(newPlayer.getName());
+    System.out.println(newPlayer.getPassword());
+    System.out.println(newPlayer.getId());
+
+    // Send the new user to the server
+    Call<PlayerEntity> call = ApiPlayer.createPlayer(newPlayer);
+    call.enqueue(new Callback<PlayerEntity>() {
+      @Override
+      public void onResponse(Call<PlayerEntity> call, Response<PlayerEntity> response) {
+        Snackbar.make(
+            view,
+            "Operation completed with status: " + response.code(),
+            Snackbar.LENGTH_LONG
+        ).show();
+      }
+
+      @Override
+      public void onFailure(Call<PlayerEntity> call, Throwable t) {
+        Snackbar.make(
+            view,
+            "Generic error placeholder!!",
+            Snackbar.LENGTH_LONG
+        ).show();
+      }
+    });
   }
 }
