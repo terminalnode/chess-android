@@ -1,19 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".LoginScreenActivity"
-  android:background="@color/colorBackground">
+  android:background="@color/colorBackground"
+  tools:context=".LoginScreenActivity">
 
-  <include layout="@layout/newton_chess_banner" />
+  <include
+    android:id="@+id/include"
+    layout="@layout/newton_chess_banner" />
 
-  <com.google.android.material.appbar.AppBarLayout
+  <TextView
+    android:id="@+id/loginScreenTitle"
     android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginTop="160dp"
+    android:text="@string/loginScreenTitle"
+    android:textAlignment="center"
+    android:textColor="@color/colorPrimary"
+    android:textSize="50sp"
+    android:textStyle="bold"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+    android:id="@+id/signUpButton"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.AppBarOverlay"/>
+    android:layout_marginTop="80dp"
+    android:width="@dimen/loginScreenButtonWidth"
+    android:height="@dimen/loginScreenButtonHeight"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/signupButtonText"
+    android:textAllCaps="false"
+    android:textColor="@color/colorComplementary"
+    android:textSize="30sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/verticalMidpoint"
+    app:layout_constraintTop_toBottomOf="@+id/passwordEditBox" />
 
-  <include layout="@layout/content_login_screen" />
+  <Button
+    android:id="@+id/logInButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="80dp"
+    android:width="@dimen/loginScreenButtonWidth"
+    android:height="@dimen/loginScreenButtonHeight"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/loginButtonText"
+    android:textAllCaps="false"
+    android:textColor="@color/colorComplementary"
+    android:textSize="30sp"
+    app:layout_constraintEnd_toStartOf="@+id/verticalMidpoint"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/passwordEditBox" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+  <EditText
+    android:id="@+id/passwordEditBox"
+    android:layout_width="@dimen/loginScreenTextFieldWidth"
+    android:layout_marginTop="30dp"
+    android:width="@dimen/loginScreenTextFieldWidth"
+    android:autofillHints=""
+    android:ems="10"
+    android:hint="@string/passwordTextFieldHint"
+    android:inputType="textPassword"
+    android:textColor="@color/colorPrimary"
+    android:textColorHighlight="@color/colorComplementary"
+    android:textColorHint="@color/colorPrimaryDark"
+    android:textColorLink="@color/colorComplementary"
+    android:textCursorDrawable="@color/colorComplementary"
+    android:textSize="@dimen/loginScreenTextFieldFontSize"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/userNameEditBox"
+    android:layout_height="wrap_content" />
+
+  <EditText
+    android:id="@+id/userNameEditBox"
+    android:layout_width="@dimen/loginScreenTextFieldWidth"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="70dp"
+    android:width="@dimen/loginScreenTextFieldWidth"
+    android:autofillHints=""
+    android:ems="10"
+    android:hint="@string/usernameTextFieldHint"
+    android:inputType="textEmailAddress"
+    android:textColor="@color/colorPrimary"
+    android:textColorHighlight="@color/colorComplementary"
+    android:textColorHint="@color/colorPrimaryDark"
+    android:textColorLink="@color/colorComplementary"
+    android:textCursorDrawable="@color/colorComplementary"
+    android:textSize="@dimen/loginScreenTextFieldFontSize"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/loginScreenTitle" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/verticalMidpoint"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
