@@ -30,7 +30,7 @@ public class FriendsListActivity extends AppCompatActivity {
 
     this.loggedInUserData = getIntent().getParcelableExtra("UserData");
 
-    final ListView listView = (ListView) findViewById(R.id.listView);
+    final ListView listView = findViewById(R.id.listView);
 
     final StableArrayAdapter adapter = new StableArrayAdapter(this, R.id.textView2, this.loggedInUserData.getFriendList());
 

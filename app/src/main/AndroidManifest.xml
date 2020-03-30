@@ -12,14 +12,23 @@
     android:theme="@style/AppTheme">
     <activity
       android:name=".FriendsListActivity"
-      android:label="@string/title_activity_friends_list"></activity>
-    <activity android:name=".PlayScreenActivity"></activity>
+      android:label="@string/title_activity_friends_list"
+    />
+
+    <activity
+      android:name=".PlayScreenActivity"
+    />
+
     <activity
       android:name=".MainMenuActivity"
-      android:label="@string/title_activity_main_menu"></activity>
+      android:label="@string/title_activity_main_menu"
+    />
+
     <activity
       android:name=".LoginScreenActivity"
-      android:label="@string/title_activity_login_screen"></activity>
+      android:label="@string/title_activity_login_screen"
+    />
+
     <activity android:name=".SplashScreenActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -27,6 +36,6 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-  </application>
 
+  </application>
 </manifest>
