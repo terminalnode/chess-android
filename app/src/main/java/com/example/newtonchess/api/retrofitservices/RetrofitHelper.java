@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitHelper {
   private static final String BASE_URL = "https://newton-sysqg3-chessapi.herokuapp.com/api/";
 
-  public static Retrofit getBase() {
+  private static Retrofit getBase() {
     return new Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -14,7 +14,6 @@ public class RetrofitHelper {
   }
 
   public static PlayerService getPlayerService() {
-    return getBase()
-        .create(PlayerService.class);
+    return getBase().create(PlayerService.class);
   }
 }

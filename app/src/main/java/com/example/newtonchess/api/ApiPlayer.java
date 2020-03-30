@@ -13,4 +13,10 @@ public class ApiPlayer {
         .getPlayerService()
         .getAll();
   }
+
+  public static Call<PlayerEntity> createPlayer(PlayerEntity player) {
+    return RetrofitHelper
+        .getPlayerService()
+        .createPlayer(player);
+  }
 }
