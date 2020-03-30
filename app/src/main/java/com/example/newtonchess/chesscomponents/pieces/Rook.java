@@ -17,7 +17,7 @@ public class Rook extends Piece {
   @Override
   public int getDrawableId() {
     return color == PieceColor.WHITE ?
-        R.drawable.wr : R.drawable.br;
+        R.drawable.wrook : R.drawable.brook;
   }
 
   @Override

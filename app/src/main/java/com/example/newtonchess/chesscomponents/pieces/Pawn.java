@@ -28,7 +28,7 @@ public class Pawn extends Piece {
   @Override
   public int getDrawableId() {
     return color == PieceColor.WHITE ?
-        R.drawable.wp : R.drawable.bp;
+        R.drawable.wpawn : R.drawable.bpawn;
   }
 
   @Override

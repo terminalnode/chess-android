@@ -17,7 +17,7 @@ public class Queen extends Piece {
   @Override
   public int getDrawableId() {
     return color == PieceColor.WHITE ?
-        R.drawable.wq : R.drawable.bq;
+        R.drawable.wqueen : R.drawable.bqueen;
   }
 
   @Override

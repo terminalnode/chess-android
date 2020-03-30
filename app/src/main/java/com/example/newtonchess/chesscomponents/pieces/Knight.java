@@ -17,7 +17,7 @@ public class Knight extends Piece {
   @Override
   public int getDrawableId() {
     return color == PieceColor.WHITE ?
-        R.drawable.wk : R.drawable.bk;
+        R.drawable.wknight : R.drawable.bknight;
   }
 
   @Override

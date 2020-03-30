@@ -17,7 +17,7 @@ public class Bishop extends Piece {
   @Override
   public int getDrawableId() {
     return color == PieceColor.WHITE ?
-        R.drawable.wb : R.drawable.bb;
+        R.drawable.wbishop : R.drawable.bbishop;
   }
 
   @Override
