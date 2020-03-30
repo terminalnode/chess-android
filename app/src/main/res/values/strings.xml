@@ -16,6 +16,10 @@
   <string name="missingUsernameSnackbar">You forgot to enter a username.</string>
   <string name="missingPasswordSnackbar">You forgot to enter a password.</string>
   <string name="incorrectLoginCredentialsSnackbar">Incorrect username and/or password.</string>
+  <string name="accountCreationSuccessful">Account created: %1$s</string>
+  <string name="accountCreationGenericError">Oops, something went wrong! Please try again.</string>
+  <string name="accountCreationMissingFields">Please enter a username and password</string>
+  <string name="accountCreationUsernameTaken">The requested username has already been taken</string>
 
   <!-- Main Menu -->
   <string name="mainmenuWelcome">Welcome, %1$s!</string>
