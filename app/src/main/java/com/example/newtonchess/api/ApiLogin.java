@@ -19,5 +19,4 @@ public class ApiLogin {
     return cc;
 
   }
-
 }
