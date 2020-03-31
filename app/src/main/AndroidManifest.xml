@@ -11,25 +11,25 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity
-      android:name=".FriendsListActivity"
+      android:name=".activities.FriendsListActivity"
       android:label="@string/title_activity_friends_list"
     />
 
     <activity
-      android:name=".PlayScreenActivity"
+      android:name=".activities.PlayScreenActivity"
     />
 
     <activity
-      android:name=".MainMenuActivity"
+      android:name=".activities.MainMenuActivity"
       android:label="@string/title_activity_main_menu"
     />
 
     <activity
-      android:name=".LoginScreenActivity"
+      android:name=".activities.LoginScreenActivity"
       android:label="@string/title_activity_login_screen"
     />
 
-    <activity android:name=".SplashScreenActivity">
+    <activity android:name=".activities.SplashScreenActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

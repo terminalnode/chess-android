@@ -1,10 +1,12 @@
-package com.example.newtonchess;
+package com.example.newtonchess.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.example.newtonchess.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

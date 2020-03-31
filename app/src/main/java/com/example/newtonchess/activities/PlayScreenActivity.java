@@ -1,10 +1,11 @@
-package com.example.newtonchess;
+package com.example.newtonchess.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import com.example.newtonchess.R;
 import com.example.newtonchess.chesscomponents.ChessBoard;
 
 public class PlayScreenActivity extends AppCompatActivity {

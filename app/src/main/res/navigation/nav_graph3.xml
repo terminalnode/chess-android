@@ -7,22 +7,8 @@
 
   <fragment
     android:id="@+id/FirstFragment"
-    android:name="com.example.newtonchess.FriendsListFragment"
+    android:name="com.example.newtonchess.activities.FriendsListFragment"
     android:label="@string/first_fragment_label"
     tools:layout="@layout/friends_list_fragment_first">
-
-    <action
-      android:id="@+id/action_FirstFragment_to_SecondFragment"
-      app:destination="@id/SecondFragment" />
-  </fragment>
-  <fragment
-    android:id="@+id/SecondFragment"
-    android:name="com.example.newtonchess.api.SecondFragment"
-    android:label="@string/second_fragment_label"
-    tools:layout="@layout/friends_list_fragment_second">
-
-    <action
-      android:id="@+id/action_SecondFragment_to_FirstFragment"
-      app:destination="@id/FirstFragment" />
   </fragment>
 </navigation>

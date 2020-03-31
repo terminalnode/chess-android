@@ -1,4 +1,4 @@
-package com.example.newtonchess;
+package com.example.newtonchess.activities;
 
 import android.content.Context;
 import android.os.Bundle;

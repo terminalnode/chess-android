@@ -1,18 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".MainMenuActivity"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  tools:context=".activities.MainMenuActivity"
   android:background="@color/colorBackground">
 
   <include layout="@layout/newton_chess_banner" />
 
-  <com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
+  <TextView
+    android:id="@+id/welcomeTextView"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.AppBarOverlay"/>
+    android:text="@string/mainmenuWelcome"
+    android:textColor="@color/colorPrimary"
+    android:textSize="@dimen/mainMenuHeaderTextSize"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toTopOf="@+id/newGameButton"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-  <include layout="@layout/content_main_menu" />
+  <Button
+    android:id="@+id/activeGamesButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:width="@dimen/mainMenuButtonWidth"
+    android:height="@dimen/mainMenuButtonHeight"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/activeGamesButton"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/mainMenuButtonTextSize"
+    app:layout_constraintBottom_toTopOf="@+id/newGameButton"
+    app:layout_constraintEnd_toEndOf="@+id/guideline"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+  <Button
+    android:id="@+id/friendsListButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:width="@dimen/mainMenuButtonWidth"
+    android:height="@dimen/mainMenuButtonHeight"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/friendsListButton"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/mainMenuButtonTextSize"
+    app:layout_constraintBottom_toTopOf="@+id/newGameButton"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/guideline"
+    app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
+
+  <Button
+    android:id="@+id/newGameButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:width="@dimen/mainMenuButtonWidth"
+    android:height="@dimen/mainMenuButtonHeight"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/startNewGameButton"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/mainMenuButtonTextSize"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/guideline"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
+
+  <Button
+    android:id="@+id/logoutButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:width="@dimen/mainMenuButtonWidth"
+    android:height="@dimen/mainMenuButtonHeight"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/logoutButton"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/mainMenuButtonTextSize"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/guideline"
+    app:layout_constraintTop_toBottomOf="@id/welcomeTextView" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.50121653" />
+</androidx.constraintlayout.widget.ConstraintLayout>

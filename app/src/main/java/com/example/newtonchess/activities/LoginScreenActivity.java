@@ -1,4 +1,4 @@
-package com.example.newtonchess;
+package com.example.newtonchess.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.newtonchess.R;
 import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.ApiPlayer;
 import com.example.newtonchess.api.entities.PlayerEntity;
