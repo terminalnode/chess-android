@@ -2,19 +2,14 @@ package com.example.newtonchess.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import com.example.newtonchess.api.Friend;
-import com.example.newtonchess.api.UserData;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.newtonchess.R;
+import com.example.newtonchess.api.Friend;
+import com.example.newtonchess.api.UserData;
 
 import java.util.HashMap;
 import java.util.List;

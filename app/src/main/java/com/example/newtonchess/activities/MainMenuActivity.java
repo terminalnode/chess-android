@@ -2,21 +2,17 @@ package com.example.newtonchess.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.newtonchess.R;
-import com.example.newtonchess.api.UserData;
-import com.example.newtonchess.api.entities.PlayerEntity;
-import com.example.newtonchess.api.entities.TokenEntity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.newtonchess.R;
+import com.example.newtonchess.api.entities.PlayerEntity;
+import com.example.newtonchess.api.entities.TokenEntity;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainMenuActivity extends AppCompatActivity {
   TokenEntity token;
