@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
-  private static final String BASE_URL = "https://newton-sysqg3-chessapi.herokuapp.com/api/";
+  private static final String BASE_URL = "https://newton-sysjg3-chessapi.herokuapp.com/api/";
 
   private static Retrofit getBase() {
     return new Retrofit.Builder()
