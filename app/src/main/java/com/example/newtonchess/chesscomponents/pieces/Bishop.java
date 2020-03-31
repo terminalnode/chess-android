@@ -2,6 +2,7 @@ package com.example.newtonchess.chesscomponents.pieces;
 
 import com.example.newtonchess.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Bishop extends Piece {
@@ -11,7 +12,7 @@ public class Bishop extends Piece {
 
   @Override
   public List<int[]> getMoves(List<Piece> pieces) {
-    return null;
+    return getDiagonalMoves(pieces);
   }
 
   @Override

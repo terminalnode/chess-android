@@ -75,6 +75,44 @@ public abstract class Piece {
     return moves;
   }
 
+  List<int[]> getDiagonalMoves(List<Piece> pieces) {
+    List<int[]> moves = new ArrayList<>();
+    boolean upRightBlocked = false;
+    boolean upLeftBlocked = false;
+    boolean downRightBlocked = false;
+    boolean downLeftBlocked = false;
+
+    for (int i = 1; i < 8; i++) {
+      Log.i("PIECE", String.format("Calculating straight lines %s moves from %s", i, this));
+      int[] upRight   = new int[]{x + i, y - i};
+      int[] upLeft    = new int[]{x - i, y - i};
+      int[] downRight = new int[]{x + i, y + i};
+      int[] downLeft  = new int[]{x - i, y + i};
+
+      if (!upRightBlocked) {
+        Log.i("PIECE", "Up-Right is not blocked, adding move.");
+        upRightBlocked = !addMoveToList(moves, upRight, pieces);
+      }
+
+      if (!upLeftBlocked) {
+        Log.i("PIECE", "Up-Left is not blocked, adding move.");
+        upLeftBlocked = !addMoveToList(moves, upLeft, pieces);
+      }
+
+      if (!downRightBlocked) {
+        Log.i("PIECE", "Down-Right is not blocked, adding move.");
+        downRightBlocked = !addMoveToList(moves, downRight, pieces);
+      }
+
+      if (!downLeftBlocked) {
+        Log.i("PIECE", "Down-Left is not blocked, adding move.");
+        downLeftBlocked = !addMoveToList(moves, downLeft, pieces);
+      }
+    }
+
+    return moves;
+  }
+
   private Piece pieceAtPosition(int[] position, List<Piece> pieces) {
     int xHere = position[0];
     int yHere = position[1];
