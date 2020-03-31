@@ -36,7 +36,7 @@ public class ChessBoard extends View {
   int xMin, yMin, selectedX, selectedY, squareSize;
   boolean flipped;
   List<Piece> pieces;
-  PieceColor playerColor;
+  PieceColor playerColor, playerTurn;
   Piece selectedPiece;
 
   /**
@@ -53,8 +53,9 @@ public class ChessBoard extends View {
       generatePieces();
     }
 
-    // Set default player color
+    // Set default player color and whose turn it is.
     playerColor = PieceColor.WHITE;
+    playerTurn = PieceColor.WHITE;
 
     // Board is not flipped by default
     flipped = false;
@@ -143,10 +144,10 @@ public class ChessBoard extends View {
    */
   private void drawSquares(Canvas canvas) {
     for (int x = 0; x < 8; x++) {
-      flipColor();
+      flipCurrentPaint();
       int xCoordinate = getXCoordinate(x);
       for (int y = 0; y < 8; y++) {
-        flipColor();
+        flipCurrentPaint();
         int yCoordinate = getYCoordinate(y);
         canvas.drawRect(
             xCoordinate,
@@ -276,18 +277,20 @@ public class ChessBoard extends View {
    * vice versa in order to flip between the two when drawing
    * the chess board.
    */
-  private void flipColor() {
+  private void flipCurrentPaint() {
     currentPaint =
         currentPaint == lightPaint ?
             darkPaint : lightPaint;
   }
 
   /**
-   * Change the player color.
-   * @param playerColor The player's new color.
+   * Flip the current player color from PieceColor.WHITE
+   * to PieceColor.BLACK and vice versa.
    */
-  private void setPlayerColor(PieceColor playerColor) {
-    this.playerColor = playerColor;
+  private void flipPlayerTurn() {
+    playerTurn =
+        playerTurn == PieceColor.WHITE ?
+            PieceColor.BLACK : PieceColor.WHITE;
   }
 
   /**
@@ -302,6 +305,9 @@ public class ChessBoard extends View {
       if (x == move[0] && y == move[1]) {
         Log.w("TOUCH", String.format("Moving piece to (%s,%s)", x, y));
         selectedPiece.move(x, y);
+
+        flipPlayerTurn();
+        return;
       }
     }
   }
@@ -313,6 +319,11 @@ public class ChessBoard extends View {
    * @return Whether or not we're interested in all subsequent events in this gesture.
    */
   public boolean onTouch(View view, MotionEvent motionEvent) {
+    // Ignore the touch event if it's not the player's turn.
+    if (playerColor != playerTurn) {
+      return false;
+    }
+
     // Get what square we're on
     int x = getXSquare((int) motionEvent.getX());
     int y = getYSquare((int) motionEvent.getY());
@@ -324,17 +335,29 @@ public class ChessBoard extends View {
       selectedX = -1;
       selectedY = -1;
 
-    } else {
+    } else if (selectedPiece != null) {
+      // Try to make a move
       Log.w("TOUCH", String.format("New square, selecting. selectedPiece is %s", selectedPiece));
-      if (selectedPiece != null) {
-        Log.w("TOUCH", "Selected piece not null, executing makeMove()");
-        makeMove(x, y);
-      }
+      makeMove(x, y);
+      selectedX = -1;
+      selectedY = -1;
+
+    } else {
+      // Just select the tile
+      Log.w("TOUCH", "Selected piece is null, will select specified tile and continue.");
       selectedX = x;
       selectedY = y;
     }
-    invalidate();
 
+    invalidate();
     return false;
+  }
+
+  /**
+   * Change the player color.
+   * @param playerColor The player's new color.
+   */
+  private void setPlayerColor(PieceColor playerColor) {
+    this.playerColor = playerColor;
   }
 }
