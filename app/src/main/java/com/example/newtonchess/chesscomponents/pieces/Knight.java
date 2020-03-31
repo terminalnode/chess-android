@@ -2,6 +2,7 @@ package com.example.newtonchess.chesscomponents.pieces;
 
 import com.example.newtonchess.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Knight extends Piece {
@@ -11,7 +12,23 @@ public class Knight extends Piece {
 
   @Override
   public List<int[]> getMoves(List<Piece> pieces) {
-    return null;
+    List<int[]> moves = new ArrayList<>();
+    int[][] theoreticalMoves = new int[][]{
+        { x - 1, y - 2 },
+        { x + 1, y - 2 },
+        { x - 1, y + 2 },
+        { x + 1, y + 2 },
+        { x - 2, y - 1 },
+        { x - 2, y + 1 },
+        { x + 2, y - 1 },
+        { x + 2, y + 1 }
+    };
+
+    for (int[] theoreticalMove : theoreticalMoves) {
+      addMoveToList(moves, theoreticalMove[0], theoreticalMove[1], pieces);
+    }
+
+    return moves;
   }
 
   @Override
