@@ -9,6 +9,7 @@ package com.example.newtonchess.chesscomponents;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -32,10 +33,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChessBoard extends View {
-  Paint currentPaint, darkPaint, lightPaint;
-  int xMin, yMin, squareSize;
+  Paint currentPaint, darkPaint, lightPaint, highlightPaint;
+  int xMin, yMin, selectedX, selectedY, squareSize;
   boolean flipped;
-  boolean highlightSquare;
   List<Piece> pieces;
 
   /**
@@ -46,19 +46,30 @@ public class ChessBoard extends View {
    */
   public ChessBoard(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
-    darkPaint = new Paint();
-    lightPaint = new Paint();
-    currentPaint = lightPaint;
-    flipped = false;
-    highlightSquare = false;
+    // Generate pieces if they do not exist
     if (pieces == null) {
       pieces = new ArrayList<>();
       generatePieces();
     }
 
+    // Board is not flipped by default
+    flipped = false;
+
+    // Set selected tile to inactive (-1,-1)
+    selectedX = -1;
+    selectedY = -1;
+
     // Set light and dark tile colors
+    darkPaint = new Paint();
+    lightPaint = new Paint();
+    highlightPaint = new Paint();
     darkPaint.setColor(ContextCompat.getColor(context, R.color.darkSquare));
     lightPaint.setColor(ContextCompat.getColor(context, R.color.lightSquare));
+    highlightPaint.setColor(ContextCompat.getColor(context, R.color.colorComplementary));
+    highlightPaint.setStyle(Paint.Style.STROKE);
+    highlightPaint.setStrokeWidth(10.0F);
+
+    currentPaint = lightPaint;
   }
 
   private void generatePieces() {
@@ -113,6 +124,13 @@ public class ChessBoard extends View {
     yMin = (height - squareSize * 8) / 2;
 
     // Loop over the board to paint the squares
+    drawSquares(canvas);
+
+    // Loop over the pieces and place them on the board
+    drawPieces(canvas);
+  }
+
+  private void drawSquares(Canvas canvas) {
     for (int x = 0; x < 8; x++) {
       flipColor();
       int xCoordinate = getXCoordinate(x);
@@ -128,21 +146,67 @@ public class ChessBoard extends View {
         );
       }
     }
+  }
 
-    // Loop over the pieces and place them on the board
+  /**
+   * Highlight a square based on its x and y position in the grid.
+   * @param canvas The canvas which the square resides on.
+   * @param xSquare The square's x-position in the grid.
+   * @param ySquare The square's y-position in the grid.
+   */
+  private void highlightSquare(Canvas canvas, int xSquare, int ySquare) {
+    int x0 = getXCoordinate(xSquare);
+    int y0 = getYCoordinate(ySquare);
+
+    float left = x0 + highlightPaint.getStrokeWidth() / 2;
+    float top = y0 + highlightPaint.getStrokeWidth() / 2;
+    float right = x0 + squareSize - highlightPaint.getStrokeWidth() / 2;
+    float bottom = y0 + squareSize - highlightPaint.getStrokeWidth() / 2;
+
+    canvas.drawRect(left, top, right, bottom, highlightPaint);
+  }
+
+  /**
+   * Highlight a square based on its position on the screen. Useful for when
+   * we already have the position and don't want to calculate it again.
+   * @param canvas The canvas which the square resides on.
+   * @param left Left-most x-coordinate of the square.
+   * @param top Top-most y-coordinate of the square.
+   * @param right Right-most x-coordinate of the square.
+   * @param bottom Bottom-most y-coordinate of the square.
+   */
+  private void highlightSquare(Canvas canvas, float left, float top, float right, float bottom) {
+    left += highlightPaint.getStrokeWidth() / 2;
+    top += highlightPaint.getStrokeWidth() / 2;
+    right -= highlightPaint.getStrokeWidth() / 2;
+    bottom -= highlightPaint.getStrokeWidth() / 2;
+
+    canvas.drawRect(left, top, right, bottom, highlightPaint);
+  }
+
+  private void drawPieces(Canvas canvas) {
     for (Piece piece : pieces) {
-      int xCoordinate = getXCoordinate(piece.getX());
-      int yCoordinate = getYCoordinate(piece.getY());
+      int x = piece.getX();
+      int y = piece.getY();
+
+      int left = getXCoordinate(x);
+      int top = getYCoordinate(y);
+      int right = left + squareSize;
+      int bottom = top + squareSize;
+
       Drawable drawable = ContextCompat.getDrawable(getContext(), piece.getDrawableId());
 
       if (drawable != null) {
-        drawable.setBounds(
-            xCoordinate,
-            yCoordinate,
-            xCoordinate + squareSize,
-            yCoordinate + squareSize
-        );
+        drawable.setBounds(left, top, right, bottom);
         drawable.draw(canvas);
+
+        if (x == selectedX && y == selectedY) {
+          highlightSquare(canvas, left, top, right, bottom);
+
+          for (int[] move : piece.getMoves()) {
+            highlightSquare(canvas, move[0], move[1]);
+          }
+        }
       }
     }
   }
@@ -211,6 +275,16 @@ public class ChessBoard extends View {
     int x = getXSquare((int) motionEvent.getX());
     int y = getYSquare((int) motionEvent.getY());
     Log.w("TOUCH", String.format("Touched square: (%s,%s)", x, y));
+
+    if (selectedX == x && selectedY == y) {
+      // Unset selection if same square is touched twice
+      selectedX = -1;
+      selectedY = -1;
+    } else {
+      selectedX = x;
+      selectedY = y;
+    }
+    invalidate();
 
     return false;
   }
