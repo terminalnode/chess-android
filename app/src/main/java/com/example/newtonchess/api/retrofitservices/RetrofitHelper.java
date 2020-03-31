@@ -16,4 +16,8 @@ public class RetrofitHelper {
   public static PlayerService getPlayerService() {
     return getBase().create(PlayerService.class);
   }
+
+  public static LoginService getLoginService() {
+    return getBase().create(LoginService.class);
+  }
 }

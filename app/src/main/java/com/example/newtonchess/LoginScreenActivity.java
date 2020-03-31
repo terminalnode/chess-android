@@ -2,6 +2,7 @@ package com.example.newtonchess;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.ApiPlayer;
-import com.example.newtonchess.api.UserData;
 import com.example.newtonchess.api.entities.PlayerEntity;
+import com.example.newtonchess.api.entities.TokenEntity;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
@@ -37,16 +38,22 @@ public class LoginScreenActivity extends AppCompatActivity {
     signUpButton = findViewById(R.id.signUpButton);
     userNameTextBox = findViewById(R.id.userNameEditBox);
     passwordTextBox = findViewById(R.id.passwordEditBox);
+
+    signInButton.setOnClickListener(this::loginButtonPress);
+    signUpButton.setOnClickListener(this::signUpButtonPress);
   }
 
   private void loginButtonPress(View view) {
-    String username = userNameTextBox.getText().toString();
-    String password = passwordTextBox.getText().toString();
+    Log.i("LOGIN", "Sign In-button pressed");
+    // Disable the sign up button to avoid double clicking
+    // They will be reenabled once we get a response.
+    disableButtons();
+
+    // Fetch the input username and password
+    String username = userNameTextBox.getText().toString().trim();
+    String password = passwordTextBox.getText().toString().trim();
     Snackbar snackbar = Snackbar.make(
-        view,
-        R.string.missingUsernamePasswordSnackbar,
-        Snackbar.LENGTH_LONG
-    );
+        view, R.string.missingUsernamePasswordSnackbar, Snackbar.LENGTH_LONG);
 
     // Verify that login credentials were filled in and correct.
     if (username.isEmpty() && password.isEmpty()) {
@@ -61,22 +68,39 @@ public class LoginScreenActivity extends AppCompatActivity {
       snackbar.setText(R.string.missingPasswordSnackbar);
       snackbar.show();
 
-    } else if (!ApiLogin.verifyUsername(username, password)) {
-      snackbar.setText(R.string.incorrectLoginCredentialsSnackbar);
-      snackbar.show();
-
-    } else {
-
-      UserData loggedInUserData = ApiLogin.getUserData(404);
-
-      Intent mainMenuIntent = new Intent(view.getContext(), MainMenuActivity.class);
-      mainMenuIntent.putExtra("UserData", loggedInUserData);
-
-      startActivity(mainMenuIntent);
     }
+
+    // Create the user we will send to the API
+    PlayerEntity newPlayer = new PlayerEntity(username, password);
+    Call<TokenEntity> call = ApiLogin.login(newPlayer);
+
+    // Make API call
+    call.enqueue(new Callback<TokenEntity>() {
+      @Override
+      @EverythingIsNonNull
+      public void onResponse(Call<TokenEntity> call, Response<TokenEntity> response) {
+        Log.i("LOGIN", "Inside onResponse of loginButtonClicked");
+        if (response.code() == 200) {
+          handleSuccessfulLogin(response, view);
+        } else {
+          handleUnsuccessfulLogin(response, snackbar);
+        }
+        enableButtons();
+      }
+
+      @Override
+      @EverythingIsNonNull
+      public void onFailure(Call<TokenEntity> call, Throwable t) {
+        Log.w("LOGIN", "Inside onFailure of loginButtonClicked");
+        snackbar.setText(R.string.somethingWentWrong);
+        snackbar.show();
+        enableButtons();
+      }
+    });
   }
 
   private void signUpButtonPress(View view) {
+    Log.i("LOGIN", "Sign Up-button pressed");
     // Disable the sign up button to avoid double clicking
     // They will be reenabled once we get a response.
     disableButtons();
@@ -93,7 +117,13 @@ public class LoginScreenActivity extends AppCompatActivity {
       @EverythingIsNonNull
       public void onResponse(Call<PlayerEntity> call, Response<PlayerEntity> response) {
         if (response.isSuccessful() && response.body() != null) {
-          accountCreatedSnackbar(view, response.body());
+          PlayerEntity player = response.body();
+          Snackbar.make(
+              view,
+              getString(R.string.accountCreationSuccessful, player.getName()),
+              Snackbar.LENGTH_LONG
+          ).show();
+
         } else {
           accountNotCreatedSnackbar(view, response);
         }
@@ -103,23 +133,38 @@ public class LoginScreenActivity extends AppCompatActivity {
       @Override
       @EverythingIsNonNull
       public void onFailure(Call<PlayerEntity> call, Throwable t) {
-        accountCreationGenericError(view);
+        Snackbar.make(
+            view,
+            R.string.somethingWentWrong,
+            Snackbar.LENGTH_LONG
+        ).show();
         enableButtons();
       }
     });
   }
 
-  private void accountCreatedSnackbar(View view, PlayerEntity player) {
-    Snackbar.make(
-        view,
-        getString(R.string.accountCreationSuccessful, player.getName()),
-        Snackbar.LENGTH_LONG
-    ).show();
+  /**
+   * Status code of login API call was 200, we should be able to get a token.
+   * @param response The response containing the token.
+   * @param view The view we're in.
+   */
+  private void handleSuccessfulLogin(Response<TokenEntity> response, View view) {
+    Intent mainMenuIntent = new Intent(view.getContext(), MainMenuActivity.class);
+    mainMenuIntent.putExtra("TokenEntity", response.body());
+    startActivity(mainMenuIntent);
+  }
+
+  /**
+   * Status code of login API call was not 200, something wen't wrong. We need to know what.
+   * @param response The response containing the error message.
+   * @param snackbar A snackbar for showing useful messages.
+   */
+  private void handleUnsuccessfulLogin(Response<TokenEntity> response, Snackbar snackbar) {
   }
 
   private void accountNotCreatedSnackbar(View view, Response response) {
     String internalName = null;
-    int error = R.string.accountCreationGenericError;
+    int error = R.string.somethingWentWrong;
 
     // Try to read the message body to identify the error
     try {
@@ -145,14 +190,6 @@ public class LoginScreenActivity extends AppCompatActivity {
     Snackbar.make(
         view,
         error,
-        Snackbar.LENGTH_LONG
-    ).show();
-  }
-
-  private void accountCreationGenericError(View view) {
-    Snackbar.make(
-        view,
-        R.string.accountCreationGenericError,
         Snackbar.LENGTH_LONG
     ).show();
   }

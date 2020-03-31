@@ -22,7 +22,7 @@
   <string name="friendsListButton">Vänlista</string>
   <string name="logoutButton">Logga ut</string>
   <string name="accountCreationSuccessful">Konto skapat: %1$s</string>
-  <string name="accountCreationGenericError">Ojsan hoppsan, där gick det snett! Vänligen försök igen.</string>
+  <string name="somethingWentWrong">Ojsan hoppsan, där gick det snett! Vänligen försök igen.</string>
   <string name="accountCreationMissingFields">Vänligen skriv in ett användarnamn och lösenord</string>
   <string name="accountCreationUsernameTaken">Det önskade användarnamnet är redan taget</string>
 </resources>

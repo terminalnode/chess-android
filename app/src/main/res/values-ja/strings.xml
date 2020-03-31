@@ -22,7 +22,7 @@
   <string name="activeGamesButton">未了勝負</string>
   <string name="friendsListButton">友達リスト</string>
   <string name="accountCreationSuccessful">アカウント工作成功しました：%1$s</string>
-  <string name="accountCreationGenericError">あらまぁ、何か失敗しました。もう一回やり直して下さい</string>
+  <string name="somethingWentWrong">あらまぁ、何か失敗しました。もう一回やり直して下さい</string>
   <string name="accountCreationMissingFields">"ユーザー名とパスワードを入力して下さい "</string>
   <string name="accountCreationUsernameTaken">"そのユーザー名は既に取られてしまった "</string>
 </resources>
