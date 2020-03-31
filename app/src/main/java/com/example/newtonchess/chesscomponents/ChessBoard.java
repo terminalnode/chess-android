@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChessBoard extends View {
-  Paint currentPaint, darkPaint, lightPaint, highlightPaint;
+  Paint currentPaint, darkPaint, lightPaint, highlightPaint, selectionPaint;
   int xMin, yMin, selectedX, selectedY, squareSize;
   boolean flipped;
   List<Piece> pieces;
@@ -68,8 +68,12 @@ public class ChessBoard extends View {
     darkPaint = new Paint();
     lightPaint = new Paint();
     highlightPaint = new Paint();
+    selectionPaint = new Paint();
     darkPaint.setColor(ContextCompat.getColor(context, R.color.darkSquare));
     lightPaint.setColor(ContextCompat.getColor(context, R.color.lightSquare));
+    selectionPaint.setColor(ContextCompat.getColor(context, R.color.colorNewtonOrange));
+    selectionPaint.setStyle(Paint.Style.STROKE);
+    selectionPaint.setStrokeWidth(10.0F);
     highlightPaint.setColor(ContextCompat.getColor(context, R.color.colorComplementary));
     highlightPaint.setStyle(Paint.Style.STROKE);
     highlightPaint.setStrokeWidth(10.0F);
@@ -167,15 +171,26 @@ public class ChessBoard extends View {
    * @param ySquare The square's y-position in the grid.
    */
   private void highlightSquare(Canvas canvas, int xSquare, int ySquare) {
+    highlightSquare(canvas, xSquare, ySquare, highlightPaint);
+  }
+
+  /**
+   * Highlight a square based on its x and y position in the grid.
+   * @param canvas The canvas which the square resides on.
+   * @param xSquare The square's x-position in the grid.
+   * @param ySquare The square's y-position in the grid.
+   * @param paint The paint to draw the highlight with.
+   */
+  private void highlightSquare(Canvas canvas, int xSquare, int ySquare, Paint paint) {
     int x0 = getXCoordinate(xSquare);
     int y0 = getYCoordinate(ySquare);
 
-    float left = x0 + highlightPaint.getStrokeWidth() / 2;
-    float top = y0 + highlightPaint.getStrokeWidth() / 2;
-    float right = x0 + squareSize - highlightPaint.getStrokeWidth() / 2;
-    float bottom = y0 + squareSize - highlightPaint.getStrokeWidth() / 2;
+    float left = x0 + paint.getStrokeWidth() / 2;
+    float top = y0 + paint.getStrokeWidth() / 2;
+    float right = x0 + squareSize - paint.getStrokeWidth() / 2;
+    float bottom = y0 + squareSize - paint.getStrokeWidth() / 2;
 
-    canvas.drawRect(left, top, right, bottom, highlightPaint);
+    canvas.drawRect(left, top, right, bottom, paint);
   }
 
   /**
@@ -188,12 +203,26 @@ public class ChessBoard extends View {
    * @param bottom Bottom-most y-coordinate of the square.
    */
   private void highlightSquare(Canvas canvas, float left, float top, float right, float bottom) {
-    left += highlightPaint.getStrokeWidth() / 2;
-    top += highlightPaint.getStrokeWidth() / 2;
-    right -= highlightPaint.getStrokeWidth() / 2;
-    bottom -= highlightPaint.getStrokeWidth() / 2;
+    highlightSquare(canvas, left, top, right, bottom, highlightPaint);
+  }
 
-    canvas.drawRect(left, top, right, bottom, highlightPaint);
+  /**
+   * Highlight a square based on its position on the screen. Useful for when
+   * we already have the position and don't want to calculate it again.
+   * @param canvas The canvas which the square resides on.
+   * @param left Left-most x-coordinate of the square.
+   * @param top Top-most y-coordinate of the square.
+   * @param right Right-most x-coordinate of the square.
+   * @param bottom Bottom-most y-coordinate of the square.
+   * @param paint The paint with which the square will be highlighted
+   */
+  private void highlightSquare(Canvas canvas, float left, float top, float right, float bottom, Paint paint) {
+    left += paint.getStrokeWidth() / 2;
+    top += paint.getStrokeWidth() / 2;
+    right -= paint.getStrokeWidth() / 2;
+    bottom -= paint.getStrokeWidth() / 2;
+
+    canvas.drawRect(left, top, right, bottom, paint);
   }
 
   /**
@@ -220,7 +249,7 @@ public class ChessBoard extends View {
         if (x == selectedX && y == selectedY && piece.getColor() == playerColor) {
           Log.i("TOUCH", String.format("Setting selected piece to: %s", piece));
           selectedPiece = piece;
-          highlightSquare(canvas, left, top, right, bottom);
+          highlightSquare(canvas, left, top, right, bottom, selectionPaint);
 
           for (int[] move : piece.getMoves(pieces)) {
             highlightSquare(canvas, move[0], move[1]);
