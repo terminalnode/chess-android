@@ -9,7 +9,6 @@ package com.example.newtonchess.chesscomponents;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -37,6 +36,7 @@ public class ChessBoard extends View {
   int xMin, yMin, selectedX, selectedY, squareSize;
   boolean flipped;
   List<Piece> pieces;
+  PieceColor playerColor;
 
   /**
    * Modified version of a default View constructor, which calls upon the built-in
@@ -203,7 +203,7 @@ public class ChessBoard extends View {
         if (x == selectedX && y == selectedY) {
           highlightSquare(canvas, left, top, right, bottom);
 
-          for (int[] move : piece.getMoves()) {
+          for (int[] move : piece.getMoves(pieces)) {
             highlightSquare(canvas, move[0], move[1]);
           }
         }

@@ -10,7 +10,7 @@ public class Queen extends Piece {
   }
 
   @Override
-  public List<int[]> getMoves() {
+  public List<int[]> getMoves(List<Piece> pieces) {
     return null;
   }
 

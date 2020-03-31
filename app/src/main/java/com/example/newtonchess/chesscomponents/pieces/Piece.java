@@ -20,7 +20,7 @@ public abstract class Piece {
 
 
   //----- Abstract methods ----//
-  public abstract List<int[]> getMoves();
+  public abstract List<int[]> getMoves(List<Piece> pieces);
   public abstract int getDrawableId();
   public abstract PieceType getPieceType();
 
@@ -66,5 +66,13 @@ public abstract class Piece {
 
   public void setHasMoved(boolean hasMoved) {
     this.hasMoved = hasMoved;
+  }
+
+  public void setColor(PieceColor color) {
+    this.color = color;
+  }
+
+  public PieceColor getColor() {
+    return color;
   }
 }

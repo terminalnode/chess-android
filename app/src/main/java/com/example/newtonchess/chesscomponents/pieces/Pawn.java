@@ -11,15 +11,49 @@ public class Pawn extends Piece {
   }
 
   @Override
-  public List<int[]> getMoves() {
+  public List<int[]> getMoves(List<Piece> pieces) {
     List<int[]> moves = new ArrayList<>();
     int dy = isWhite ? 1 : -1;
     int yPlusOne = y + dy;
     int yPlusTwo = y + dy * 2;
-    addMoveToList(moves, x, yPlusOne);
+    int diagonalRight = x + 1;
+    int diagonalLeft = x - 1;
 
-    if (!hasMoved) {
-      addMoveToList(moves, x, yPlusTwo);
+    // Check if pawn can make diagonal moves and/or if pawn is blocked
+    boolean yPlusOneBlocked = false;
+    boolean yPlusTwoBlocked = false;
+    boolean pieceOnRight = false;
+    boolean pieceOnLeft = false;
+
+    for (Piece piece : pieces) {
+      int otherX = piece.getX();
+      int otherY = piece.getY();
+      boolean sameColor = piece.getColor() == color;
+
+      if (otherX == x && otherY == yPlusOne) {
+        yPlusOneBlocked = true;
+      } else if (otherX == x && otherY == yPlusTwo) {
+        yPlusTwoBlocked = true;
+      } else if (otherX == diagonalRight && otherY == yPlusOne && !sameColor) {
+        pieceOnRight = true;
+      } else if (otherX == diagonalLeft && otherY == yPlusOne && !sameColor) {
+        pieceOnLeft = true;
+      }
+    }
+
+    // Add moves to list
+    if (!yPlusOneBlocked) {
+      addMoveToList(moves, x, yPlusOne);
+
+      if (!yPlusTwoBlocked && !hasMoved) {
+        addMoveToList(moves, x, yPlusTwo);
+      }
+    }
+    if (pieceOnLeft) {
+      addMoveToList(moves, diagonalLeft, yPlusOne);
+    }
+    if (pieceOnRight) {
+      addMoveToList(moves, diagonalRight, yPlusOne);
     }
 
     return moves;
