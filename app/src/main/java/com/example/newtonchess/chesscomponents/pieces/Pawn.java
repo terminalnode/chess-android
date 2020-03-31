@@ -28,32 +28,31 @@ public class Pawn extends Piece {
     for (Piece piece : pieces) {
       int otherX = piece.getX();
       int otherY = piece.getY();
-      boolean sameColor = piece.getColor() == color;
 
       if (otherX == x && otherY == yPlusOne) {
         yPlusOneBlocked = true;
       } else if (otherX == x && otherY == yPlusTwo) {
         yPlusTwoBlocked = true;
-      } else if (otherX == diagonalRight && otherY == yPlusOne && !sameColor) {
+      } else if (otherX == diagonalRight && otherY == yPlusOne) {
         pieceOnRight = true;
-      } else if (otherX == diagonalLeft && otherY == yPlusOne && !sameColor) {
+      } else if (otherX == diagonalLeft && otherY == yPlusOne) {
         pieceOnLeft = true;
       }
     }
 
     // Add moves to list
     if (!yPlusOneBlocked) {
-      addMoveToList(moves, x, yPlusOne);
+      addMoveToList(moves, x, yPlusOne, pieces);
 
       if (!yPlusTwoBlocked && !hasMoved) {
-        addMoveToList(moves, x, yPlusTwo);
+        addMoveToList(moves, x, yPlusTwo, pieces);
       }
     }
     if (pieceOnLeft) {
-      addMoveToList(moves, diagonalLeft, yPlusOne);
+      addMoveToList(moves, diagonalLeft, yPlusOne, pieces);
     }
     if (pieceOnRight) {
-      addMoveToList(moves, diagonalRight, yPlusOne);
+      addMoveToList(moves, diagonalRight, yPlusOne, pieces);
     }
 
     return moves;

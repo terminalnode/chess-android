@@ -38,9 +38,19 @@ public abstract class Piece {
     return null;
   }
 
-  void addMoveToList(List<int[]> moves, int x, int y) {
+  void addMoveToList(List<int[]> moves, int x, int y, List<Piece> otherPieces) {
     if (x >= 0 && y >= 0 && x <= 7 && y <= 7) {
-      moves.add(new int[]{x, y});
+      boolean blockedByOwnColor = false;
+      for (Piece otherPiece : otherPieces) {
+        if (otherPiece.getColor() == color && otherPiece.getX() == x && otherPiece.getY() == y) {
+          blockedByOwnColor = true;
+          break;
+        }
+      }
+
+      if (!blockedByOwnColor) {
+        moves.add(new int[]{x, y});
+      }
     }
   }
 
