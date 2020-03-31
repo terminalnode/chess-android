@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Pawn extends Piece {
   public Pawn(int x, int y, PieceColor color) {
-    super(x, y, color);
+    super(x, y, color, PieceType.PAWN);
   }
 
   @Override

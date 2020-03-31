@@ -5,15 +5,17 @@ import java.util.List;
 public abstract class Piece {
   int x, y;
   PieceColor color;
+  PieceType type;
   boolean isWhite;
   boolean hasMoved;
 
 
   //----- Constructor ----//
-  Piece(int x, int y, PieceColor color) {
+  Piece(int x, int y, PieceColor color, PieceType type) {
     this.x = x;
     this.y = y;
     this.color = color;
+    this.type = type;
     this.hasMoved = false;
     isWhite = color == PieceColor.WHITE;
   }
@@ -40,6 +42,11 @@ public abstract class Piece {
     if (x >= 0 && y >= 0 && x <= 7 && y <= 7) {
       moves.add(new int[]{x, y});
     }
+  }
+
+  @Override
+  public String toString() {
+    return String.format("<%s (%s,%s)>", type, x, y);
   }
 
 
@@ -74,5 +81,13 @@ public abstract class Piece {
 
   public PieceColor getColor() {
     return color;
+  }
+
+  public void setType(PieceType type) {
+    this.type = type;
+  }
+
+  public PieceType getType() {
+    return type;
   }
 }

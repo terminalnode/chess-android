@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Queen extends Piece {
   public Queen(int x, int y, PieceColor color) {
-    super(x, y, color);
+    super(x, y, color, PieceType.QUEEN);
   }
 
   @Override
