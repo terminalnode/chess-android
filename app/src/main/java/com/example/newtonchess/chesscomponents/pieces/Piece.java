@@ -1,5 +1,8 @@
 package com.example.newtonchess.chesscomponents.pieces;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece {
@@ -34,23 +37,95 @@ public abstract class Piece {
     this.hasMoved = true;
   }
 
+  List<int[]> getStraightMoves(List<Piece> pieces) {
+    List<int[]> moves = new ArrayList<>();
+    boolean downBlocked = false;
+    boolean upBlocked = false;
+    boolean rightBlocked = false;
+    boolean leftBlocked = false;
+
+    for (int i = 1; i < 8; i++) {
+      Log.i("PIECE", String.format("Calculating straight lines %s moves from %s", i, this));
+      int[] down = new int[]{x, y + i};
+      int[] up = new int[]{x, y - i};
+      int[] right = new int[]{x + i, y};
+      int[] left = new int[]{x - i, y};
+
+      if (!downBlocked) {
+        Log.i("PIECE", "Down is not blocked, adding move.");
+        downBlocked = !addMoveToList(moves, down, pieces);
+      }
+
+      if (!upBlocked) {
+        Log.i("PIECE", "Up is not blocked, adding move.");
+        upBlocked = !addMoveToList(moves, up, pieces);
+      }
+
+      if (!rightBlocked) {
+        Log.i("PIECE", "Right is not blocked, adding move.");
+        rightBlocked = !addMoveToList(moves, right, pieces);
+      }
+
+      if (!leftBlocked) {
+        Log.i("PIECE", "Left is not blocked, adding move.");
+        leftBlocked = !addMoveToList(moves, left, pieces);
+      }
+    }
+
+    return moves;
+  }
+
+  private Piece pieceAtPosition(int[] position, List<Piece> pieces) {
+    int xHere = position[0];
+    int yHere = position[1];
+
+    for (Piece piece : pieces) {
+      if (piece.getX() == xHere && piece.getY() == yHere) {
+        Log.i("PIECE", String.format("Space occupied by %s", piece));
+        return piece;
+      }
+    }
+    return null;
+  }
+
+  private boolean isPositionOutOfBounds(int[] position) {
+    int xHere = position[0];
+    int yHere = position[1];
+
+    return
+        xHere < 0 || xHere > 7 ||
+        yHere < 0 || yHere > 7;
+  }
+
   public PieceType[] upgrade() {
     return null;
   }
 
-  void addMoveToList(List<int[]> moves, int x, int y, List<Piece> otherPieces) {
-    if (x >= 0 && y >= 0 && x <= 7 && y <= 7) {
-      boolean blockedByOwnColor = false;
-      for (Piece otherPiece : otherPieces) {
-        if (otherPiece.getColor() == color && otherPiece.getX() == x && otherPiece.getY() == y) {
-          blockedByOwnColor = true;
-          break;
-        }
-      }
+  boolean addMoveToList(List<int[]> moves, int x, int y, List<Piece> otherPieces) {
+    return addMoveToList(moves, new int[]{x, y}, otherPieces);
+  }
 
-      if (!blockedByOwnColor) {
-        moves.add(new int[]{x, y});
-      }
+  boolean addMoveToList(List<int[]> moves, int[] position, List<Piece> otherPieces) {
+    if (isPositionOutOfBounds(position)) {
+      Log.i("PIECE", "Move is out of bounds, returning false");
+      return false;
+    }
+
+    Piece pieceHere = pieceAtPosition(position, otherPieces);
+    boolean blockedByPiece = pieceHere != null;
+    boolean blockedByOwnColor = blockedByPiece && pieceHere.getColor() == color;
+
+    if (blockedByOwnColor) {
+      Log.i("PIECE", "Blocked by own color, returning false");
+      return false;
+    } else if (blockedByPiece) {
+      Log.i("PIECE", "Blocked by other piece, returning false but adding position");
+      moves.add(position);
+      return false;
+    } else {
+      Log.i("PIECE", "Coast is clear, adding position");
+      moves.add(position);
+      return true;
     }
   }
 

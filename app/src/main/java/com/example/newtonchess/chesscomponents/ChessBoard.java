@@ -218,7 +218,7 @@ public class ChessBoard extends View {
         drawable.draw(canvas);
 
         if (x == selectedX && y == selectedY && piece.getColor() == playerColor) {
-          Log.w("TOUCH", String.format("Setting selected piece to: %s", piece));
+          Log.i("TOUCH", String.format("Setting selected piece to: %s", piece));
           selectedPiece = piece;
           highlightSquare(canvas, left, top, right, bottom);
 
@@ -299,11 +299,11 @@ public class ChessBoard extends View {
    * @param y The new y-position in the grid.
    */
   public void makeMove(int x, int y) {
-    Log.w("TOUCH", String.format("Checking if we can move to (%s,%s)", x, y));
+    Log.i("TOUCH", String.format("Checking if we can move to (%s,%s)", x, y));
 
     for (int[] move : selectedPiece.getMoves(pieces)) {
       if (x == move[0] && y == move[1]) {
-        Log.w("TOUCH", String.format("Moving piece to (%s,%s)", x, y));
+        Log.i("TOUCH", String.format("Moving piece to (%s,%s)", x, y));
         selectedPiece.move(x, y);
 
         flipPlayerTurn();
@@ -327,24 +327,24 @@ public class ChessBoard extends View {
     // Get what square we're on
     int x = getXSquare((int) motionEvent.getX());
     int y = getYSquare((int) motionEvent.getY());
-    Log.w("TOUCH", String.format("Touched square: (%s,%s)", x, y));
+    Log.i("TOUCH", String.format("Touched square: (%s,%s)", x, y));
 
     if (selectedX == x && selectedY == y) {
       // Unset selection if same square is touched twice
-      Log.w("TOUCH", "Same square as before, deselecting.");
+      Log.i("TOUCH", "Same square as before, deselecting.");
       selectedX = -1;
       selectedY = -1;
 
     } else if (selectedPiece != null) {
       // Try to make a move
-      Log.w("TOUCH", String.format("New square, selecting. selectedPiece is %s", selectedPiece));
+      Log.i("TOUCH", String.format("New square, selecting. selectedPiece is %s", selectedPiece));
       makeMove(x, y);
       selectedX = -1;
       selectedY = -1;
 
     } else {
       // Just select the tile
-      Log.w("TOUCH", "Selected piece is null, will select specified tile and continue.");
+      Log.i("TOUCH", "Selected piece is null, will select specified tile and continue.");
       selectedX = x;
       selectedY = y;
     }
