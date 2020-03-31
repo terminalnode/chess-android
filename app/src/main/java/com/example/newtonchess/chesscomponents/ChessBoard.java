@@ -52,6 +52,9 @@ public class ChessBoard extends View {
       generatePieces();
     }
 
+    // Set default player color
+    playerColor = PieceColor.WHITE;
+
     // Board is not flipped by default
     flipped = false;
 
@@ -200,7 +203,7 @@ public class ChessBoard extends View {
         drawable.setBounds(left, top, right, bottom);
         drawable.draw(canvas);
 
-        if (x == selectedX && y == selectedY) {
+        if (x == selectedX && y == selectedY && piece.getColor() == playerColor) {
           highlightSquare(canvas, left, top, right, bottom);
 
           for (int[] move : piece.getMoves(pieces)) {
@@ -264,6 +267,9 @@ public class ChessBoard extends View {
             darkPaint : lightPaint;
   }
 
+  private void setPlayerColor(PieceColor playerColor) {
+    this.playerColor = playerColor;
+  }
   /**
    * This method is used as onTouchListener for the ChessBoard.
    * @param view The View in which the chessboard resides.
