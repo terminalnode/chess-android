@@ -11,6 +11,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -31,7 +33,7 @@ import java.util.List;
 
 public class ChessBoard extends View {
   Paint currentPaint, darkPaint, lightPaint;
-  int x0, y0, squareSize;
+  int xMin, yMin, squareSize;
   boolean flipped;
   boolean highlightSquare;
   List<Piece> pieces;
@@ -103,12 +105,12 @@ public class ChessBoard extends View {
     // Calculate best square size.
     final int width = getWidth();
     final int height = getHeight();
-    squareSize = getSquareSize(Math.min(width, height));
+    squareSize = Math.min(width, height) / 8;
 
     // Set x0 and y0 to upper left corner of the board,
     // centering the board based on the square size.
-    x0 = (width - squareSize * 8) / 2;
-    y0 = (height - squareSize * 8) / 2;
+    xMin = (width - squareSize * 8) / 2;
+    yMin = (height - squareSize * 8) / 2;
 
     // Loop over the board to paint the squares
     for (int x = 0; x < 8; x++) {
@@ -146,22 +148,13 @@ public class ChessBoard extends View {
   }
 
   /**
-   * Calculate the height and width of the squares on the board.
-   * @param length The height or width of a chess board.
-   * @return The height and width of a square on the chess board.
-   */
-  private int getSquareSize(int length) {
-    return length / 8;
-  }
-
-  /**
    * Get the leftmost x-coordinate of a square given it's
    * x-number on the board (0 - 7 on a normal chess board).
    * @param x The x-number of the square.
    * @return The leftmost x-coordinate of the square (or column).
    */
   private int getXCoordinate(int x) {
-    return x0 + squareSize * (flipped ? 7 - x : x);
+    return xMin + squareSize * (flipped ? 7 - x : x);
   }
 
   /**
@@ -171,7 +164,29 @@ public class ChessBoard extends View {
    * @return The topmost y-coordinate of the square (or column).
    */
   private int getYCoordinate(int y) {
-    return y0 + squareSize * (flipped ? y : 7 - y);
+    return yMin + squareSize * (flipped ? y : 7 - y);
+  }
+
+  /**
+   * Get the Y-position of a square (0 - 7 on a normal chess board)
+   * from the y coordinate of the cursor of a MotionEvent.
+   * @param y The y-coordinate of the cursor.
+   * @return The Y-position of the square it's touching.
+   */
+  private int getYSquare(int y) {
+    int ySquare = (y - yMin) / squareSize;
+    return flipped ? ySquare : 7 - ySquare;
+  }
+
+  /**
+   * Get the X-position of a square (0 - 7 on a normal chess board)
+   * from the x coordinate of the cursor of a MotionEvent.
+   * @param x The x-coordinate of the cursor.
+   * @return The X-position of the square it's touching.
+   */
+  private int getXSquare(int x) {
+    int xSquare = (x - xMin) / squareSize;
+    return flipped ? 7 - xSquare : xSquare;
   }
 
   /**
@@ -183,5 +198,20 @@ public class ChessBoard extends View {
     currentPaint =
         currentPaint == lightPaint ?
             darkPaint : lightPaint;
+  }
+
+  /**
+   * This method is used as onTouchListener for the ChessBoard.
+   * @param view The View in which the chessboard resides.
+   * @param motionEvent The MotionEvent that triggered the method.
+   * @return Whether or not we're interested in all subsequent events in this gesture.
+   */
+  public boolean onTouch(View view, MotionEvent motionEvent) {
+    // Get what square we're on
+    int x = getXSquare((int) motionEvent.getX());
+    int y = getYSquare((int) motionEvent.getY());
+    Log.w("TOUCH", String.format("Touched square: (%s,%s)", x, y));
+
+    return false;
   }
 }
