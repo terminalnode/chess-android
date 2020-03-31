@@ -11,7 +11,9 @@ public class Queen extends Piece {
 
   @Override
   public List<int[]> getMoves(List<Piece> pieces) {
-    return null;
+    List<int[]> moves = getStraightMoves(pieces);
+    moves.addAll(getDiagonalMoves(pieces));
+    return moves;
   }
 
   @Override
