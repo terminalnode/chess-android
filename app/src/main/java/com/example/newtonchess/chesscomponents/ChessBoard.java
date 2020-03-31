@@ -37,6 +37,7 @@ public class ChessBoard extends View {
   boolean flipped;
   List<Piece> pieces;
   PieceColor playerColor;
+  Piece selectedPiece;
 
   /**
    * Modified version of a default View constructor, which calls upon the built-in
@@ -75,6 +76,9 @@ public class ChessBoard extends View {
     currentPaint = lightPaint;
   }
 
+  /**
+   * Generate a standard set of pieces, and add these to the pieces list.
+   */
   private void generatePieces() {
     // Add pawns
     for (int x = 0; x < 8; x++) {
@@ -133,6 +137,10 @@ public class ChessBoard extends View {
     drawPieces(canvas);
   }
 
+  /**
+   * Draw the squares of the chessboard.
+   * @param canvas The canvas on which the board will be drawn.
+   */
   private void drawSquares(Canvas canvas) {
     for (int x = 0; x < 8; x++) {
       flipColor();
@@ -187,7 +195,12 @@ public class ChessBoard extends View {
     canvas.drawRect(left, top, right, bottom, highlightPaint);
   }
 
+  /**
+   * Draw all the pieces on the board.
+   * @param canvas The canvas on which the pieces will be drawn.
+   */
   private void drawPieces(Canvas canvas) {
+    selectedPiece = null;
     for (Piece piece : pieces) {
       int x = piece.getX();
       int y = piece.getY();
@@ -204,6 +217,8 @@ public class ChessBoard extends View {
         drawable.draw(canvas);
 
         if (x == selectedX && y == selectedY && piece.getColor() == playerColor) {
+          Log.w("TOUCH", String.format("Setting selected piece to: %s", piece));
+          selectedPiece = piece;
           highlightSquare(canvas, left, top, right, bottom);
 
           for (int[] move : piece.getMoves(pieces)) {
@@ -267,9 +282,30 @@ public class ChessBoard extends View {
             darkPaint : lightPaint;
   }
 
+  /**
+   * Change the player color.
+   * @param playerColor The player's new color.
+   */
   private void setPlayerColor(PieceColor playerColor) {
     this.playerColor = playerColor;
   }
+
+  /**
+   * Attempt to move from current position to these coordinates.
+   * @param x The new x-position in the grid.
+   * @param y The new y-position in the grid.
+   */
+  public void makeMove(int x, int y) {
+    Log.w("TOUCH", String.format("Checking if we can move to (%s,%s)", x, y));
+
+    for (int[] move : selectedPiece.getMoves(pieces)) {
+      if (x == move[0] && y == move[1]) {
+        Log.w("TOUCH", String.format("Moving piece to (%s,%s)", x, y));
+        selectedPiece.move(x, y);
+      }
+    }
+  }
+
   /**
    * This method is used as onTouchListener for the ChessBoard.
    * @param view The View in which the chessboard resides.
@@ -284,9 +320,16 @@ public class ChessBoard extends View {
 
     if (selectedX == x && selectedY == y) {
       // Unset selection if same square is touched twice
+      Log.w("TOUCH", "Same square as before, deselecting.");
       selectedX = -1;
       selectedY = -1;
+
     } else {
+      Log.w("TOUCH", String.format("New square, selecting. selectedPiece is %s", selectedPiece));
+      if (selectedPiece != null) {
+        Log.w("TOUCH", "Selected piece not null, executing makeMove()");
+        makeMove(x, y);
+      }
       selectedX = x;
       selectedY = y;
     }
