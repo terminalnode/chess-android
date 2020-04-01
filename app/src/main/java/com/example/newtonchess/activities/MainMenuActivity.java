@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
 import com.google.android.material.snackbar.Snackbar;
@@ -70,6 +71,7 @@ public class MainMenuActivity extends AppCompatActivity {
   }
 
   private void logoutButtonPress(View view) {
+    ApiLogin.logout(token.getTokenString());
     Intent loginScreenIntent = new Intent(view.getContext(), LoginScreenActivity.class);
     startActivity(loginScreenIntent);
   }
