@@ -2,22 +2,31 @@ package com.example.newtonchess.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
+import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
 import com.example.newtonchess.gui.FriendsListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
+
 public class FriendsListActivity extends AppCompatActivity {
   TokenEntity token;
   ListView friendsListView;
   FriendsListAdapter friendsListAdapter;
+  TextView emptyListTextViewTop, emptyListTextViewBottom;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,56 +37,62 @@ public class FriendsListActivity extends AppCompatActivity {
     token = getIntent().getParcelableExtra("TokenEntity");
     Log.i("ACTIVITY", String.format("Main menu started, token: %s", token));
 
-    // Find the friendsListView
+    // Find the views
     friendsListView = findViewById(R.id.friendsListView);
+    emptyListTextViewTop = findViewById(R.id.emptyListTextViewTop);
+    emptyListTextViewBottom = findViewById(R.id.emptyListTextViewBottom);
 
-    // Create an example list of friends to display
-    List<PlayerEntity> testList = new ArrayList<>();
-    testList.add(new PlayerEntity("Test 01", "Password 01"));
-    testList.add(new PlayerEntity("Test 02", "Password 02"));
-    testList.add(new PlayerEntity("Test 03", "Password 03"));
-    testList.add(new PlayerEntity("Test 04", "Password 04"));
-    testList.add(new PlayerEntity("Test 05", "Password 05"));
-    testList.add(new PlayerEntity("Test 06", "Password 06"));
-    testList.add(new PlayerEntity("Test 07", "Password 07"));
-    testList.add(new PlayerEntity("Test 08", "Password 08"));
-    testList.add(new PlayerEntity("Test 09", "Password 09"));
-    testList.add(new PlayerEntity("Test 10", "Password 10"));
-
-    // Create the adapter and set it to the list view
-    friendsListAdapter = new FriendsListAdapter(this, R.layout.list_single_friend, testList);
+    // Set empty adapter on friendsListView
+    friendsListAdapter = new FriendsListAdapter(
+        this,
+        R.layout.list_single_friend,
+        new ArrayList<>());
     friendsListView.setAdapter(friendsListAdapter);
 
-    // Add friends to list view
-
-    //final ListView listView = findViewById(R.id.listView);
-    //final StableArrayAdapter adapter = new StableArrayAdapter(this, R.id.textView2, this.loggedInUserData.getFriendList());
-    //listView.setAdapter(adapter);
+    // Fetch the friends list from server
+    getFriendsList();
   }
 
-  // private class StableArrayAdapter extends ArrayAdapter<Friend> {
-  //   //TODO Understand how this works and refactor.
-  //   HashMap<Friend, Integer> mIdMap = new HashMap<Friend, Integer>();
-  //   public StableArrayAdapter(Context context, int textViewResourceId,
-  //                             List<Friend> objects) {
-  //     super(context,R.layout.custom_list_view , textViewResourceId, objects);
+  private void getFriendsList() {
+    Call<List<PlayerEntity>> call = RetrofitHelper
+        .getPlayerService()
+        .getFriends(token.getTokenString());
+    call.enqueue(new Callback<List<PlayerEntity>>() {
+      @Override
+      @EverythingIsNonNull
+      public void onResponse(Call<List<PlayerEntity>> call, Response<List<PlayerEntity>> response) {
+        if (response.body() != null && response.body().size() > 0) {
+          friendsListAdapter.addAll(response.body());
+          emptyListTextViewTop.setVisibility(View.INVISIBLE);
+          emptyListTextViewBottom.setVisibility(View.INVISIBLE);
+        } else if (response.body() != null) {
+          emptyListTextViewTop.setText(R.string.emptyListText);
+          emptyListTextViewBottom.setText(R.string.thatsTooBad);
+          emptyListTextViewTop.setVisibility(View.VISIBLE);
+          emptyListTextViewBottom.setVisibility(View.VISIBLE);
+        } else {
+          emptyListTextViewTop.setText(R.string.failedToFetchList);
+          emptyListTextViewBottom.setText(R.string.thatsTooBad);
+          emptyListTextViewTop.setVisibility(View.VISIBLE);
+          emptyListTextViewBottom.setVisibility(View.VISIBLE);
+        }
+      }
 
-  //     for (int i = 0; i < objects.size(); ++i) {
-  //       mIdMap.put(objects.get(i), i);
-  //     }
-  //   }
-
-
-  //   @Override
-  //   public long getItemId(int position) {
-  //     Friend item = getItem(position);
-  //     return mIdMap.get(item);
-  //   }
-
-  //   @Override
-  //   public boolean hasStableIds() {
-  //     return true;
-  //   }
-
-  // }
+      @Override
+      @EverythingIsNonNull
+      public void onFailure(Call<List<PlayerEntity>> call, Throwable t) {
+        emptyListTextViewTop.setTextSize(R.string.failedToFetchList);
+        emptyListTextViewBottom.setText(R.string.thatsTooBad);
+        emptyListTextViewTop.setVisibility(View.VISIBLE);
+        emptyListTextViewBottom.setVisibility(View.VISIBLE);
+      }
+    });
+  }
 }
+
+
+
+
+
+
+

@@ -27,4 +27,9 @@
   <string name="accountCreationUsernameTaken">Det önskade användarnamnet är redan taget</string>
   <string name="friendListIconDescription">En svart eller vit bonde</string>
   <string name="challengeButton">Utmana!</string>
+  <string name="emptyListText">Det är ingen här…</string>
+  <string name="thatsTooBad">Det var ju synd.</string>
+  <string name="failedToFetchList">Kunde inte hämta vänlista!</string>
+  <string name="fetchingList">Hämtar vänlista…</string>
+  <string name="standBy">Vänligen vänta…</string>
 </resources>

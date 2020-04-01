@@ -27,4 +27,9 @@
   <string name="accountCreationUsernameTaken">"そのユーザー名は既に取られてしまった "</string>
   <string name="friendListIconDescription">黒いか白いポーン</string>
   <string name="challengeButton">挑戦！</string>
+  <string name="emptyListText">誰も居ないじゃん</string>
+  <string name="thatsTooBad">残念ですね</string>
+  <string name="standBy">しばらくお待ちください</string>
+  <string name="fetchingList">リストを取得しています</string>
+  <string name="failedToFetchList">リストを取得失敗！</string>
 </resources>

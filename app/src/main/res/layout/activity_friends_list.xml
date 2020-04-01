@@ -8,6 +8,35 @@
   android:background="@color/colorBackground"
   tools:context=".activities.FriendsListActivity">
 
+  <TextView
+    android:id="@+id/emptyListTextViewTop"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/fetchingList"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/emptyListTextSize"
+    app:layout_constraintBottom_toTopOf="@+id/emptyListTextViewBottom"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <TextView
+    android:id="@+id/emptyListTextViewBottom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/standBy"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/emptyListTextSize"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/midpointGuideline" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/midpointGuideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.5" />
+
   <include
     android:id="@+id/include"
     layout="@layout/newton_chess_banner" />

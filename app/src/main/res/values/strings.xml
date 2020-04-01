@@ -33,6 +33,11 @@
 
   <!-- Friends list -->
   <string name="challengeButton">Challenge!</string>
+  <string name="emptyListText">There\'s no one here…</string>
+  <string name="thatsTooBad">That\'s too bad.</string>
+  <string name="failedToFetchList">Failed to fetch friends list!</string>
+  <string name="fetchingList">Fetching list…</string>
+  <string name="standBy">Please stand by…</string>
 
   <!-- Play screen -->
   <string name="playScreenOpponentLabel">Opponent:</string>
