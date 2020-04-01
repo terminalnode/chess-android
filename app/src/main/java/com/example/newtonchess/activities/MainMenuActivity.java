@@ -66,8 +66,9 @@ public class MainMenuActivity extends AppCompatActivity {
   }
 
   private void friendsButtonPress(View view) {
-    Intent friendListIntent = new Intent(view.getContext(), FriendsListActivity.class);
-    startActivity(friendListIntent);
+    Intent friendsListIntent = new Intent(view.getContext(), FriendsListActivity.class);
+    friendsListIntent.putExtra("TokenEntity", token);
+    startActivity(friendsListIntent);
   }
 
   private void logoutButtonPress(View view) {

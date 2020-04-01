@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".activities.FriendsListActivity"
   android:background="@color/colorBackground"
-  android:textColor="@color/colorComplementary">
+  tools:context=".activities.FriendsListActivity">
 
-  <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+  <include
+    android:id="@+id/include"
+    layout="@layout/newton_chess_banner" />
 
-  <include layout="@layout/content_friends_list" />
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
