@@ -16,7 +16,7 @@
     android:layout_height="wrap_content"
     android:text="@string/mainmenuWelcome"
     android:textColor="@color/colorPrimary"
-    android:textSize="@dimen/mainMenuHeaderTextSize"
+    android:textSize="@dimen/headerTextSize"
     android:textStyle="bold"
     app:layout_constraintBottom_toTopOf="@+id/newGameButton"
     app:layout_constraintEnd_toEndOf="parent"

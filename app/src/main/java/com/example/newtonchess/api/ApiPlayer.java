@@ -19,4 +19,16 @@ public class ApiPlayer {
         .getPlayerService()
         .createPlayer(player);
   }
+
+  public static Call<List<PlayerEntity>> getFriends(String token) {
+    return RetrofitHelper
+        .getPlayerService()
+        .getFriends(token);
+  }
+
+  public static Call<PlayerEntity> addFriend(String token, PlayerEntity player) {
+    return RetrofitHelper
+        .getPlayerService()
+        .addFriend(token, player);
+  }
 }

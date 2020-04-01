@@ -25,4 +25,6 @@
   <string name="somethingWentWrong">Ojsan hoppsan, där gick det snett! Vänligen försök igen.</string>
   <string name="accountCreationMissingFields">Vänligen skriv in ett användarnamn och lösenord</string>
   <string name="accountCreationUsernameTaken">Det önskade användarnamnet är redan taget</string>
+  <string name="friendListIconDescription">En svart eller vit bonde</string>
+  <string name="challengeButton">Utmana!</string>
 </resources>

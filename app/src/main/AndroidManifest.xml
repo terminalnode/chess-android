@@ -12,7 +12,6 @@
     android:theme="@style/AppTheme">
     <activity
       android:name=".activities.FriendsListActivity"
-      android:label="@string/title_activity_friends_list"
     />
 
     <activity
@@ -21,12 +20,10 @@
 
     <activity
       android:name=".activities.MainMenuActivity"
-      android:label="@string/title_activity_main_menu"
     />
 
     <activity
       android:name=".activities.LoginScreenActivity"
-      android:label="@string/title_activity_login_screen"
     />
 
     <activity android:name=".activities.SplashScreenActivity">

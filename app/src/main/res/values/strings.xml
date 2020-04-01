@@ -1,10 +1,13 @@
 <resources>
   <string name="appName">Newton Chess</string>
 
+  <!-- Descriptions -->
+  <string name="newtonLogoDescription">An image showing Sir Isaac Newton holding a Java cup</string>
+  <string name="friendListIconDescription">A black or white pawn</string>
+
   <!-- Splash screen -->
   <string name="titleNewton">N e w t o n</string>
   <string name="titleChess">C h e s s</string>
-  <string name="newtonLogoDescription">An image showing Sir Isaac Newton holding a Java cup</string>
 
   <!-- Login screen -->
   <string name="loginScreenTitle">Sign in</string>
@@ -28,24 +31,12 @@
   <string name="friendsListButton">Friends List</string>
   <string name="logoutButton">Log Out</string>
 
-  <string name="friendsListButtonPressed">You have pressed the Friends List Button</string>
-  <string name="activeGamesButtonPressed">You have pressed the Active Games Button</string>
-  <string name="newGameButtonPressed">You have pressed the New Game Button</string>
-  <string name="logoutButtonPressed">You have pressed the Log Out Button</string>
+  <!-- Friends list -->
+  <string name="challengeButton">Challenge!</string>
 
   <!-- Play screen -->
   <string name="playScreenOpponentLabel">Opponent:</string>
   <string name="playScreenOpponentName">No one!</string>
 
-  <string name="title_activity_login_screen">LoginScreen</string>
-
-  <string name="first_fragment_label">First Fragment</string>
-  <string name="second_fragment_label">Second Fragment</string>
-  <string name="next">Next</string>
-  <string name="previous">Previous</string>
-
-  <string name="title_activity_main_menu">MainMenuActivity</string>
-
-  <string name="title_activity_friends_list">FriendsListActivity</string>
   <string name="userUnknown">anonymous</string>
 </resources>

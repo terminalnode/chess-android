@@ -25,4 +25,6 @@
   <string name="somethingWentWrong">あらまぁ、何か失敗しました。もう一回やり直して下さい</string>
   <string name="accountCreationMissingFields">"ユーザー名とパスワードを入力して下さい "</string>
   <string name="accountCreationUsernameTaken">"そのユーザー名は既に取られてしまった "</string>
+  <string name="friendListIconDescription">黒いか白いポーン</string>
+  <string name="challengeButton">挑戦！</string>
 </resources>

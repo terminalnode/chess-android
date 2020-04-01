@@ -13,7 +13,6 @@ import com.example.newtonchess.R;
 import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainMenuActivity extends AppCompatActivity {
   TokenEntity token;
@@ -50,19 +49,9 @@ public class MainMenuActivity extends AppCompatActivity {
   }
 
   private void activeGamesButtonPress(View view) {
-    Snackbar.make(
-        view,
-        R.string.activeGamesButtonPressed,
-        Snackbar.LENGTH_LONG
-    ).show();
   }
 
   private void newGameButtonPress(View view) {
-    Snackbar.make(
-        view,
-        R.string.newGameButtonPressed,
-        Snackbar.LENGTH_LONG
-    ).show();
   }
 
   private void friendsButtonPress(View view) {
