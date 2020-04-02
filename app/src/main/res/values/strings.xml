@@ -40,6 +40,9 @@
   <string name="fetchingList">Fetching list…</string>
   <string name="standBy">Please stand by…</string>
   <string name="findNewFriends">Find new friends!</string>
+  <string name="findFriendsScreenTitle">Find Friends</string>
+  <string name="searchButtonText">Search</string>
+  <string name="typeSomething">Type something…</string>
 
   <!-- Play screen -->
   <string name="playScreenOpponentLabel">Opponent:</string>

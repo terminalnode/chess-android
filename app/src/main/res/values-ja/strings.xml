@@ -34,4 +34,7 @@
   <string name="failedToFetchList">リストを取得失敗！</string>
   <string name="findNewFriends">"友達を探せ！ "</string>
   <string name="addFriendButton">友達追加</string>
+  <string name="findFriendsScreenTitle">友達指し</string>
+  <string name="searchButtonText">探せ</string>
+  <string name="typeSomething">入力して下さい…</string>
 </resources>

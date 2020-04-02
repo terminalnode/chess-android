@@ -34,4 +34,7 @@
   <string name="standBy">Vänligen vänta…</string>
   <string name="findNewFriends">Hitta nya vänner!</string>
   <string name="addFriendButton">Lägg till vän</string>
+  <string name="findFriendsScreenTitle">Leta Vänner</string>
+  <string name="searchButtonText">Sök</string>
+  <string name="typeSomething">Skriv något…</string>
 </resources>
