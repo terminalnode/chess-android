@@ -57,5 +57,5 @@
   <string name="deny">Deny</string>
   <string name="viewBoard">View Board</string>
   <string name="turn">Turn</string>
-  <string name="turnNum" translatable="false">#%1$s</string>
+  <string name="turnNum" translatable="false">\?\?\?</string>
 </resources>
