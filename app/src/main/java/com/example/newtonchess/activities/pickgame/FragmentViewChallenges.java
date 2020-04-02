@@ -29,7 +29,7 @@ public class FragmentViewChallenges extends Fragment {
       @Override
       public void onClick(View view) {
         NavHostFragment.findNavController(FragmentViewChallenges.this)
-            .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            .navigate(R.id.action_ChallengeView_to_GamesView);
       }
     });
   }
