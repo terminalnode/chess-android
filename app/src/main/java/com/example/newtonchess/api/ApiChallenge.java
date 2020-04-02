@@ -7,6 +7,9 @@ import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
 import retrofit2.Call;
 
 public class ApiChallenge {
+  public static final String CHALLENGE_ALREADY_EXISTS = "ChallengeAlreadyExistsException";
+  public static final String CHALLENGE_ID_MISMATCH = "ChallengeIdMismatchException";
+
   public static Call<ChallengeEntity> createNewChallenge(String token, PlayerEntity player) {
     return RetrofitHelper
         .getChallengeService()

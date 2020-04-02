@@ -38,4 +38,6 @@
   <string name="searchButtonText">探せ</string>
   <string name="typeSomething">入力して下さい…</string>
   <string name="challengeSentButtonText">送信済み</string>
+  <string name="challengeNotSentButtonText">不送信</string>
+  <string name="challengeAlreadyExistsSnackbar">このユーザーとは既に挑戦がある</string>
 </resources>

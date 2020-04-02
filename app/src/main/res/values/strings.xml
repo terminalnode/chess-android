@@ -44,14 +44,11 @@
   <string name="searchButtonText">Search</string>
   <string name="typeSomething">Type something…</string>
   <string name="challengeSentButtonText">Sent</string>
+  <string name="challengeNotSentButtonText">Not sent</string>
+  <string name="challengeAlreadyExistsSnackbar">You already have a challenge with this user</string>
 
   <!-- Play screen -->
   <string name="playScreenOpponentLabel">Opponent:</string>
   <string name="playScreenOpponentName">No one!</string>
-
   <string name="userUnknown">anonymous</string>
-  <string name="title_activity_pick_game_screen">PickGameScreen</string>
-  <!-- Strings used for fragments for navigation -->
-  <string name="first_fragment_label">First Fragment</string>
-  <string name="second_fragment_label">Second Fragment</string>
 </resources>

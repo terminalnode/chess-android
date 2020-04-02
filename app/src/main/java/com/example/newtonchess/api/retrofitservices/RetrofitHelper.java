@@ -4,6 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
+  public static final String INTERNAL_SERVER_ERROR = "InternalServerErrorException";
   private static final String BASE_URL = "https://newton-sysjg3-chessapi.herokuapp.com/api/";
 
   private static Retrofit getBase() {
