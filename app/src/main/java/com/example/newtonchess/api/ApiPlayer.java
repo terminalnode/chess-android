@@ -31,4 +31,10 @@ public class ApiPlayer {
         .getPlayerService()
         .addFriend(token, player);
   }
+
+  public static Call<List<PlayerEntity>> searchFriend(String token, String searchTerm) {
+    return RetrofitHelper
+        .getPlayerService()
+        .searchFriend(token, searchTerm);
+  }
 }

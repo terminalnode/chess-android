@@ -37,4 +37,5 @@
   <string name="findFriendsScreenTitle">Leta Vänner</string>
   <string name="searchButtonText">Sök</string>
   <string name="typeSomething">Skriv något…</string>
+  <string name="challengeSentButtonText">Skickat</string>
 </resources>

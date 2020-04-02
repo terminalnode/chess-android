@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.example.newtonchess.R;
 import com.example.newtonchess.api.entities.PlayerEntity;
+import com.example.newtonchess.api.entities.TokenEntity;
 
 import java.util.List;
 
@@ -21,17 +22,20 @@ public class FriendsListAdapter extends ArrayAdapter<PlayerEntity> {
   private Context context;
   private int listLayout;
   FriendsListListenerType listenerType;
+  TokenEntity token;
 
   public FriendsListAdapter(
       @NonNull Context context,
       int listLayout,
       @NonNull List<PlayerEntity> objects,
-      FriendsListListenerType listenerType) {
+      FriendsListListenerType listenerType,
+      TokenEntity token) {
 
     super(context, listLayout, objects);
     this.context = context;
     this.listLayout = listLayout;
     this.listenerType = listenerType;
+    this.token = token;
   }
 
   @NonNull
@@ -50,7 +54,7 @@ public class FriendsListAdapter extends ArrayAdapter<PlayerEntity> {
     // Set button text and listener
     if (listenerType == FriendsListListenerType.CHALLENGE) {
       button.setText(R.string.challengeButton);
-      button.setOnClickListener(new FriendsListChallengeListener());
+      button.setOnClickListener(new FriendsListChallengeListener(getItem(position), token, button));
     } else {
       button.setText(R.string.addFriendButton);
       button.setOnClickListener(new FriendsListAddFriendListener());

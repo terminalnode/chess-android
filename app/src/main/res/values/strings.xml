@@ -43,6 +43,7 @@
   <string name="findFriendsScreenTitle">Find Friends</string>
   <string name="searchButtonText">Search</string>
   <string name="typeSomething">Type something…</string>
+  <string name="challengeSentButtonText">Sent</string>
 
   <!-- Play screen -->
   <string name="playScreenOpponentLabel">Opponent:</string>

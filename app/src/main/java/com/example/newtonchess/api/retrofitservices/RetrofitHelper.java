@@ -20,4 +20,8 @@ public class RetrofitHelper {
   public static LoginService getLoginService() {
     return getBase().create(LoginService.class);
   }
+
+  public static ChallengeService getChallengeService() {
+    return getBase().create(ChallengeService.class);
+  }
 }

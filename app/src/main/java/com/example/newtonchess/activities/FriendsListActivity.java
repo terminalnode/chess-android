@@ -55,7 +55,8 @@ public class FriendsListActivity extends AppCompatActivity {
         this,
         R.layout.list_single_friend,
         new ArrayList<>(),
-        FriendsListListenerType.CHALLENGE);
+        FriendsListListenerType.CHALLENGE,
+        token);
     friendsListView.setAdapter(friendsListAdapter);
 
     // Fetch the friends list from server
