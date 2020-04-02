@@ -24,7 +24,7 @@ public interface PlayerService {
   @POST("friends")
   Call<PlayerEntity> addFriend(@Header("Token") String token, PlayerEntity friend);
 
-  @POST("friends/search/{searchTerm}")
+  @GET("friends/search/{searchTerm}")
   Call<List<PlayerEntity>> searchFriend(
       @Header("Token") String token,
       @Path("searchTerm") String searchTerm);

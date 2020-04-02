@@ -95,6 +95,7 @@ public class PickGameMainScreen extends AppCompatActivity {
   }
 
   private void updateGames(View view) {
+    Log.i("GAMES", "Updating games, my token is: " + token);
   }
 
   private void updateChallenges(View view) {

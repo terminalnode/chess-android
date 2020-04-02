@@ -24,7 +24,8 @@
     <activity android:name=".activities.PlayScreenActivity" />
     <activity android:name=".activities.MainMenuActivity" />
     <activity android:name=".activities.LoginScreenActivity" />
-    <activity android:name=".activities.AddFriendActivity" />
+    <activity android:name=".activities.AddFriendActivity"
+              android:windowSoftInputMode="adjustPan"/>
   </application>
 
 </manifest>
