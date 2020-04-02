@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="@dimen/listViewItemHeight"
   android:background="@color/colorPrimaryDark"
@@ -9,16 +10,37 @@
   android:paddingTop="5dp"
   android:paddingBottom="5dp">
 
-  <ImageView
-    android:id="@+id/challengeIcon"
-    android:layout_width="60dp"
-    android:layout_height="wrap_content"
-    android:contentDescription="@string/friendListIconDescription"
-    android:maxHeight="@dimen/listViewItemHeight"
-    android:minHeight="@dimen/listViewItemHeight"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:srcCompat="@drawable/wpawn" />
+  <Button
+    android:id="@+id/challengeListDenyButton"
+    android:layout_width="@dimen/challengeReplyButtonWidth"
+    android:layout_height="@dimen/challengeReplyButtonHeight"
+    android:layout_marginEnd="10dp"
+    android:width="@dimen/challengeReplyButtonWidth"
+    android:background="@color/denyRed"
+    android:hapticFeedbackEnabled="false"
+    android:maxWidth="@dimen/challengeReplyButtonWidth"
+    android:text="@string/deny"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/challengeReplyButtonText"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/challengeListAcceptButton"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+    android:id="@+id/challengeListAcceptButton"
+    android:layout_width="@dimen/challengeReplyButtonWidth"
+    android:layout_height="@dimen/challengeReplyButtonHeight"
+    android:layout_marginEnd="10dp"
+    android:layout_weight="1"
+    android:width="@dimen/challengeReplyButtonWidth"
+    android:background="@color/acceptGreen"
+    android:maxWidth="@dimen/challengeReplyButtonWidth"
+    android:text="@string/accept"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/challengeReplyButtonText"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/challengerName"
@@ -28,20 +50,8 @@
     android:text="@string/userUnknown"
     android:textColor="@color/colorComplementary"
     android:textSize="24sp"
-    app:layout_constraintBottom_toBottomOf="@+id/challengeIcon"
-    app:layout_constraintStart_toEndOf="@+id/challengeIcon"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
-  <Button
-    android:id="@+id/challengesListEntryButton"
-    android:layout_width="@dimen/listViewButtonWidth"
-    android:layout_height="@dimen/listViewButtonHeight"
-    android:layout_marginEnd="10dp"
-    android:background="@color/colorPrimary"
-    android:hapticFeedbackEnabled="false"
-    android:text="@string/challengeButton"
-    android:textColor="@color/colorNewtonOrange"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

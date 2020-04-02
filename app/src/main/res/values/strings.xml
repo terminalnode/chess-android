@@ -53,4 +53,6 @@
   <string name="userUnknown">anonymous</string>
   <string name="showGamesText">Games</string>
   <string name="showChallengesText">Challenges</string>
+  <string name="accept">Accept</string>
+  <string name="deny">Deny</string>
 </resources>

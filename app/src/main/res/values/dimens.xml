@@ -25,6 +25,9 @@
   <dimen name="switchModeButtonHeight">60dp</dimen>
   <dimen name="switchModeButtonText">25sp</dimen>
   <dimen name="fragmentHeight">500dp</dimen>
+  <dimen name="challengeReplyButtonWidth">90dp</dimen>
+  <dimen name="challengeReplyButtonHeight">40dp</dimen>
+  <dimen name="challengeReplyButtonText">20sp</dimen>
 
   <!-- Find friends screen -->
   <dimen name="searchButtonWidth">70dp</dimen>
