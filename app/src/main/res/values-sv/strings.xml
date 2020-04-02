@@ -32,4 +32,6 @@
   <string name="failedToFetchList">Kunde inte hämta vänlista!</string>
   <string name="fetchingList">Hämtar vänlista…</string>
   <string name="standBy">Vänligen vänta…</string>
+  <string name="findNewFriends">Hitta nya vänner!</string>
+  <string name="addFriendButton">Lägg till vän</string>
 </resources>

@@ -13,6 +13,7 @@ import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
 import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
 import com.example.newtonchess.gui.FriendsListAdapter;
+import com.example.newtonchess.gui.FriendsListListenerType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ public class FriendsListActivity extends AppCompatActivity {
     friendsListAdapter = new FriendsListAdapter(
         this,
         R.layout.list_single_friend,
-        new ArrayList<>());
+        new ArrayList<>(),
+        FriendsListListenerType.CHALLENGE);
     friendsListView.setAdapter(friendsListAdapter);
 
     // Fetch the friends list from server

@@ -25,12 +25,12 @@
     android:textColor="@color/colorComplementary"
     android:textSize="24sp"
     app:layout_constraintBottom_toBottomOf="@+id/friendIcon"
-    app:layout_constraintEnd_toStartOf="@+id/button"
+    app:layout_constraintEnd_toStartOf="@+id/friendsListEntryButton"
     app:layout_constraintStart_toEndOf="@+id/friendIcon"
     app:layout_constraintTop_toTopOf="parent" />
 
   <Button
-    android:id="@+id/button"
+    android:id="@+id/friendsListEntryButton"
     android:layout_width="@dimen/listViewButtonWidth"
     android:layout_height="@dimen/listViewButtonHeight"
     android:background="@color/colorPrimary"

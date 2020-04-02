@@ -32,4 +32,6 @@
   <string name="standBy">しばらくお待ちください</string>
   <string name="fetchingList">リストを取得しています</string>
   <string name="failedToFetchList">リストを取得失敗！</string>
+  <string name="findNewFriends">"友達を探せ！ "</string>
+  <string name="addFriendButton">友達追加</string>
 </resources>

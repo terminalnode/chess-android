@@ -19,6 +19,10 @@
   <!-- Play screen -->
   <dimen name="playScreenOpponentText">30sp</dimen>
 
+  <!-- Find friends screen -->
+  <dimen name="searchButtonWidth">70dp</dimen>
+  <dimen name="searchButtonHeight">50dp</dimen>
+
   <!-- Various other measures -->
   <dimen name="listViewItemHeight">65dp</dimen>
   <dimen name="listViewHeight">400dp</dimen>
@@ -27,4 +31,7 @@
   <dimen name="listViewButtonWidth">110dp</dimen>
   <dimen name="headerTextSize">50sp</dimen>
   <dimen name="emptyListTextSize">40sp</dimen>
+  <dimen name="bigButtonWidth">330dp</dimen>
+  <dimen name="bigButtonHeight">50dp</dimen>
+  <dimen name="bigButtonText">30sp</dimen>
 </resources>

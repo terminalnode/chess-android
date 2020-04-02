@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,11 +20,18 @@ import java.util.List;
 public class FriendsListAdapter extends ArrayAdapter<PlayerEntity> {
   private Context context;
   private int listLayout;
+  FriendsListListenerType listenerType;
 
-  public FriendsListAdapter(@NonNull Context context, int listLayout, @NonNull List<PlayerEntity> objects) {
+  public FriendsListAdapter(
+      @NonNull Context context,
+      int listLayout,
+      @NonNull List<PlayerEntity> objects,
+      FriendsListListenerType listenerType) {
+
     super(context, listLayout, objects);
     this.context = context;
     this.listLayout = listLayout;
+    this.listenerType = listenerType;
   }
 
   @NonNull
@@ -37,6 +45,16 @@ public class FriendsListAdapter extends ArrayAdapter<PlayerEntity> {
     // Find the views inside the adapter
     TextView friendNameTextView = convertView.findViewById(R.id.friendName);
     ImageView friendIcon = convertView.findViewById(R.id.friendIcon);
+    Button button = convertView.findViewById(R.id.friendsListEntryButton);
+
+    // Set button text and listener
+    if (listenerType == FriendsListListenerType.CHALLENGE) {
+      button.setText(R.string.challengeButton);
+      button.setOnClickListener(new FriendsListChallengeListener());
+    } else {
+      button.setText(R.string.addFriendButton);
+      button.setOnClickListener(new FriendsListAddFriendListener());
+    }
 
     // Set views to correct values
     friendNameTextView.setText(name);
