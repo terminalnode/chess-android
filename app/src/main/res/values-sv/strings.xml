@@ -15,9 +15,9 @@
   <string name="incorrectLoginCredentialsSnackbar">Felaktigt användarnamn eller lösenord.</string>
   <string name="playScreenOpponentLabel">Motståndare:</string>
   <string name="playScreenOpponentName">Ingen!</string>
-  <string name="mainmenuWelcome">Välkommen, %1$s!</string>
+  <string name="mainMenuWelcome">Välkommen</string>
   <string name="userUnknown">anonym</string>
-  <string name="activeGamesButton">Pågående Matcher</string>
+  <string name="playButton">Spela</string>
   <string name="startNewGameButton">Påbörja Ny Match</string>
   <string name="friendsListButton">Vänlista</string>
   <string name="logoutButton">Logga ut</string>

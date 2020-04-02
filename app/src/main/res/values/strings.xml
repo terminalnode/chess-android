@@ -25,8 +25,8 @@
   <string name="accountCreationUsernameTaken">The requested username has already been taken</string>
 
   <!-- Main Menu -->
-  <string name="mainmenuWelcome">Welcome, %1$s!</string>
-  <string name="activeGamesButton">Active Games</string>
+  <string name="mainMenuWelcome">Welcome</string>
+  <string name="playButton">Play</string>
   <string name="startNewGameButton">Start New Game</string>
   <string name="friendsListButton">Friends List</string>
   <string name="logoutButton">Log Out</string>
