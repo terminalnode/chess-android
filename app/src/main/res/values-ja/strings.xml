@@ -46,4 +46,5 @@
   <string name="viewBoard">ボードを観る</string>
   <string name="showChallengesText">受けた挑戦</string>
   <string name="deny">否定する</string>
+  <string name="addedFriendButton">追加しました</string>
 </resources>

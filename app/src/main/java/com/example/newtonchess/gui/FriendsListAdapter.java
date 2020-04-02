@@ -57,7 +57,7 @@ public class FriendsListAdapter extends ArrayAdapter<PlayerEntity> {
       button.setOnClickListener(new FriendsListChallengeListener(getItem(position), token, button));
     } else {
       button.setText(R.string.addFriendButton);
-      button.setOnClickListener(new FriendsListAddFriendListener());
+      button.setOnClickListener(new FriendsListAddFriendListener(getItem(position), token, button));
     }
 
     // Set views to correct values

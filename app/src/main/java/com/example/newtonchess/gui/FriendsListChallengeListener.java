@@ -38,10 +38,7 @@ public class FriendsListChallengeListener implements View.OnClickListener {
   public void onClick(View view) {
     this.view = view;
     deactivateButton();
-    sendChallenge();
-  }
 
-  private void sendChallenge() {
     Call<ChallengeEntity> call = ApiChallenge.createNewChallenge(token, friend);
     call.enqueue(new Callback<ChallengeEntity>() {
       @Override

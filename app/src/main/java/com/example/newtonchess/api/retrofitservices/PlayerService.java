@@ -16,13 +16,17 @@ public interface PlayerService {
   Call<List<PlayerEntity>> getAll();
 
   @POST("players")
-  Call<PlayerEntity> createPlayer(@Body PlayerEntity player);
+  Call<PlayerEntity> createPlayer(
+      @Body PlayerEntity player);
 
   @GET("friends")
-  Call<List<PlayerEntity>> getFriends(@Header("Token") String token);
+  Call<List<PlayerEntity>> getFriends(
+      @Header("Token") String token);
 
   @POST("friends")
-  Call<PlayerEntity> addFriend(@Header("Token") String token, PlayerEntity friend);
+  Call<PlayerEntity> addFriend(
+      @Header("Token") String token,
+      @Body PlayerEntity friend);
 
   @GET("friends/search/{searchTerm}")
   Call<List<PlayerEntity>> searchFriend(
