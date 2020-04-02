@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.example.newtonchess">
+
   <uses-permission android:name="android.permission.INTERNET" />
 
   <application
@@ -10,19 +12,18 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
+    <activity android:name=".activities.SplashScreenActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity android:name=".activities.pickgame.PickGameMainScreen" />
     <activity android:name=".activities.FriendsListActivity" />
     <activity android:name=".activities.PlayScreenActivity" />
     <activity android:name=".activities.MainMenuActivity" />
     <activity android:name=".activities.LoginScreenActivity" />
     <activity android:name=".activities.AddFriendActivity" />
-
-    <activity android:name=".activities.SplashScreenActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-
   </application>
+
 </manifest>

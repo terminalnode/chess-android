@@ -2,6 +2,7 @@
   <dictionary name="terminal">
     <words>
       <w>newtonchess</w>
+      <w>pickgame</w>
     </words>
   </dictionary>
 </component>

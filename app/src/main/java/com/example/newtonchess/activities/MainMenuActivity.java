@@ -1,3 +1,4 @@
+// Skriven av Sebastian, redigerad av Alexander.
 package com.example.newtonchess.activities;
 
 import android.content.Intent;
@@ -10,13 +11,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.activities.pickgame.PickGameMainScreen;
 import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
 
 public class MainMenuActivity extends AppCompatActivity {
   TokenEntity token;
-  Button activeGamesButton, newGameButton, friendsListButton, logoutButton;
+  Button playButton, newGameButton, friendsListButton, logoutButton;
   TextView userNameTextView;
 
   @Override
@@ -25,7 +27,7 @@ public class MainMenuActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main_menu);
 
     // Set buttons
-    activeGamesButton = findViewById(R.id.playButton);
+    playButton = findViewById(R.id.playButton);
     newGameButton = findViewById(R.id.newGameButton);
     friendsListButton = findViewById(R.id.friendsListButton);
     logoutButton = findViewById(R.id.logoutButton);
@@ -42,13 +44,16 @@ public class MainMenuActivity extends AppCompatActivity {
     userNameTextView.setText(welcomeTextString);
 
     // Set button listeners
-    activeGamesButton.setOnClickListener(this::activeGamesButtonPress);
+    playButton.setOnClickListener(this::playButtonPress);
     newGameButton.setOnClickListener(this::newGameButtonPress);
     friendsListButton.setOnClickListener(this::friendsButtonPress);
     logoutButton.setOnClickListener(this::logoutButtonPress);
   }
 
-  private void activeGamesButtonPress(View view) {
+  private void playButtonPress(View view) {
+    Intent playIntent = new Intent(view.getContext(), PickGameMainScreen.class);
+    playIntent.putExtra("TokenEntity", token);
+    startActivity(playIntent);
   }
 
   private void newGameButtonPress(View view) {
