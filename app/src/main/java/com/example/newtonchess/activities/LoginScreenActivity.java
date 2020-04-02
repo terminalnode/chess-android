@@ -49,6 +49,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     // Disable the sign up button to avoid double clicking
     // They will be reenabled once we get a response.
     disableButtons();
+    userTextBoxToLowerCase();
 
     // Fetch the input username and password
     String username = userNameTextBox.getText().toString().trim();
@@ -105,6 +106,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     // Disable the sign up button to avoid double clicking
     // They will be reenabled once we get a response.
     disableButtons();
+    userTextBoxToLowerCase();
 
     // Create the new user
     PlayerEntity newPlayer = new PlayerEntity();
@@ -207,5 +209,13 @@ public class LoginScreenActivity extends AppCompatActivity {
     signInButton.setClickable(true);
     signUpButton.setAlpha(1F);
     signInButton.setAlpha(1F);
+  }
+
+  private void userTextBoxToLowerCase() {
+    userNameTextBox
+        .setText(userNameTextBox
+            .getText()
+            .toString()
+            .toLowerCase());
   }
 }
