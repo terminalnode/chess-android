@@ -13,12 +13,12 @@ import com.example.newtonchess.api.entities.TokenEntity;
 
 import java.util.List;
 
-public class ChallengeListAdapter extends ArrayAdapter<ChallengeEntity> {
+public class GamesListAdapter extends ArrayAdapter<ChallengeEntity> {
   private Context context;
   private int listLayout;
   private TokenEntity token;
 
-  public ChallengeListAdapter(
+  public GamesListAdapter(
       @NonNull Context context,
       int listLayout,
       @NonNull List<ChallengeEntity> objects,

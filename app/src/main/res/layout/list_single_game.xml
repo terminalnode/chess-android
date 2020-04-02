@@ -10,7 +10,7 @@
   android:paddingBottom="5dp">
 
   <ImageView
-    android:id="@+id/friendIcon"
+    android:id="@+id/gameIcon"
     android:layout_width="60dp"
     android:layout_height="wrap_content"
     android:contentDescription="@string/friendListIconDescription"
@@ -21,19 +21,19 @@
     app:srcCompat="@drawable/wpawn" />
 
   <TextView
-    android:id="@+id/friendName"
+    android:id="@+id/opponentName"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
     android:text="@string/userUnknown"
     android:textColor="@color/colorComplementary"
     android:textSize="24sp"
-    app:layout_constraintBottom_toBottomOf="@+id/friendIcon"
-    app:layout_constraintStart_toEndOf="@+id/friendIcon"
+    app:layout_constraintBottom_toBottomOf="@+id/gameIcon"
+    app:layout_constraintStart_toEndOf="@+id/gameIcon"
     app:layout_constraintTop_toTopOf="parent" />
 
   <Button
-    android:id="@+id/friendsListEntryButton"
+    android:id="@+id/gameListEntryButton"
     android:layout_width="@dimen/listViewButtonWidth"
     android:layout_height="@dimen/listViewButtonHeight"
     android:layout_marginEnd="10dp"

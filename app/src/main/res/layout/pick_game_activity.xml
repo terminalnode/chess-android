@@ -15,7 +15,7 @@
     android:id="@+id/gameScreenHeader"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@string/gamesViewHeader"
+    android:text="@string/showGamesText"
     android:textAlignment="center"
     android:textColor="@color/colorPrimary"
     android:textSize="@dimen/headerTextSize"
