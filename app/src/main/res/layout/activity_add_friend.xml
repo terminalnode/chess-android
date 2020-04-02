@@ -1,9 +1,11 @@
+<!-- Skriven av Alexander -->
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/addFriendsConstraintLayout"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:background="@color/colorBackground"
   tools:context=".activities.AddFriendActivity">
 
@@ -18,7 +20,6 @@
     android:text="@string/findFriendsScreenTitle"
     android:textColor="@color/colorPrimary"
     android:textSize="@dimen/headerTextSize"
-    app:layout_constraintBottom_toTopOf="@+id/friendsListView"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/include" />
@@ -28,7 +29,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    app:layout_constraintGuide_percent="0.5" />
+    app:layout_constraintGuide_begin="460dp" />
 
   <ListView
     android:id="@+id/friendsListView"
@@ -37,7 +38,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/include" />
+    app:layout_constraintTop_toBottomOf="@+id/searchFriendsEditText" />
 
   <TextView
     android:id="@+id/emptyListTextViewTop"
@@ -55,15 +56,15 @@
     android:layout_width="@dimen/searchTextFieldWidth"
     android:layout_height="@dimen/searchButtonHeight"
     android:layout_marginStart="10dp"
+    android:layout_marginTop="25dp"
     android:hint="@string/typeSomething"
+    android:importantForAutofill="no"
     android:inputType="text"
     android:textColor="@color/colorPrimaryDark"
     android:textColorHint="@color/colorPrimaryDark"
     android:textSize="@dimen/searchTextFieldFontSize"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/friendsListView"
-    android:importantForAutofill="no" />
+    app:layout_constraintTop_toBottomOf="@+id/addFriendsListScreenTitle" />
 
   <TextView
     android:id="@+id/emptyListTextViewBottom"
@@ -80,12 +81,12 @@
     android:id="@+id/searchFriendsButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="25dp"
     android:background="@color/colorPrimaryDark"
     android:text="@string/searchButtonText"
     android:textColor="@color/colorComplementary"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/searchFriendsEditText"
-    app:layout_constraintTop_toBottomOf="@+id/friendsListView" />
+    app:layout_constraintTop_toBottomOf="@+id/addFriendsListScreenTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
