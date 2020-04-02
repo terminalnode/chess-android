@@ -1,8 +1,10 @@
 package com.example.newtonchess.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ public class FriendsListActivity extends AppCompatActivity {
   ListView friendsListView;
   FriendsListAdapter friendsListAdapter;
   TextView emptyListTextViewTop, emptyListTextViewBottom;
+  Button findNewFriendsButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +39,16 @@ public class FriendsListActivity extends AppCompatActivity {
 
     // Retrieve the token
     token = getIntent().getParcelableExtra("TokenEntity");
-    Log.i("ACTIVITY", String.format("Main menu started, token: %s", token));
+    Log.i("ACTIVITY", String.format("Friends list started, token: %s", token));
 
     // Find the views
     friendsListView = findViewById(R.id.friendsListView);
     emptyListTextViewTop = findViewById(R.id.emptyListTextViewTop);
     emptyListTextViewBottom = findViewById(R.id.emptyListTextViewBottom);
+    findNewFriendsButton = findViewById(R.id.findNewFriendsButton);
+
+    // Set listener for findNewFriendsButton
+    findNewFriendsButton.setOnClickListener(this::goToFindFriends);
 
     // Set empty adapter on friendsListView
     friendsListAdapter = new FriendsListAdapter(
@@ -53,6 +60,12 @@ public class FriendsListActivity extends AppCompatActivity {
 
     // Fetch the friends list from server
     getFriendsList();
+  }
+
+  private void goToFindFriends(View view) {
+    Intent addFriendIntent = new Intent(view.getContext(), AddFriendActivity.class);
+    addFriendIntent.putExtra("TokenEntity", token);
+    startActivity(addFriendIntent);
   }
 
   private void getFriendsList() {
