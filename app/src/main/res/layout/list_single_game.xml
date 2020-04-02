@@ -2,23 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="@dimen/listViewItemHeight"
   android:background="@color/colorPrimaryDark"
   android:fadingEdge="horizontal"
   android:paddingTop="5dp"
   android:paddingBottom="5dp">
-
-  <ImageView
-    android:id="@+id/gameIcon"
-    android:layout_width="60dp"
-    android:layout_height="wrap_content"
-    android:contentDescription="@string/friendListIconDescription"
-    android:maxHeight="@dimen/listViewItemHeight"
-    android:minHeight="@dimen/listViewItemHeight"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:srcCompat="@drawable/wpawn" />
 
   <TextView
     android:id="@+id/opponentName"
@@ -28,8 +18,8 @@
     android:text="@string/userUnknown"
     android:textColor="@color/colorComplementary"
     android:textSize="24sp"
-    app:layout_constraintBottom_toBottomOf="@+id/gameIcon"
-    app:layout_constraintStart_toEndOf="@+id/gameIcon"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <Button
@@ -39,9 +29,45 @@
     android:layout_marginEnd="10dp"
     android:background="@color/colorPrimary"
     android:hapticFeedbackEnabled="false"
-    android:text="@string/challengeButton"
+    android:text="@string/viewBoard"
     android:textColor="@color/colorNewtonOrange"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/turnsTakenContainer"
+    android:layout_width="70dp"
+    android:layout_height="55dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/gameListEntryButton"
+    app:layout_constraintStart_toEndOf="@+id/opponentName"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+      android:id="@+id/turnTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:text="@string/turn"
+      android:textAlignment="center"
+      android:textColor="@color/colorNewtonOrange"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/numberTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:text="@string/turnNum"
+      android:textAlignment="center"
+      android:textColor="@color/colorNewtonOrange"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.476"
+      app:layout_constraintStart_toStartOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

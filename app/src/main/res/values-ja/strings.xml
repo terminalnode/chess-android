@@ -40,4 +40,10 @@
   <string name="challengeSentButtonText">送信済み</string>
   <string name="challengeNotSentButtonText">不送信</string>
   <string name="challengeAlreadyExistsSnackbar">このユーザーとは既に挑戦がある</string>
+  <string name="showGamesText">ゲーム</string>
+  <string name="accept">受け取る</string>
+  <string name="turn">ターン</string>
+  <string name="viewBoard">ボードを観る</string>
+  <string name="showChallengesText">受けた挑戦</string>
+  <string name="deny">否定する</string>
 </resources>

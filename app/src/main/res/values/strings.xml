@@ -55,4 +55,7 @@
   <string name="showChallengesText">Challenges</string>
   <string name="accept">Accept</string>
   <string name="deny">Deny</string>
+  <string name="viewBoard">View Board</string>
+  <string name="turn">Turn</string>
+  <string name="turnNum" translatable="false">#%1$s</string>
 </resources>

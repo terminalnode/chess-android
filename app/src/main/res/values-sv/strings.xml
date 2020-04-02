@@ -40,4 +40,10 @@
   <string name="challengeSentButtonText">Skickat</string>
   <string name="challengeNotSentButtonText">Ej skickat</string>
   <string name="challengeAlreadyExistsSnackbar">Du har redan en utmaning mot den här spelaren</string>
+  <string name="turn">Tur</string>
+  <string name="viewBoard">Se Bräde</string>
+  <string name="deny">Neka</string>
+  <string name="accept">Acceptera</string>
+  <string name="showChallengesText">Utmaningar</string>
+  <string name="showGamesText">Spel</string>
 </resources>
