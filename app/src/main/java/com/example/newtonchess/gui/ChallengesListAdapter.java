@@ -16,7 +16,6 @@ import com.example.newtonchess.R;
 import com.example.newtonchess.api.entities.ChallengeEntity;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -69,24 +68,8 @@ public class ChallengesListAdapter extends ArrayAdapter<ChallengeEntity> {
 
     // Set up listeners for the buttons
     acceptButton.setOnClickListener(new ChallengesListAcceptListener(challenge, token, acceptButton, denyButton));
-    denyButton.setOnClickListener(this::denyButtonPressed);
+    denyButton.setOnClickListener(new ChallengesListDenyListener(challenge, token, acceptButton, denyButton));
 
     return convertView;
-  }
-
-  private void denyButtonPressed(View view) {
-    Snackbar.make(
-        view,
-        "Deny button pressed placeholder",
-        Snackbar.LENGTH_LONG
-    ).show();
-  }
-
-  private void acceptButtonPressed(View view) {
-    Snackbar.make(
-        view,
-        "Accept button pressed placeholder",
-        Snackbar.LENGTH_LONG
-    ).show();
   }
 }

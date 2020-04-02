@@ -30,4 +30,10 @@ public class ApiChallenge {
         .getChallengeService()
         .acceptChallenge(token, challengeId);
   }
+
+  public static Call<String> denyChallenge(String token, long challengeId) {
+    return  RetrofitHelper
+        .getChallengeService()
+        .denyChallenge(token, challengeId);
+  }
 }

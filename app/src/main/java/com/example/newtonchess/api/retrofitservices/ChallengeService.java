@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -17,7 +18,8 @@ public interface ChallengeService {
   @POST("challenges")
   Call<ChallengeEntity> createNewChallenge(
       @Header("Token") String token,
-      @Body PlayerEntity player);
+      @Body PlayerEntity player
+  );
 
   @GET("challenges/challenged")
   Call<List<ChallengeEntity>> getChallengesToMe(@Header("Token") String token);
@@ -25,5 +27,12 @@ public interface ChallengeService {
   @POST("challenges/{challengeId}")
   Call<GameEntity> acceptChallenge(
       @Header("Token") String token,
-      @Path("challengeId") long challengeId);
+      @Path("challengeId") long challengeId
+  );
+
+  @DELETE("challenges/{challengeId}")
+  Call<String> denyChallenge(
+      @Header("Token") String token,
+      @Path("challengeId") long challengeId
+  );
 }
