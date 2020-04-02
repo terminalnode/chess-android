@@ -51,4 +51,8 @@
   <string name="playScreenOpponentLabel">Opponent:</string>
   <string name="playScreenOpponentName">No one!</string>
   <string name="userUnknown">anonymous</string>
+  <string name="showGamesText">Games</string>
+  <string name="showChallengesText">Challenges</string>
+  <string name="gamesViewHeader">Games</string>
+  <string name="challengeViewHeader">Challenges</string>
 </resources>

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
-import com.example.newtonchess.activities.pickgame.PickGameMainScreen;
 import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;

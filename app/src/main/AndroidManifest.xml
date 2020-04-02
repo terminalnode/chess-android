@@ -18,7 +18,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".activities.pickgame.PickGameMainScreen" />
+    <activity android:name=".activities.PickGameMainScreen" />
     <activity android:name=".activities.FriendsListActivity" />
     <activity android:name=".activities.PlayScreenActivity" />
     <activity android:name=".activities.MainMenuActivity" />

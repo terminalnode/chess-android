@@ -1,4 +1,4 @@
-package com.example.newtonchess.activities.pickgame;
+package com.example.newtonchess.activities;
 
 import android.os.Bundle;
 import android.util.Log;
