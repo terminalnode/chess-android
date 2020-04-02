@@ -1,6 +1,7 @@
 package com.example.newtonchess.api;
 
 import com.example.newtonchess.api.entities.ChallengeEntity;
+import com.example.newtonchess.api.entities.GameEntity;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
 
@@ -22,5 +23,11 @@ public class ApiChallenge {
     return RetrofitHelper
         .getChallengeService()
         .getChallengesToMe(token);
+  }
+
+  public static Call<GameEntity> acceptChallenge(String token, long challengeId) {
+    return  RetrofitHelper
+        .getChallengeService()
+        .acceptChallenge(token, challengeId);
   }
 }

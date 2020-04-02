@@ -68,7 +68,7 @@ public class ChallengesListAdapter extends ArrayAdapter<ChallengeEntity> {
     }
 
     // Set up listeners for the buttons
-    acceptButton.setOnClickListener(this::acceptButtonPressed);
+    acceptButton.setOnClickListener(new ChallengesListAcceptListener(challenge, token, acceptButton, denyButton));
     denyButton.setOnClickListener(this::denyButtonPressed);
 
     return convertView;
