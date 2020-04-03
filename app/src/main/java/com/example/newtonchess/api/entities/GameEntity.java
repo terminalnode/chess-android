@@ -1,7 +1,19 @@
 package com.example.newtonchess.api.entities;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Entity class for deserializing GameEntities sent by the server.
+ * Like all entities, this class is meant to represent a game as sent by the server.
+ * The actual ChessBoard view class contains a lot more information than this, and as
+ * such they are separated. However the ChessBoard class has getters and setters for
+ * injecting the information contained in this object and thus alter it's state to
+ * one representative of the information contained in the JSON.
+ *
+ * @author Alexander Rundberg
+ */
 public class GameEntity {
   @SerializedName("id")
   private long id;
@@ -28,6 +40,16 @@ public class GameEntity {
   //----- Constructors -----//
   public GameEntity() {
     // Required no-arg constructor
+  }
+
+  //----- Methods -----//
+  @NonNull
+  @Override
+  public String toString() {
+    return String.format(
+        "<Game id=%s, whitePlayer=%s blackPlayer=%s, whitesTurn=%s, turnsTaken=%s, finished=%s>",
+        id, whitePlayer, blackPlayer, whitesTurn, turnsTaken, finished
+    );
   }
 
   //----- Setters -----//

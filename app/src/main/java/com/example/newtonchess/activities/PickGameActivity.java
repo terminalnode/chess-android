@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
 import com.example.newtonchess.api.entities.ChallengeEntity;
+import com.example.newtonchess.api.entities.GameEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
 import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
 import com.example.newtonchess.gui.ChallengesListAdapter;
@@ -23,8 +24,18 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
-public class PickGameMainScreen extends AppCompatActivity {
+/**
+ * Activity for starting games and accepting/denying challenges.
+ * Whenever the showGamesButton or showChallengesButton are pressed
+ * the latest games or challenges are fetched from the server and fed
+ * into the corresponding ListAdapters, then displayed in the list
+ * view at the center of the screen.
+ *
+ * @author Alexander Rundberg
+ */
+public class PickGameActivity extends AppCompatActivity {
   TokenEntity token;
   Button showGamesButton, showChallengesButton;
   ListView listView;
@@ -58,7 +69,8 @@ public class PickGameMainScreen extends AppCompatActivity {
         this,
         R.layout.list_single_game,
         new ArrayList<>(),
-        token);
+        token,
+        getString(R.string.userUnknown));
 
     // Set button listeners
     showGamesButton.setOnClickListener(this::activateGamesListAdapter);
@@ -96,6 +108,33 @@ public class PickGameMainScreen extends AppCompatActivity {
 
   private void updateGames(View view) {
     Log.i("GAMES", "Updating games, my token is: " + token);
+    Call<List<GameEntity>> call = RetrofitHelper
+        .getGameService()
+        .getAllGames(token.getTokenString());
+    Log.i("GAMES", "Created Retrofit call: " + call);
+
+    call.enqueue(new Callback<List<GameEntity>>() {
+      @Override
+      @EverythingIsNonNull
+      public void onResponse(Call<List<GameEntity>> call, Response<List<GameEntity>> response) {
+        List<GameEntity> games = response.body();
+        Log.i("GAMES", "Fetched games, got this: " + games);
+
+        if (games != null) {
+          gamesListAdapter.clear();
+          gamesListAdapter.addAll(games);
+          if (games.size() > 0) {
+            Log.i("GAMES", "Fetched a list of games, first one: " + games.get(0));
+          }
+        }
+      }
+
+      @Override
+      @EverythingIsNonNull
+      public void onFailure(Call<List<GameEntity>> call, Throwable t) {
+        unknownError(view);
+      }
+    });
   }
 
   private void updateChallenges(View view) {

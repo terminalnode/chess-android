@@ -10,8 +10,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import okhttp3.ResponseBody;
 
-// TODO Create a game entity, or adapt the one we already have, and use that instead of ChallengeEntity.
-// This class is just a place holder with the general structure of our listeners implemented.
 public class GamesListStartGameListener implements View.OnClickListener {
   private View view;
   private ChallengeEntity challenge;

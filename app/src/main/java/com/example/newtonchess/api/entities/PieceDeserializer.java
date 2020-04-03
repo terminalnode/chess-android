@@ -15,6 +15,16 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 
+/**
+ * JsonDeserializer for converting data from our JSON response to Piece objects.
+ * The pieces do not save any data that's not in the JSON, and as such we can have
+ * a deserialize them whenever we receive a new GameEntity from the server and
+ * replace the list of pieces in our ChessBoard object with this list. Replacing them
+ * in the ChessBoard class will automatically trigger an invalidation of that boards
+ * state forcing it to redraw the chessboard.
+ *
+ * @author Alexander Rundberg
+ */
 public class PieceDeserializer implements JsonDeserializer<Piece> {
   @Override
   public Piece deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -26,7 +36,6 @@ public class PieceDeserializer implements JsonDeserializer<Piece> {
       case "bishop":  newPiece = new Bishop(); break;
       case "knight":  newPiece = new Knight(); break;
       case "king":    newPiece = new King(); break;
-      case "pawn":    newPiece = new Pawn(); break;
       case "queen":   newPiece = new Queen(); break;
       case "rook":    newPiece = new Rook(); break;
       default:        newPiece = new Pawn(); break;

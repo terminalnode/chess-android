@@ -26,4 +26,8 @@ public class RetrofitHelper {
   public static ChallengeService getChallengeService() {
     return getBase().create(ChallengeService.class);
   }
+
+  public static GameService getGameService() {
+    return getBase().create(GameService.class);
+  }
 }

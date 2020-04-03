@@ -50,7 +50,7 @@ public class MainMenuActivity extends AppCompatActivity {
   }
 
   private void playButtonPress(View view) {
-    Intent playIntent = new Intent(view.getContext(), PickGameMainScreen.class);
+    Intent playIntent = new Intent(view.getContext(), PickGameActivity.class);
     playIntent.putExtra("TokenEntity", token);
     startActivity(playIntent);
   }

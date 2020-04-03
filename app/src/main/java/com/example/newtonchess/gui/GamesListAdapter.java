@@ -19,23 +19,32 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
+/**
+ * List adapter for viewing a list of GameEntities, this is mainly
+ * used in the PickGameActivity when fetching ongoing games.
+ *
+ * @author Alexander Rundberg
+ */
 public class GamesListAdapter extends ArrayAdapter<GameEntity> {
   private Context context;
   private int listLayout;
   private TokenEntity token;
   private PlayerEntity thisPlayer;
+  private String userUnknownString;
 
   public GamesListAdapter(
       @NonNull Context context,
       int listLayout,
       @NonNull List<GameEntity> objects,
-      TokenEntity token) {
+      TokenEntity token,
+      String userUnknownString) {
 
     super(context, listLayout, objects);
     this.context = context;
     this.listLayout = listLayout;
     this.token = token;
     thisPlayer = token.getPlayer();
+    this.userUnknownString = userUnknownString;
   }
 
   @NonNull
@@ -46,9 +55,7 @@ public class GamesListAdapter extends ArrayAdapter<GameEntity> {
     PlayerEntity whitePlayer = game == null ? null : game.getWhitePlayer();
     String turnsTaken = game == null ? "???" : "#" + game.getTurnsTaken();
 
-    String opponentName = convertView
-        .getResources()
-        .getString(R.string.userUnknown);
+    String opponentName = userUnknownString;
 
     if (blackPlayer != null && whitePlayer != null) {
       opponentName = blackPlayer.equals(thisPlayer) ?
