@@ -1,10 +1,14 @@
 package com.example.newtonchess.api.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import com.example.newtonchess.chesscomponents.pieces.Piece;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +21,7 @@ import java.util.List;
  *
  * @author Alexander Rundberg
  */
-public class GameEntity {
+public class GameEntity implements Parcelable {
   @SerializedName("id")
   private long id;
 
@@ -53,6 +57,45 @@ public class GameEntity {
         id, whitePlayer, blackPlayer, whitesTurn, turnsTaken, finished, pieces.size()
     );
   }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeLong(this.id);
+    dest.writeParcelable(this.whitePlayer, flags);
+    dest.writeParcelable(this.blackPlayer, flags);
+    dest.writeByte(this.whitesTurn ? (byte) 1 : (byte) 0);
+    dest.writeLong(this.turnsTaken);
+    dest.writeByte(this.finished ? (byte) 1 : (byte) 0);
+    dest.writeList(this.pieces);
+  }
+
+  protected GameEntity(Parcel in) {
+    this.id = in.readLong();
+    this.whitePlayer = in.readParcelable(PlayerEntity.class.getClassLoader());
+    this.blackPlayer = in.readParcelable(PlayerEntity.class.getClassLoader());
+    this.whitesTurn = in.readByte() != 0;
+    this.turnsTaken = in.readLong();
+    this.finished = in.readByte() != 0;
+    this.pieces = new ArrayList<Piece>();
+    in.readList(this.pieces, Piece.class.getClassLoader());
+  }
+
+  public static final Creator<GameEntity> CREATOR = new Creator<GameEntity>() {
+    @Override
+    public GameEntity createFromParcel(Parcel source) {
+      return new GameEntity(source);
+    }
+
+    @Override
+    public GameEntity[] newArray(int size) {
+      return new GameEntity[size];
+    }
+  };
 
   //----- Setters -----//
   public void setId(long id) {
