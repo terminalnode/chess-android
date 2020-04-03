@@ -63,4 +63,9 @@
   <string name="yourTurn">Your turn</string>
   <string name="refresh">Refresh</string>
   <string name="playerColorDescription">A piece showing which color you\'re playing as.</string>
+
+  <!-- Errors -->
+  <string name="tokenInvalid">Your token is invalid or expired, try logging in again.</string>
+  <string name="noSuchGame">This game doesn\'t exist, so we can\'t make a move.</string>
+  <string name="notPartofGame">You\'re not a part of this game.</string>
 </resources>

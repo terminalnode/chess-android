@@ -49,6 +49,7 @@ public class PlayScreenActivity extends AppCompatActivity {
     chessBoard = findViewById(R.id.chessBoard);
     chessBoard.setWhoseTurnPawn(findViewById(R.id.whoseTurnPawn));
     chessBoard.setWhoseTurnTextView(findViewById(R.id.whoseTurnTextView));
+    chessBoard.setToken(token);
     chessBoard.loadFromGameEntity(game, token.getPlayer());
     chessBoard.setOnTouchListener(chessBoard::onTouch);
 

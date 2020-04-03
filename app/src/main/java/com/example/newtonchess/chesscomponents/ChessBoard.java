@@ -23,11 +23,24 @@ import androidx.core.content.ContextCompat;
 import com.example.newtonchess.R;
 import com.example.newtonchess.StaticValues;
 import com.example.newtonchess.api.entities.GameEntity;
+import com.example.newtonchess.api.entities.MoveEntity;
 import com.example.newtonchess.api.entities.PlayerEntity;
+import com.example.newtonchess.api.entities.TokenEntity;
+import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
 import com.example.newtonchess.chesscomponents.pieces.Piece;
+import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 /**
  * This is the view that shows us the board and lets us move pieces around it.
@@ -45,6 +58,7 @@ public class ChessBoard extends View {
   private Piece selectedPiece;
   TextView whoseTurnTextView;
   ImageView whoseTurnPawn;
+  TokenEntity token;
 
 
   /**
@@ -103,12 +117,14 @@ public class ChessBoard extends View {
     // Retrieve values from game
     boolean isWhiteInCheck = game.isWhiteInCheck();
     boolean isBlackInCheck = game.isBlackInCheck();
+    gameId = game.getId();
     turnsTaken = game.getTurnsTaken();
     finished = game.isFinished();
     pieces = game.getPieces() == null ? pieces : game.getPieces();
     isWhitesTurn = game.isWhitesTurn();
     isWhite = game.isGettingPlayerWhite();
     inCheck = (isWhite && isWhiteInCheck) || (!isWhite && isBlackInCheck);
+    flipped = !isWhite;
 
     // Sanity checks
     Log.i(StaticValues.CHESSBOARD, "turnsTaken: " + turnsTaken);
@@ -347,17 +363,118 @@ public class ChessBoard extends View {
    * @param y The new y-position in the grid.
    */
   public void makeMove(int x, int y) {
-    Log.i("TOUCH", String.format("Checking if we can move to (%s,%s)", x, y));
+    flipPlayerTurn();
+    List<int[]> validMoves = selectedPiece.getMoves(pieces);
 
-    for (int[] move : selectedPiece.getMoves(pieces)) {
-      if (x == move[0] && y == move[1]) {
-        Log.i("TOUCH", String.format("Moving piece to (%s,%s)", x, y));
-        selectedPiece.move(x, y);
+    for (int[] move : validMoves) {
+      int newX = move[0];
+      int newY = move[1];
 
-        flipPlayerTurn();
+      if (x == newX && y == newY) {
+        makeApiMove(x, y);
         return;
       }
     }
+  }
+
+  /**
+   * Make the call to the API to make a move.
+   * @param x The new x-position in the grid.
+   * @param y The new y-position in the grid.
+   */
+  private void makeApiMove(int x, int y) {
+    // If we don't have a token there's no point to this.
+    if (token == null) {
+      showSnackbar(R.string.tokenInvalid);
+      return;
+    }
+
+    // Create the move
+    MoveEntity move = new MoveEntity(
+        selectedPiece.getInternalId(),
+        new int[]{x, y});
+
+    // Make call
+    RetrofitHelper
+        .getGameService()
+        .makeMove(token.getTokenString(), gameId, move)
+        .enqueue(new Callback<String>() {
+          @Override
+          @EverythingIsNonNull
+          public void onResponse(Call<String> call, Response<String> response) {
+            // If response was OK, finalize the move and return
+            if (response.code() == 200) {
+              selectedPiece.move(x, y);
+              return;
+            }
+
+            // If not, lets see if we can find out what the error was
+            String error = StaticValues.INTERNAL_SERVER_ERROR;
+            try {
+              String jsonError = response.errorBody().string();
+              Log.e(
+                  StaticValues.CHESSBOARD,
+                  "Processing this error:\n" + jsonError);
+
+              error = new JSONObject(jsonError)
+                  .get(StaticValues.INTERNAL_NAME)
+                  .toString();
+            } catch (JSONException|IOException|NullPointerException ignored) { }
+
+            switch (error) {
+              case StaticValues.TOKEN_INVALID:
+              case StaticValues.NO_SUCH_TOKEN:
+                showSnackbar(R.string.tokenInvalid);
+                break;
+              case StaticValues.NOT_PART_OF_GAME:
+                showSnackbar(R.string.notPartofGame);
+                break;
+              case StaticValues.NO_SUCH_GAME:
+                showSnackbar(R.string.noSuchGame);
+                break;
+              default:
+                Log.w(StaticValues.CHESSBOARD, "Got an unrecognised error! " + error);
+                showSnackbar(R.string.somethingWentWrong);
+            }
+          }
+
+          @Override
+          @EverythingIsNonNull
+          public void onFailure(Call<String> call, Throwable t) {
+            Log.e(StaticValues.CHESSBOARD, "API move call failed, got this: " + t.getMessage());
+            showSnackbar(R.string.somethingWentWrong);
+          }
+        });
+  }
+
+  /**
+   * Helper method for showing a snackbar with some message
+   * @param resourceId The resource id for the message to be shown.
+   */
+  private void showSnackbar(int resourceId) {
+    Snackbar.make(
+        this,
+        resourceId,
+        Snackbar.LENGTH_LONG
+    ).show();
+    flipPlayerTurn();
+  }
+
+  /**
+   * Looks through all of the pieces to see if there's a piece standing
+   * there, and if there is remove it from the list of pieces.
+   * @param x The x-position of the piece in the grid.
+   * @param y The y-position of the piece in the grid.
+   */
+  private void removePieceInPosition(int x, int y) {
+    Piece removePiece = null;
+    for (Piece piece : pieces) {
+      if (piece.getX() == x && piece.getY() == y) {
+        removePiece = piece;
+        break;
+      }
+    }
+    pieces.remove(removePiece);
   }
 
   /**
@@ -367,8 +484,8 @@ public class ChessBoard extends View {
    * @return Whether or not we're interested in all subsequent events in this gesture.
    */
   public boolean onTouch(View view, MotionEvent motionEvent) {
-    // Ignore the touch event if it's not the player's turn.
-    if (isWhite != isWhitesTurn) {
+    // Ignore the touch event if it's not the player's turn or the game is over.
+    if ((isWhite != isWhitesTurn) || finished) {
       return false;
     }
 
@@ -431,6 +548,10 @@ public class ChessBoard extends View {
     this.whoseTurnPawn = whoseTurnPawn;
   }
 
+  public void setToken(TokenEntity token) {
+    this.token = token;
+  }
+
   //----- Getters -----//
   public boolean isWhite() {
     return isWhite;
@@ -458,5 +579,9 @@ public class ChessBoard extends View {
 
   public ImageView getWhoseTurnPawn() {
     return whoseTurnPawn;
+  }
+
+  public TokenEntity getToken() {
+    return token;
   }
 }
