@@ -8,7 +8,7 @@
   tools:context=".activities.PlayScreenActivity">
 
   <TextView
-    android:id="@+id/whoseTurnTextLabel"
+    android:id="@+id/whoseTurnTextView"
     android:layout_width="250dp"
     android:layout_height="wrap_content"
     android:text="@string/yourTurn"

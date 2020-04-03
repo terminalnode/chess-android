@@ -1,5 +1,6 @@
 package com.example.newtonchess.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.StaticValues;
 import com.example.newtonchess.api.entities.ChallengeEntity;
 import com.example.newtonchess.api.entities.GameEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
@@ -79,6 +81,13 @@ public class PickGameActivity extends AppCompatActivity {
 
     // Default view is active games, so lets activate that
     showGamesButton.callOnClick();
+  }
+
+  @Override
+  public void onBackPressed() {
+    Intent intent = new Intent(this, MainMenuActivity.class);
+    intent.putExtra(StaticValues.INTENT_TOKEN, token);
+    startActivity(intent);
   }
 
   private void activateGamesListAdapter(View view) {
