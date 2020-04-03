@@ -44,6 +44,11 @@ public class LoginScreenActivity extends AppCompatActivity {
     signUpButton.setOnClickListener(this::signUpButtonPress);
   }
 
+  @Override
+  public void onBackPressed() {
+    // Do nothing, intentionally left blank
+  }
+
   private void loginButtonPress(View view) {
     Log.i("LOGIN", "Sign In-button pressed");
     // Disable the sign up button to avoid double clicking
