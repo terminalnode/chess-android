@@ -1,5 +1,7 @@
 package com.example.newtonchess.chesscomponents.pieces;
 
+import android.os.Parcel;
+
 import com.example.newtonchess.R;
 
 import java.util.ArrayList;
@@ -8,6 +10,10 @@ import java.util.List;
 public class Pawn extends Piece {
   public Pawn() {
     super();
+  }
+
+  public Pawn(Parcel in) {
+    super(in);
   }
 
   public Pawn(int internalId, int x, int y, boolean isWhite) {
@@ -85,4 +91,16 @@ public class Pawn extends Piece {
     }
     return null;
   }
+
+  public static final Creator<Bishop> CREATOR = new Creator<Bishop>() {
+    @Override
+    public Bishop createFromParcel(Parcel source) {
+      return new Bishop(source);
+    }
+
+    @Override
+    public Bishop[] newArray(int size) {
+      return new Bishop[size];
+    }
+  };
 }

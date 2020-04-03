@@ -1,5 +1,7 @@
 package com.example.newtonchess.chesscomponents.pieces;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.example.newtonchess.api.entities.PieceAdapter;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonAdapter(PieceAdapter.class)
-public abstract class Piece {
+public abstract class Piece implements Parcelable {
   public static final boolean WHITE = true;
   public static final boolean BLACK = false;
 
@@ -44,6 +46,28 @@ public abstract class Piece {
     this.x = x;
     this.y = y;
     this.moved = true;
+  }
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(this.x);
+    dest.writeInt(this.y);
+    dest.writeInt(this.internalId);
+    dest.writeByte(this.isWhite ? (byte) 1 : (byte) 0);
+    dest.writeByte(this.moved ? (byte) 1 : (byte) 0);
+  }
+
+  public Piece(Parcel in) {
+    this.x = in.readInt();
+    this.y = in.readInt();
+    this.internalId = in.readInt();
+    this.isWhite = in.readByte() != 0;
+    this.moved = in.readByte() != 0;
   }
 
   List<int[]> getStraightMoves(List<Piece> pieces) {
