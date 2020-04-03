@@ -14,6 +14,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -36,10 +38,13 @@ import java.util.List;
 public class ChessBoard extends View {
   private Paint currentPaint, darkPaint, lightPaint, highlightPaint, selectionPaint;
   private int xMin, yMin, selectedX, selectedY, squareSize;
-  private long turnsTaken;
+  private long turnsTaken, gameId;
   private boolean isWhite, isWhitesTurn, finished, flipped;
   private List<Piece> pieces;
   private Piece selectedPiece;
+  TextView whoseTurnTextView;
+  ImageView whoseTurnPawn;
+
 
   /**
    * Modified version of a default View constructor, which calls upon the built-in
@@ -56,6 +61,9 @@ public class ChessBoard extends View {
     flipped = false;
     finished = false;
     turnsTaken = 0;
+    gameId = 0;
+    whoseTurnTextView = null;
+    whoseTurnPawn = null;
 
     // Set selected tile to inactive (-1,-1)
     selectedX = -1;
@@ -93,11 +101,26 @@ public class ChessBoard extends View {
     }
 
     pieces = game.getPieces();
-    isWhitesTurn = game.isWhitesTurn();
     turnsTaken = game.getTurnsTaken();
     finished = game.isFinished();
     pieces = game.getPieces() == null ? pieces : game.getPieces();
-    isWhite = thisPlayer.equals(game.getWhitePlayer());
+    isWhitesTurn = game.isWhitesTurn();
+    isWhite = game.isGettingPlayerWhite();
+    Log.i("GAME", "isWhitesTurn: " + isWhitesTurn);
+    Log.i("GAME", "isWhite: " + isWhite);
+
+    if (isWhitesTurn && whoseTurnPawn != null) {
+      whoseTurnPawn.setImageResource(R.drawable.wknight);
+    } else if (whoseTurnPawn != null) {
+      whoseTurnPawn.setImageResource(R.drawable.bknight);
+    }
+
+    if (isWhitesTurn == isWhite && whoseTurnTextView != null) {
+      whoseTurnTextView.setText(R.string.yourTurn);
+    } else if (whoseTurnTextView != null) {
+      whoseTurnTextView.setText(R.string.opponentsTurn);
+    }
+
     invalidate();
   }
 
@@ -379,8 +402,20 @@ public class ChessBoard extends View {
     invalidate();
   }
 
+  public void setFinished(boolean finished) {
+    this.finished = finished;
+  }
+
   public void setFlipped(boolean flipped) {
     this.flipped = flipped;
+  }
+
+  public void setWhoseTurnTextView(TextView whoseTurnTextView) {
+    this.whoseTurnTextView = whoseTurnTextView;
+  }
+
+  public void setWhoseTurnPawn(ImageView whoseTurnPawn) {
+    this.whoseTurnPawn = whoseTurnPawn;
   }
 
   //----- Getters -----//
@@ -398,5 +433,17 @@ public class ChessBoard extends View {
 
   public boolean isFlipped() {
     return flipped;
+  }
+
+  public boolean isFinished() {
+    return finished;
+  }
+
+  public TextView getWhoseTurnTextView() {
+    return whoseTurnTextView;
+  }
+
+  public ImageView getWhoseTurnPawn() {
+    return whoseTurnPawn;
   }
 }
