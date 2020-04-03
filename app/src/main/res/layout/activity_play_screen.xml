@@ -7,6 +7,36 @@
   android:background="@color/colorBackground"
   tools:context=".activities.PlayScreenActivity">
 
+  <TextView
+    android:id="@+id/whoseTurnTextLabel"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:text="@string/yourTurn"
+    android:textAlignment="center"
+    android:textColor="@color/colorPrimary"
+    android:textSize="@dimen/playScreenOpponentText"
+    app:layout_constraintBottom_toTopOf="@+id/chessBoard"
+    app:layout_constraintEnd_toEndOf="@+id/opponentName"
+    app:layout_constraintStart_toStartOf="@+id/opponentName"
+    app:layout_constraintTop_toBottomOf="@+id/opponentName" />
+
+  <ImageView
+    android:id="@+id/whoseTurnPawn"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:adjustViewBounds="true"
+    android:contentDescription="@string/playerColorDescription"
+    android:maxHeight="30dp"
+    android:minHeight="30dp"
+    android:scaleType="centerInside"
+    android:scaleX="0.7"
+    android:scaleY="0.7"
+    app:layout_constraintBottom_toTopOf="@+id/chessBoard"
+    app:layout_constraintEnd_toEndOf="@+id/opponentLabel"
+    app:layout_constraintStart_toStartOf="@+id/opponentLabel"
+    app:layout_constraintTop_toBottomOf="@+id/opponentLabel"
+    app:srcCompat="@drawable/wknight" />
+
   <include
     android:id="@+id/include"
     layout="@layout/newton_chess_banner" />
@@ -16,7 +46,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="20dp"
-    android:layout_marginTop="10dp"
     android:text="@string/playScreenOpponentLabel"
     android:textColor="@color/colorPrimary"
     android:textColorHighlight="@color/colorComplementary"
@@ -30,7 +59,6 @@
     android:id="@+id/opponentName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
     android:text="@string/playScreenOpponentName"
     android:textColor="@color/colorPrimary"
     android:textColorHighlight="@color/colorComplementary"
@@ -48,5 +76,18 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/include" />
+
+  <Button
+    android:id="@+id/refreshButton"
+    android:layout_width="@dimen/bigButtonWidth"
+    android:layout_height="@dimen/bigButtonHeight"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/refresh"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/bigButtonText"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/chessBoard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

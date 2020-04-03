@@ -59,4 +59,8 @@
   <string name="viewBoard">View Board</string>
   <string name="turn">Turn</string>
   <string name="turnNum" translatable="false">\?\?\?</string>
+  <string name="opponentsTurn">Opponents turn</string>
+  <string name="yourTurn">Your turn</string>
+  <string name="refresh">Refresh</string>
+  <string name="playerColorDescription">A piece showing which color you\'re playing as.</string>
 </resources>
