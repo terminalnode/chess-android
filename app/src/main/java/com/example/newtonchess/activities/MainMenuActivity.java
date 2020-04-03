@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
@@ -44,29 +45,30 @@ public class MainMenuActivity extends AppCompatActivity {
 
     // Set button listeners
     playButton.setOnClickListener(this::playButtonPress);
-    newGameButton.setOnClickListener(this::newGameButtonPress);
     friendsListButton.setOnClickListener(this::friendsButtonPress);
     logoutButton.setOnClickListener(this::logoutButtonPress);
   }
 
-  private void playButtonPress(View view) {
-    Intent playIntent = new Intent(view.getContext(), PickGameActivity.class);
+  @Override
+  public void onBackPressed() {
+    logoutButtonPress(null);
+  }
+
+  private void playButtonPress(@Nullable View view) {
+    Intent playIntent = new Intent(this, PickGameActivity.class);
     playIntent.putExtra("TokenEntity", token);
     startActivity(playIntent);
   }
 
-  private void newGameButtonPress(View view) {
+  private void friendsButtonPress(@Nullable View view) {
+    Intent intent = new Intent(this, FriendsListActivity.class);
+    intent.putExtra("TokenEntity", token);
+    startActivity(intent);
   }
 
-  private void friendsButtonPress(View view) {
-    Intent friendsListIntent = new Intent(view.getContext(), FriendsListActivity.class);
-    friendsListIntent.putExtra("TokenEntity", token);
-    startActivity(friendsListIntent);
-  }
-
-  private void logoutButtonPress(View view) {
+  private void logoutButtonPress(@Nullable View view) {
     ApiLogin.logout(token.getTokenString());
-    Intent loginScreenIntent = new Intent(view.getContext(), LoginScreenActivity.class);
+    Intent loginScreenIntent = new Intent(this, LoginScreenActivity.class);
     startActivity(loginScreenIntent);
   }
 }
