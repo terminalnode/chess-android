@@ -1,12 +1,16 @@
 package com.example.newtonchess.api.retrofitservices;
 
 import com.example.newtonchess.api.entities.GameEntity;
+import com.example.newtonchess.api.entities.MoveEntity;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Retrofit service interface connecting to the /api/games endpoint.
@@ -14,10 +18,12 @@ import retrofit2.http.Header;
  */
 public interface GameService {
   @GET("games")
-  Call<List<GameEntity>> getAllGames(@Header("Token") String token);
+  Call<List<GameEntity>> getAllGames(
+      @Header("Token") String token);
 
-  /* Move entity is not implemented yet
   @POST("game/{gameId}")
-  Call<String> makeMove(@Header("Token") String token, @Path("gameId") String gameId, @Body MoveEntity move)
-   */
+  Call<String> makeMove(
+      @Header("Token") String token,
+      @Path("gameId") long gameId,
+      @Body MoveEntity move);
 }

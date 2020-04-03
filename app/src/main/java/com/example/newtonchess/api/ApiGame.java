@@ -1,6 +1,7 @@
 package com.example.newtonchess.api;
 
 import com.example.newtonchess.api.entities.GameEntity;
+import com.example.newtonchess.api.entities.MoveEntity;
 import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
 
 import java.util.List;
@@ -12,5 +13,11 @@ public class ApiGame {
     return RetrofitHelper
         .getGameService()
         .getAllGames(token);
+  }
+
+  public static Call<String> makeMove(String token, long gameId, MoveEntity move) {
+    return RetrofitHelper
+        .getGameService()
+        .makeMove(token, gameId, move);
   }
 }
