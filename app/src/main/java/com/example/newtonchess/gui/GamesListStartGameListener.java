@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.newtonchess.StaticValues;
 import com.example.newtonchess.activities.PlayScreenActivity;
 import com.example.newtonchess.api.entities.GameEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
@@ -30,13 +31,11 @@ public class GamesListStartGameListener implements View.OnClickListener {
 
     Log.i("GAMES", "Creating playScreenIntent");
     Intent playScreenIntent = new Intent(view.getContext(), PlayScreenActivity.class);
-    Log.i("GAMES", "Packing token: " + token);
-    playScreenIntent.putExtra("TokenEntity", token);
-    Log.i("GAMES", "Packing game: " + game);
-    playScreenIntent.putExtra("GameEntity", game);
+    playScreenIntent.putExtra(StaticValues.INTENT_TOKEN, token);
+    playScreenIntent.putExtra(StaticValues.INTENT_GAME, game);
+
     Log.i("GAMES", "Starting activity playScreenIntent");
     context.startActivity(playScreenIntent);
-    Log.i("GAMES", "playScreenIntent activity started. Bye...");
   }
 
   private void deactivateButton() {
