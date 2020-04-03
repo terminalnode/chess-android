@@ -81,20 +81,24 @@ public class ChessBoard extends View {
     currentPaint = lightPaint;
   }
 
+  /**
+   * Loads settings from a GameEntity, then invalidates the board.
+   * @param game The GameEntity to load data from.
+   * @param thisPlayer Who this player is.
+   */
   public void loadFromGameEntity(GameEntity game, PlayerEntity thisPlayer) {
     if (game == null) {
       Log.i("CHESSBOARD", "Game entity is null, nothing to do.");
       return;
     }
 
-    PlayerEntity whitePlayer = game.getWhitePlayer();
-    PlayerEntity blackPlayer = game.getWhitePlayer();
     pieces = game.getPieces();
     isWhitesTurn = game.isWhitesTurn();
     turnsTaken = game.getTurnsTaken();
     finished = game.isFinished();
     pieces = game.getPieces() == null ? pieces : game.getPieces();
-    isWhite = thisPlayer.equals(whitePlayer);
+    isWhite = thisPlayer.equals(game.getWhitePlayer());
+    invalidate();
   }
 
   /**
