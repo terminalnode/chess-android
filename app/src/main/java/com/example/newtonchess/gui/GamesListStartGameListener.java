@@ -11,23 +11,21 @@ import com.example.newtonchess.api.entities.GameEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
 
 public class GamesListStartGameListener implements View.OnClickListener {
-  private View view;
   private GameEntity game;
-  private String token;
+  private TokenEntity token;
   private Button button;
   private Context context;
 
   GamesListStartGameListener(GameEntity game, TokenEntity token, Button button, Context context) {
     this.game = game;
-    this.token = token.getTokenString();
+    this.token = token;
     this.button = button;
     this.context = context;
   }
 
   @Override
   public void onClick(View view) {
-    Log.i("GAMES", "Starting a game");
-    this.view = view;
+    Log.i("GAMES", "Starting a game, just have to create the intent.");
     deactivateButton();
 
     Log.i("GAMES", "Creating playScreenIntent");
@@ -38,7 +36,7 @@ public class GamesListStartGameListener implements View.OnClickListener {
     playScreenIntent.putExtra("GameEntity", game);
     Log.i("GAMES", "Starting activity playScreenIntent");
     context.startActivity(playScreenIntent);
-    Log.i("GAMES", "playScreenIntent started. I should be gone now I think.");
+    Log.i("GAMES", "playScreenIntent activity started. Bye...");
   }
 
   private void deactivateButton() {

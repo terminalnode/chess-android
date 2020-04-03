@@ -22,14 +22,14 @@ public class PlayScreenActivity extends AppCompatActivity {
     setContentView(R.layout.activity_play_screen);
 
     // Extract contents from intent
+    Log.i("ACTIVITY", "Play screen starting to extract contents from intent.");
     token = getIntent().getParcelableExtra("TokenEntity");
+    Log.i("ACTIVITY", "Token is: " + token);
     GameEntity game = getIntent().getParcelableExtra("GameEntity");
-
-    // Log the extracted contents
-    Log.i("ACTIVITY", String.format("Play screen has started, token: %s", token));
-    Log.i("ACTIVITY", String.format("Game is: %s", game));
+    Log.i("ACTIVITY", "Game is: " + game);
 
     chessBoard = findViewById(R.id.chessBoard);
+    chessBoard.loadFromGameEntity(game, token.getPlayer());
     chessBoard.setOnTouchListener(chessBoard::onTouch);
   }
 }

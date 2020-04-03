@@ -19,24 +19,26 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.example.newtonchess.R;
-import com.example.newtonchess.chesscomponents.pieces.Bishop;
-import com.example.newtonchess.chesscomponents.pieces.King;
-import com.example.newtonchess.chesscomponents.pieces.Knight;
-import com.example.newtonchess.chesscomponents.pieces.Pawn;
+import com.example.newtonchess.api.entities.GameEntity;
+import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.chesscomponents.pieces.Piece;
-import com.example.newtonchess.chesscomponents.pieces.Queen;
-import com.example.newtonchess.chesscomponents.pieces.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the view that shows us the board and lets us move pieces around it.
+ * It can retrieve a GameEntity object through loadFromGameEntity which sets
+ * all of its field according to the GameEntity retrieved from the server.
+ *
+ * @author Alexander Rundberg
+ */
 public class ChessBoard extends View {
   private Paint currentPaint, darkPaint, lightPaint, highlightPaint, selectionPaint;
   private int xMin, yMin, selectedX, selectedY, squareSize;
+  private long turnsTaken;
+  private boolean isWhite, isWhitesTurn, finished, flipped;
   private List<Piece> pieces;
-  boolean flipped;
-  private boolean isWhite;
-  private boolean isWhitesTurn;
   private Piece selectedPiece;
 
   /**
@@ -47,18 +49,13 @@ public class ChessBoard extends View {
    */
   public ChessBoard(Context context, @Nullable AttributeSet attrs) {
     super(context, attrs);
-    // Generate pieces if they do not exist
-    if (pieces == null) {
-      pieces = new ArrayList<>();
-      generatePieces();
-    }
-
-    // Set default player color and whose turn it is.
+    // Dummy values to make sure they're set to something and/or not null.
+    pieces = new ArrayList<>();
     isWhite = true;
     isWhitesTurn = true;
-
-    // Board is not flipped by default
     flipped = false;
+    finished = false;
+    turnsTaken = 0;
 
     // Set selected tile to inactive (-1,-1)
     selectedX = -1;
@@ -69,11 +66,14 @@ public class ChessBoard extends View {
     lightPaint = new Paint();
     highlightPaint = new Paint();
     selectionPaint = new Paint();
+
     darkPaint.setColor(ContextCompat.getColor(context, R.color.darkSquare));
     lightPaint.setColor(ContextCompat.getColor(context, R.color.lightSquare));
+
     selectionPaint.setColor(ContextCompat.getColor(context, R.color.colorNewtonOrange));
     selectionPaint.setStyle(Paint.Style.STROKE);
     selectionPaint.setStrokeWidth(10.0F);
+
     highlightPaint.setColor(ContextCompat.getColor(context, R.color.colorComplementary));
     highlightPaint.setStyle(Paint.Style.STROKE);
     highlightPaint.setStrokeWidth(10.0F);
@@ -81,39 +81,20 @@ public class ChessBoard extends View {
     currentPaint = lightPaint;
   }
 
-  /**
-   * Generate a standard set of pieces, and add these to the pieces list.
-   */
-  private void generatePieces() {
-    // Add pawns
-    for (int x = 0; x < 8; x++) {
-      pieces.add(new Pawn(0, x, 1, Piece.WHITE));
-      pieces.add(new Pawn(0, x, 6, Piece.BLACK));
+  public void loadFromGameEntity(GameEntity game, PlayerEntity thisPlayer) {
+    if (game == null) {
+      Log.i("CHESSBOARD", "Game entity is null, nothing to do.");
+      return;
     }
 
-    // Add rooks
-    pieces.add(new Rook(0, 0, 0, Piece.WHITE));
-    pieces.add(new Rook(0, 7, 0, Piece.WHITE));
-    pieces.add(new Rook(0, 0, 7, Piece.BLACK));
-    pieces.add(new Rook(0, 7, 7, Piece.BLACK));
-
-    // Add knights
-    pieces.add(new Knight(0, 1, 0, Piece.WHITE));
-    pieces.add(new Knight(0, 6, 0, Piece.WHITE));
-    pieces.add(new Knight(0, 1, 7, Piece.BLACK));
-    pieces.add(new Knight(0, 6, 7, Piece.BLACK));
-
-    // Add bishops
-    pieces.add(new Bishop(0, 2, 0, Piece.WHITE));
-    pieces.add(new Bishop(0, 5, 0, Piece.WHITE));
-    pieces.add(new Bishop(0, 2, 7, Piece.BLACK));
-    pieces.add(new Bishop(0, 5, 7, Piece.BLACK));
-
-    // Add kings and queens
-    pieces.add(new King(0, 4, 0, Piece.WHITE));
-    pieces.add(new King(0, 4, 7, Piece.BLACK));
-    pieces.add(new Queen(0, 3, 0, Piece.WHITE));
-    pieces.add(new Queen(0, 3, 7, Piece.BLACK));
+    PlayerEntity whitePlayer = game.getWhitePlayer();
+    PlayerEntity blackPlayer = game.getWhitePlayer();
+    pieces = game.getPieces();
+    isWhitesTurn = game.isWhitesTurn();
+    turnsTaken = game.getTurnsTaken();
+    finished = game.isFinished();
+    pieces = game.getPieces() == null ? pieces : game.getPieces();
+    isWhite = thisPlayer.equals(whitePlayer);
   }
 
   /**
