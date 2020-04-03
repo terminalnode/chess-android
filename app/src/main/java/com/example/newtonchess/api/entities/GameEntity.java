@@ -35,13 +35,22 @@ public class GameEntity implements Parcelable {
   private boolean whitesTurn;
 
   @SerializedName("turnsTaken")
-  private long turnsTaken;
+  private int turnsTaken;
 
   @SerializedName("finished")
   private boolean finished;
 
   @SerializedName("pieces")
   List<Piece> pieces;
+
+  @SerializedName("isGettingPlayerWhite")
+  private boolean isGettingPlayerWhite;
+
+  @SerializedName("blackInCheck")
+  private boolean blackInCheck;
+
+  @SerializedName("whiteInCheck")
+  private boolean whiteInCheck;
 
   //----- Constructors -----//
   public GameEntity() {
@@ -69,8 +78,11 @@ public class GameEntity implements Parcelable {
     dest.writeParcelable(this.whitePlayer, flags);
     dest.writeParcelable(this.blackPlayer, flags);
     dest.writeByte(this.whitesTurn ? (byte) 1 : (byte) 0);
-    dest.writeLong(this.turnsTaken);
+    dest.writeInt(this.turnsTaken);
     dest.writeByte(this.finished ? (byte) 1 : (byte) 0);
+    dest.writeByte(this.isGettingPlayerWhite ? (byte) 1 : (byte) 0);
+    dest.writeByte(this.blackInCheck ? (byte) 1 : (byte) 0);
+    dest.writeByte(this.whiteInCheck ? (byte) 1 : (byte) 0);
     dest.writeList(this.pieces);
   }
 
@@ -79,9 +91,12 @@ public class GameEntity implements Parcelable {
     this.whitePlayer = in.readParcelable(PlayerEntity.class.getClassLoader());
     this.blackPlayer = in.readParcelable(PlayerEntity.class.getClassLoader());
     this.whitesTurn = in.readByte() != 0;
-    this.turnsTaken = in.readLong();
+    this.turnsTaken = in.readInt();
     this.finished = in.readByte() != 0;
-    this.pieces = new ArrayList<Piece>();
+    this.isGettingPlayerWhite = in.readByte() != 0;
+    this.blackInCheck = in.readByte() != 0;
+    this.whiteInCheck = in.readByte() != 0;
+    this.pieces = new ArrayList<>();
     in.readList(this.pieces, Piece.class.getClassLoader());
   }
 
@@ -114,7 +129,7 @@ public class GameEntity implements Parcelable {
     this.whitesTurn = whitesTurn;
   }
 
-  public void setTurnsTaken(long turnsTaken) {
+  public void setTurnsTaken(int turnsTaken) {
     this.turnsTaken = turnsTaken;
   }
 
@@ -124,6 +139,18 @@ public class GameEntity implements Parcelable {
 
   public void setPieces(List<Piece> pieces) {
     this.pieces = pieces;
+  }
+
+  public void setGettingPlayerWhite(boolean gettingPlayerWhite) {
+    isGettingPlayerWhite = gettingPlayerWhite;
+  }
+
+  public void setBlackInCheck(boolean blackInCheck) {
+    this.blackInCheck = blackInCheck;
+  }
+
+  public void setWhiteInCheck(boolean whiteInCheck) {
+    this.whiteInCheck = whiteInCheck;
   }
 
   //----- Getters -----//
@@ -143,7 +170,7 @@ public class GameEntity implements Parcelable {
     return whitesTurn;
   }
 
-  public long getTurnsTaken() {
+  public int getTurnsTaken() {
     return turnsTaken;
   }
 
@@ -153,5 +180,17 @@ public class GameEntity implements Parcelable {
 
   public List<Piece> getPieces() {
     return pieces;
+  }
+
+  public boolean isGettingPlayerWhite() {
+    return isGettingPlayerWhite;
+  }
+
+  public boolean isBlackInCheck() {
+    return blackInCheck;
+  }
+
+  public boolean isWhiteInCheck() {
+    return whiteInCheck;
   }
 }
