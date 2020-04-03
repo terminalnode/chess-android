@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.StaticValues;
 import com.example.newtonchess.api.entities.GameEntity;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.chesscomponents.pieces.Piece;
@@ -39,7 +40,7 @@ public class ChessBoard extends View {
   private Paint currentPaint, darkPaint, lightPaint, highlightPaint, selectionPaint;
   private int xMin, yMin, selectedX, selectedY, squareSize;
   private long turnsTaken, gameId;
-  private boolean isWhite, isWhitesTurn, finished, flipped;
+  private boolean isWhite, isWhitesTurn, finished, flipped, inCheck;
   private List<Piece> pieces;
   private Piece selectedPiece;
   TextView whoseTurnTextView;
@@ -96,29 +97,41 @@ public class ChessBoard extends View {
    */
   public void loadFromGameEntity(GameEntity game, PlayerEntity thisPlayer) {
     if (game == null) {
-      Log.i("CHESSBOARD", "Game entity is null, nothing to do.");
+      Log.i(StaticValues.CHESSBOARD, "Game entity is null, nothing to do.");
       return;
     }
 
-    pieces = game.getPieces();
+    // Retrieve values from game
+    boolean isWhiteInCheck = game.isWhiteInCheck();
+    boolean isBlackInCheck = game.isBlackInCheck();
     turnsTaken = game.getTurnsTaken();
     finished = game.isFinished();
     pieces = game.getPieces() == null ? pieces : game.getPieces();
     isWhitesTurn = game.isWhitesTurn();
     isWhite = game.isGettingPlayerWhite();
-    Log.i("GAME", "isWhitesTurn: " + isWhitesTurn);
-    Log.i("GAME", "isWhite: " + isWhite);
+
+    // Sanity checks
+    Log.i(StaticValues.CHESSBOARD, "turnsTaken: " + turnsTaken);
+    Log.i(StaticValues.CHESSBOARD, "finished: " + finished);
+    Log.i(StaticValues.CHESSBOARD, "pieces is not null: " + (pieces != null));
+    Log.i(StaticValues.CHESSBOARD, "isWhitesTurn: " + isWhitesTurn);
+    Log.i(StaticValues.CHESSBOARD, "isWhite: " + isWhite);
+    Log.i(StaticValues.CHESSBOARD, "whoseTurnTextView is not null: " + (whoseTurnTextView != null));
 
     if (isWhitesTurn && whoseTurnPawn != null) {
       whoseTurnPawn.setImageResource(R.drawable.wknight);
     } else if (whoseTurnPawn != null) {
       whoseTurnPawn.setImageResource(R.drawable.bknight);
+    } else {
+      Log.w(StaticValues.CHESSBOARD, "whoseTurnPawn is null!");
     }
 
     if (isWhitesTurn == isWhite && whoseTurnTextView != null) {
       whoseTurnTextView.setText(R.string.yourTurn);
     } else if (whoseTurnTextView != null) {
       whoseTurnTextView.setText(R.string.opponentsTurn);
+    } else {
+      Log.w(StaticValues.CHESSBOARD, "whoseTurnTextView is null!");
     }
 
     invalidate();

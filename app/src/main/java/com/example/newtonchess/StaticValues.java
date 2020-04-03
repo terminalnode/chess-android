@@ -8,4 +8,5 @@ public class StaticValues {
   // Log tags
   public static final String PICKSCREEN = "PICKSCREEN";
   public static final String PLAYSCREEN = "PLAYSCREEN";
+  public static final String CHESSBOARD = "CHESSBOARD";
 }

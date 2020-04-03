@@ -43,8 +43,8 @@ public class GameEntity implements Parcelable {
   @SerializedName("pieces")
   List<Piece> pieces;
 
-  @SerializedName("isGettingPlayerWhite")
-  private boolean isGettingPlayerWhite;
+  @SerializedName("gettingPlayerWhite")
+  private boolean gettingPlayerWhite;
 
   @SerializedName("blackInCheck")
   private boolean blackInCheck;
@@ -80,7 +80,7 @@ public class GameEntity implements Parcelable {
     dest.writeByte(this.whitesTurn ? (byte) 1 : (byte) 0);
     dest.writeInt(this.turnsTaken);
     dest.writeByte(this.finished ? (byte) 1 : (byte) 0);
-    dest.writeByte(this.isGettingPlayerWhite ? (byte) 1 : (byte) 0);
+    dest.writeByte(this.gettingPlayerWhite ? (byte) 1 : (byte) 0);
     dest.writeByte(this.blackInCheck ? (byte) 1 : (byte) 0);
     dest.writeByte(this.whiteInCheck ? (byte) 1 : (byte) 0);
     dest.writeList(this.pieces);
@@ -93,7 +93,7 @@ public class GameEntity implements Parcelable {
     this.whitesTurn = in.readByte() != 0;
     this.turnsTaken = in.readInt();
     this.finished = in.readByte() != 0;
-    this.isGettingPlayerWhite = in.readByte() != 0;
+    this.gettingPlayerWhite = in.readByte() != 0;
     this.blackInCheck = in.readByte() != 0;
     this.whiteInCheck = in.readByte() != 0;
     this.pieces = new ArrayList<>();
@@ -142,7 +142,7 @@ public class GameEntity implements Parcelable {
   }
 
   public void setGettingPlayerWhite(boolean gettingPlayerWhite) {
-    isGettingPlayerWhite = gettingPlayerWhite;
+    this.gettingPlayerWhite = gettingPlayerWhite;
   }
 
   public void setBlackInCheck(boolean blackInCheck) {
@@ -183,7 +183,7 @@ public class GameEntity implements Parcelable {
   }
 
   public boolean isGettingPlayerWhite() {
-    return isGettingPlayerWhite;
+    return gettingPlayerWhite;
   }
 
   public boolean isBlackInCheck() {
