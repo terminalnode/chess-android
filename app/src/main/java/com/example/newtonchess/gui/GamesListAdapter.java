@@ -15,7 +15,6 @@ import com.example.newtonchess.R;
 import com.example.newtonchess.api.entities.GameEntity;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -75,9 +74,14 @@ public class GamesListAdapter extends ArrayAdapter<GameEntity> {
     numGamesTV.setText(turnsTaken);
 
     // Set button listener
-    gameListEntryButton.setOnClickListener((View v) -> {
-      Snackbar.make(v, "Clicked on game with position " + position, Snackbar.LENGTH_LONG).show();
-    });
+    gameListEntryButton.setOnClickListener(
+        new GamesListStartGameListener(
+            game,
+            token,
+            gameListEntryButton,
+            getContext()
+        )
+    );
 
     return convertView;
   }

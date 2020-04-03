@@ -18,6 +18,7 @@ import com.example.newtonchess.gui.ChallengesListAdapter;
 import com.example.newtonchess.gui.GamesListAdapter;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,6 +126,12 @@ public class PickGameActivity extends AppCompatActivity {
           gamesListAdapter.addAll(games);
           if (games.size() > 0) {
             Log.i("GAMES", "Fetched a list of games, first one: " + games.get(0));
+          }
+        } else {
+          try {
+            Log.i("GAMES", "Error body: " + response.errorBody().string());
+          } catch (IOException e) {
+            e.printStackTrace();
           }
         }
       }

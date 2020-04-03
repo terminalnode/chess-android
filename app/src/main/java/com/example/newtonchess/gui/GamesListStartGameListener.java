@@ -1,53 +1,44 @@
 package com.example.newtonchess.gui;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.newtonchess.R;
-import com.example.newtonchess.api.entities.ChallengeEntity;
+import com.example.newtonchess.activities.PlayScreenActivity;
+import com.example.newtonchess.api.entities.GameEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
-import com.google.android.material.snackbar.Snackbar;
-
-import okhttp3.ResponseBody;
 
 public class GamesListStartGameListener implements View.OnClickListener {
   private View view;
-  private ChallengeEntity challenge;
+  private GameEntity game;
   private String token;
   private Button button;
+  private Context context;
 
-  GamesListStartGameListener(ChallengeEntity challenge, TokenEntity token, Button button) {
-    this.challenge = challenge;
+  GamesListStartGameListener(GameEntity game, TokenEntity token, Button button, Context context) {
+    this.game = game;
     this.token = token.getTokenString();
     this.button = button;
+    this.context = context;
   }
 
   @Override
   public void onClick(View view) {
+    Log.i("GAMES", "Starting a game");
     this.view = view;
     deactivateButton();
-    sendChallenge();
-  }
 
-  private void sendChallenge() {
-  }
-
-  private void knownError(ResponseBody responseBody) {
-
-  }
-
-  private void unknownError() {
-    Snackbar.make(
-        view,
-        R.string.somethingWentWrong,
-        Snackbar.LENGTH_LONG
-    ).show();
-    activateButton();
-  }
-
-  private void activateButton() {
-    button.setClickable(true);
-    button.setAlpha(1F);
+    Log.i("GAMES", "Creating playScreenIntent");
+    Intent playScreenIntent = new Intent(view.getContext(), PlayScreenActivity.class);
+    Log.i("GAMES", "Packing token: " + token);
+    playScreenIntent.putExtra("TokenEntity", token);
+    Log.i("GAMES", "Packing game: " + game);
+    playScreenIntent.putExtra("GameEntity", game);
+    Log.i("GAMES", "Starting activity playScreenIntent");
+    context.startActivity(playScreenIntent);
+    Log.i("GAMES", "playScreenIntent started. I should be gone now I think.");
   }
 
   private void deactivateButton() {
