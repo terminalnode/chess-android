@@ -6,13 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Knight extends Piece {
-  public Knight(int x, int y, PieceColor color) {
-    super(x, y, color, PieceType.KNIGHT);
+  public Knight() {
+    super();
+  }
+
+  public Knight(int internalId, int x, int y, boolean isWhite) {
+    super(internalId, x, y, isWhite);
   }
 
   @Override
   public List<int[]> getMoves(List<Piece> pieces) {
     List<int[]> moves = new ArrayList<>();
+    int x = getX();
+    int y = getY();
+
     int[][] theoreticalMoves = new int[][]{
         { x - 1, y - 2 },
         { x + 1, y - 2 },
@@ -33,8 +40,7 @@ public class Knight extends Piece {
 
   @Override
   public int getDrawableId() {
-    return color == PieceColor.WHITE ?
-        R.drawable.wknight : R.drawable.bknight;
+    return isWhite() ? R.drawable.wknight : R.drawable.bknight;
   }
 
   @Override

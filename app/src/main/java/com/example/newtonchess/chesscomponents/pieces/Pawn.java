@@ -6,18 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends Piece {
-  public Pawn(int x, int y, PieceColor color) {
-    super(x, y, color, PieceType.PAWN);
+  public Pawn() {
+    super();
+  }
+
+  public Pawn(int internalId, int x, int y, boolean isWhite) {
+    super(internalId, x, y, isWhite);
   }
 
   @Override
   public List<int[]> getMoves(List<Piece> pieces) {
     List<int[]> moves = new ArrayList<>();
-    int dy = isWhite ? 1 : -1;
-    int yPlusOne = y + dy;
-    int yPlusTwo = y + dy * 2;
-    int diagonalRight = x + 1;
-    int diagonalLeft = x - 1;
+    int dy = isWhite() ? 1 : -1;
+    int yPlusOne = getY() + dy;
+    int yPlusTwo = getY() + dy * 2;
+    int diagonalRight = getX() + 1;
+    int diagonalLeft = getX() - 1;
 
     // Check if pawn can make diagonal moves and/or if pawn is blocked
     boolean yPlusOneBlocked = false;
@@ -29,9 +33,9 @@ public class Pawn extends Piece {
       int otherX = piece.getX();
       int otherY = piece.getY();
 
-      if (otherX == x && otherY == yPlusOne) {
+      if (otherX == getX() && otherY == yPlusOne) {
         yPlusOneBlocked = true;
-      } else if (otherX == x && otherY == yPlusTwo) {
+      } else if (otherX == getX() && otherY == yPlusTwo) {
         yPlusTwoBlocked = true;
       } else if (otherX == diagonalRight && otherY == yPlusOne) {
         pieceOnRight = true;
@@ -42,10 +46,10 @@ public class Pawn extends Piece {
 
     // Add moves to list
     if (!yPlusOneBlocked) {
-      addMoveToList(moves, x, yPlusOne, pieces);
+      addMoveToList(moves, getX(), yPlusOne, pieces);
 
-      if (!yPlusTwoBlocked && !hasMoved) {
-        addMoveToList(moves, x, yPlusTwo, pieces);
+      if (!yPlusTwoBlocked && !isMoved()) {
+        addMoveToList(moves, getX(), yPlusTwo, pieces);
       }
     }
     if (pieceOnLeft) {
@@ -60,8 +64,7 @@ public class Pawn extends Piece {
 
   @Override
   public int getDrawableId() {
-    return color == PieceColor.WHITE ?
-        R.drawable.wpawn : R.drawable.bpawn;
+    return isWhite() ? R.drawable.wpawn : R.drawable.bpawn;
   }
 
   @Override
@@ -71,8 +74,8 @@ public class Pawn extends Piece {
 
   @Override
   public PieceType[] upgrade() {
-    int edgeY = isWhite ? 7 : 0;
-    if (edgeY == y) {
+    int edgeY = isWhite() ? 7 : 0;
+    if (edgeY == getY()) {
       return new PieceType[] {
           PieceType.QUEEN,
           PieceType.ROOK,

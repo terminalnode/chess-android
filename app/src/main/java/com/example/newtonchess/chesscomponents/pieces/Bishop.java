@@ -2,12 +2,15 @@ package com.example.newtonchess.chesscomponents.pieces;
 
 import com.example.newtonchess.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Bishop extends Piece {
-  public Bishop(int x, int y, PieceColor color) {
-    super(x, y, color, PieceType.BISHOP);
+  public Bishop() {
+    super();
+  }
+
+  public Bishop(int internalId, int x, int y, boolean isWhite) {
+    super(internalId, x, y, isWhite);
   }
 
   @Override
@@ -17,8 +20,7 @@ public class Bishop extends Piece {
 
   @Override
   public int getDrawableId() {
-    return color == PieceColor.WHITE ?
-        R.drawable.wbishop : R.drawable.bbishop;
+    return isWhite() ? R.drawable.wbishop : R.drawable.bbishop;
   }
 
   @Override

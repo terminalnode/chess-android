@@ -6,21 +6,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece {
-  int x, y;
-  PieceColor color;
-  PieceType type;
-  boolean isWhite;
-  boolean hasMoved;
+  public static final boolean WHITE = true;
+  public static final boolean BLACK = false;
 
+  private int x;
+  private int y;
+  private int internalId;
+  private boolean isWhite;
+  private boolean moved;
 
   //----- Constructor ----//
-  Piece(int x, int y, PieceColor color, PieceType type) {
+  Piece() {
+    // Empty constructor
+  }
+
+  Piece(int internalId, int x, int y, boolean isWhite) {
+    this.internalId = internalId;
     this.x = x;
     this.y = y;
-    this.color = color;
-    this.type = type;
-    this.hasMoved = false;
-    isWhite = color == PieceColor.WHITE;
+    this.moved = false;
+    this.isWhite = isWhite;
   }
 
 
@@ -34,7 +39,7 @@ public abstract class Piece {
   public void move(int x, int y) {
     this.x = x;
     this.y = y;
-    this.hasMoved = true;
+    this.moved = true;
   }
 
   List<int[]> getStraightMoves(List<Piece> pieces) {
@@ -151,7 +156,7 @@ public abstract class Piece {
 
     Piece pieceHere = pieceAtPosition(position, otherPieces);
     boolean blockedByPiece = pieceHere != null;
-    boolean blockedByOwnColor = blockedByPiece && pieceHere.getColor() == color;
+    boolean blockedByOwnColor = blockedByPiece && pieceHere.isWhite() == isWhite();
 
     if (blockedByOwnColor) {
       Log.i("PIECE", "Blocked by own color, returning false");
@@ -169,11 +174,10 @@ public abstract class Piece {
 
   @Override
   public String toString() {
-    return String.format("<%s (%s,%s)>", type, x, y);
+    return String.format("<%s (%s,%s)>", this.getClass().getName(), x, y);
   }
 
-
-  //----- Getters and setters -----//
+  //----- Setters -----//
   public void setX(int x) {
     this.x = x;
   }
@@ -182,6 +186,19 @@ public abstract class Piece {
     this.y = y;
   }
 
+  public void setInternalId(int internalId) {
+    this.internalId = internalId;
+  }
+
+  public void setMoved(boolean moved) {
+    this.moved = moved;
+  }
+
+  public void setWhite(boolean white) {
+    isWhite = white;
+  }
+
+  //----- Getters -----//
   public int getX() {
     return x;
   }
@@ -190,27 +207,15 @@ public abstract class Piece {
     return y;
   }
 
-  public boolean isHasMoved() {
-    return hasMoved;
+  public int getInternalId() {
+    return internalId;
   }
 
-  public void setHasMoved(boolean hasMoved) {
-    this.hasMoved = hasMoved;
+  public boolean isMoved() {
+    return moved;
   }
 
-  public void setColor(PieceColor color) {
-    this.color = color;
-  }
-
-  public PieceColor getColor() {
-    return color;
-  }
-
-  public void setType(PieceType type) {
-    this.type = type;
-  }
-
-  public PieceType getType() {
-    return type;
+  public boolean isWhite() {
+    return isWhite;
   }
 }

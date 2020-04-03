@@ -24,7 +24,6 @@ import com.example.newtonchess.chesscomponents.pieces.King;
 import com.example.newtonchess.chesscomponents.pieces.Knight;
 import com.example.newtonchess.chesscomponents.pieces.Pawn;
 import com.example.newtonchess.chesscomponents.pieces.Piece;
-import com.example.newtonchess.chesscomponents.pieces.PieceColor;
 import com.example.newtonchess.chesscomponents.pieces.Queen;
 import com.example.newtonchess.chesscomponents.pieces.Rook;
 
@@ -32,12 +31,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChessBoard extends View {
-  Paint currentPaint, darkPaint, lightPaint, highlightPaint, selectionPaint;
-  int xMin, yMin, selectedX, selectedY, squareSize;
+  private Paint currentPaint, darkPaint, lightPaint, highlightPaint, selectionPaint;
+  private int xMin, yMin, selectedX, selectedY, squareSize;
+  private List<Piece> pieces;
   boolean flipped;
-  List<Piece> pieces;
-  PieceColor playerColor, playerTurn;
-  Piece selectedPiece;
+  private boolean isWhite;
+  private boolean isWhitesTurn;
+  private Piece selectedPiece;
 
   /**
    * Modified version of a default View constructor, which calls upon the built-in
@@ -54,8 +54,8 @@ public class ChessBoard extends View {
     }
 
     // Set default player color and whose turn it is.
-    playerColor = PieceColor.WHITE;
-    playerTurn = PieceColor.WHITE;
+    isWhite = true;
+    isWhitesTurn = true;
 
     // Board is not flipped by default
     flipped = false;
@@ -87,33 +87,33 @@ public class ChessBoard extends View {
   private void generatePieces() {
     // Add pawns
     for (int x = 0; x < 8; x++) {
-      pieces.add(new Pawn(x, 1, PieceColor.WHITE));
-      pieces.add(new Pawn(x, 6, PieceColor.BLACK));
+      pieces.add(new Pawn(0, x, 1, Piece.WHITE));
+      pieces.add(new Pawn(0, x, 6, Piece.BLACK));
     }
 
     // Add rooks
-    pieces.add(new Rook(0, 0, PieceColor.WHITE));
-    pieces.add(new Rook(7, 0, PieceColor.WHITE));
-    pieces.add(new Rook(0, 7, PieceColor.BLACK));
-    pieces.add(new Rook(7, 7, PieceColor.BLACK));
+    pieces.add(new Rook(0, 0, 0, Piece.WHITE));
+    pieces.add(new Rook(0, 7, 0, Piece.WHITE));
+    pieces.add(new Rook(0, 0, 7, Piece.BLACK));
+    pieces.add(new Rook(0, 7, 7, Piece.BLACK));
 
     // Add knights
-    pieces.add(new Knight(1, 0, PieceColor.WHITE));
-    pieces.add(new Knight(6, 0, PieceColor.WHITE));
-    pieces.add(new Knight(1, 7, PieceColor.BLACK));
-    pieces.add(new Knight(6, 7, PieceColor.BLACK));
+    pieces.add(new Knight(0, 1, 0, Piece.WHITE));
+    pieces.add(new Knight(0, 6, 0, Piece.WHITE));
+    pieces.add(new Knight(0, 1, 7, Piece.BLACK));
+    pieces.add(new Knight(0, 6, 7, Piece.BLACK));
 
     // Add bishops
-    pieces.add(new Bishop(2, 0, PieceColor.WHITE));
-    pieces.add(new Bishop(5, 0, PieceColor.WHITE));
-    pieces.add(new Bishop(2, 7, PieceColor.BLACK));
-    pieces.add(new Bishop(5, 7, PieceColor.BLACK));
+    pieces.add(new Bishop(0, 2, 0, Piece.WHITE));
+    pieces.add(new Bishop(0, 5, 0, Piece.WHITE));
+    pieces.add(new Bishop(0, 2, 7, Piece.BLACK));
+    pieces.add(new Bishop(0, 5, 7, Piece.BLACK));
 
     // Add kings and queens
-    pieces.add(new King(4, 0, PieceColor.WHITE));
-    pieces.add(new King(4, 7, PieceColor.BLACK));
-    pieces.add(new Queen(3, 0, PieceColor.WHITE));
-    pieces.add(new Queen(3, 7, PieceColor.BLACK));
+    pieces.add(new King(0, 4, 0, Piece.WHITE));
+    pieces.add(new King(0, 4, 7, Piece.BLACK));
+    pieces.add(new Queen(0, 3, 0, Piece.WHITE));
+    pieces.add(new Queen(0, 3, 7, Piece.BLACK));
   }
 
   /**
@@ -246,7 +246,7 @@ public class ChessBoard extends View {
         drawable.setBounds(left, top, right, bottom);
         drawable.draw(canvas);
 
-        if (x == selectedX && y == selectedY && piece.getColor() == playerColor) {
+        if (x == selectedX && y == selectedY && piece.isWhite() == isWhite) {
           Log.i("TOUCH", String.format("Setting selected piece to: %s", piece));
           selectedPiece = piece;
           highlightSquare(canvas, left, top, right, bottom, selectionPaint);
@@ -317,9 +317,7 @@ public class ChessBoard extends View {
    * to PieceColor.BLACK and vice versa.
    */
   private void flipPlayerTurn() {
-    playerTurn =
-        playerTurn == PieceColor.WHITE ?
-            PieceColor.BLACK : PieceColor.WHITE;
+    isWhitesTurn = !isWhitesTurn;
   }
 
   /**
@@ -349,7 +347,7 @@ public class ChessBoard extends View {
    */
   public boolean onTouch(View view, MotionEvent motionEvent) {
     // Ignore the touch event if it's not the player's turn.
-    if (playerColor != playerTurn) {
+    if (isWhite != isWhitesTurn) {
       return false;
     }
 
@@ -382,11 +380,38 @@ public class ChessBoard extends View {
     return false;
   }
 
-  /**
-   * Change the player color.
-   * @param playerColor The player's new color.
-   */
-  private void setPlayerColor(PieceColor playerColor) {
-    this.playerColor = playerColor;
+  //----- Setters -----//
+  public void setWhite(boolean white) {
+    isWhite = white;
+  }
+
+  public void setWhitesTurn(boolean whitesTurn) {
+    isWhitesTurn = whitesTurn;
+  }
+
+  public void setPieces(List<Piece> pieces) {
+    this.pieces = pieces;
+    invalidate();
+  }
+
+  public void setFlipped(boolean flipped) {
+    this.flipped = flipped;
+  }
+
+  //----- Getters -----//
+  public boolean isWhite() {
+    return isWhite;
+  }
+
+  public boolean isWhitesTurn() {
+    return isWhitesTurn;
+  }
+
+  public List<Piece> getPieces() {
+    return pieces;
+  }
+
+  public boolean isFlipped() {
+    return flipped;
   }
 }

@@ -5,8 +5,12 @@ import com.example.newtonchess.R;
 import java.util.List;
 
 public class Queen extends Piece {
-  public Queen(int x, int y, PieceColor color) {
-    super(x, y, color, PieceType.QUEEN);
+  public Queen() {
+    super();
+  }
+
+  public Queen(int internalId, int x, int y, boolean isWhite) {
+    super(internalId, x, y, isWhite);
   }
 
   @Override
@@ -18,8 +22,7 @@ public class Queen extends Piece {
 
   @Override
   public int getDrawableId() {
-    return color == PieceColor.WHITE ?
-        R.drawable.wqueen : R.drawable.bqueen;
+    return isWhite() ? R.drawable.wqueen : R.drawable.bqueen;
   }
 
   @Override
