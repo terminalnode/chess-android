@@ -82,7 +82,6 @@ public class ChessBoard extends View {
     selectionPaint.setColor(ContextCompat.getColor(context, R.color.colorNewtonOrange));
     selectionPaint.setStyle(Paint.Style.STROKE);
     selectionPaint.setStrokeWidth(10.0F);
-
     highlightPaint.setColor(ContextCompat.getColor(context, R.color.colorComplementary));
     highlightPaint.setStyle(Paint.Style.STROKE);
     highlightPaint.setStrokeWidth(10.0F);
@@ -109,6 +108,7 @@ public class ChessBoard extends View {
     pieces = game.getPieces() == null ? pieces : game.getPieces();
     isWhitesTurn = game.isWhitesTurn();
     isWhite = game.isGettingPlayerWhite();
+    inCheck = (isWhite && isWhiteInCheck) || (!isWhite && isBlackInCheck);
 
     // Sanity checks
     Log.i(StaticValues.CHESSBOARD, "turnsTaken: " + turnsTaken);
