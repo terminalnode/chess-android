@@ -6,12 +6,18 @@ import com.example.newtonchess.R;
 
 import java.util.List;
 
+/**
+ * A class representing a bishop, used by ChessBoard to know what graphics to use,
+ * what moves should be allowed and so on. Implements parcelable so that it can be
+ * sent from the PickGameActivity to the PlayScreenActivity through intents.
+ * @author Alexander Rundberg
+ */
 public class Bishop extends Piece {
   public Bishop() {
     super();
   }
 
-  public Bishop(Parcel in) {
+  private Bishop(Parcel in) {
     super(in);
   }
 

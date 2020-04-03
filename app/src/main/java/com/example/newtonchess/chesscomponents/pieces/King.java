@@ -7,12 +7,18 @@ import com.example.newtonchess.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing a king, used by ChessBoard to know what graphics to use,
+ * what moves should be allowed and so on. Implements parcelable so that it can be
+ * sent from the PickGameActivity to the PlayScreenActivity through intents.
+ * @author Alexander Rundberg
+ */
 public class King extends Piece {
   public King() {
     super();
   }
 
-  public King(Parcel in) {
+  private King(Parcel in) {
     super(in);
   }
 
@@ -53,15 +59,15 @@ public class King extends Piece {
     return PieceType.KING;
   }
 
-  public static final Creator<Bishop> CREATOR = new Creator<Bishop>() {
+  public static final Creator<King> CREATOR = new Creator<King>() {
     @Override
-    public Bishop createFromParcel(Parcel source) {
-      return new Bishop(source);
+    public King createFromParcel(Parcel source) {
+      return new King(source);
     }
 
     @Override
-    public Bishop[] newArray(int size) {
-      return new Bishop[size];
+    public King[] newArray(int size) {
+      return new King[size];
     }
   };
 }

@@ -6,12 +6,18 @@ import com.example.newtonchess.R;
 
 import java.util.List;
 
+/**
+ * A class representing a queen, used by ChessBoard to know what graphics to use,
+ * what moves should be allowed and so on. Implements parcelable so that it can be
+ * sent from the PickGameActivity to the PlayScreenActivity through intents.
+ * @author Alexander Rundberg
+ */
 public class Queen extends Piece {
   public Queen() {
     super();
   }
 
-  public Queen(Parcel in) {
+  private Queen(Parcel in) {
     super(in);
   }
 
@@ -36,15 +42,15 @@ public class Queen extends Piece {
     return PieceType.QUEEN;
   }
 
-  public static final Creator<Bishop> CREATOR = new Creator<Bishop>() {
+  public static final Creator<Queen> CREATOR = new Creator<Queen>() {
     @Override
-    public Bishop createFromParcel(Parcel source) {
-      return new Bishop(source);
+    public Queen createFromParcel(Parcel source) {
+      return new Queen(source);
     }
 
     @Override
-    public Bishop[] newArray(int size) {
-      return new Bishop[size];
+    public Queen[] newArray(int size) {
+      return new Queen[size];
     }
   };
 }

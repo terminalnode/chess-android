@@ -53,7 +53,6 @@ public class GamesListAdapter extends ArrayAdapter<GameEntity> {
     PlayerEntity blackPlayer = game == null ? null : game.getBlackPlayer();
     PlayerEntity whitePlayer = game == null ? null : game.getWhitePlayer();
     String turnsTaken = game == null ? "???" : "#" + game.getTurnsTaken();
-
     String opponentName = userUnknownString;
 
     if (blackPlayer != null && whitePlayer != null) {

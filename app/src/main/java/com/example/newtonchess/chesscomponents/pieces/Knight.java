@@ -7,12 +7,18 @@ import com.example.newtonchess.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing a knight, used by ChessBoard to know what graphics to use,
+ * what moves should be allowed and so on. Implements parcelable so that it can be
+ * sent from the PickGameActivity to the PlayScreenActivity through intents.
+ * @author Alexander Rundberg
+ */
 public class Knight extends Piece {
   public Knight() {
     super();
   }
 
-  public Knight(Parcel in) {
+  private Knight(Parcel in) {
     super(in);
   }
 
@@ -54,15 +60,15 @@ public class Knight extends Piece {
     return PieceType.KNIGHT;
   }
 
-  public static final Creator<Bishop> CREATOR = new Creator<Bishop>() {
+  public static final Creator<Knight> CREATOR = new Creator<Knight>() {
     @Override
-    public Bishop createFromParcel(Parcel source) {
-      return new Bishop(source);
+    public Knight createFromParcel(Parcel source) {
+      return new Knight(source);
     }
 
     @Override
-    public Bishop[] newArray(int size) {
-      return new Bishop[size];
+    public Knight[] newArray(int size) {
+      return new Knight[size];
     }
   };
 }

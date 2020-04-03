@@ -7,12 +7,18 @@ import com.example.newtonchess.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing a pawn, used by ChessBoard to know what graphics to use,
+ * what moves should be allowed and so on. Implements parcelable so that it can be
+ * sent from the PickGameActivity to the PlayScreenActivity through intents.
+ * @author Alexander Rundberg
+ */
 public class Pawn extends Piece {
   public Pawn() {
     super();
   }
 
-  public Pawn(Parcel in) {
+  private Pawn(Parcel in) {
     super(in);
   }
 
@@ -92,15 +98,15 @@ public class Pawn extends Piece {
     return null;
   }
 
-  public static final Creator<Bishop> CREATOR = new Creator<Bishop>() {
+  public static final Creator<Pawn> CREATOR = new Creator<Pawn>() {
     @Override
-    public Bishop createFromParcel(Parcel source) {
-      return new Bishop(source);
+    public Pawn createFromParcel(Parcel source) {
+      return new Pawn(source);
     }
 
     @Override
-    public Bishop[] newArray(int size) {
-      return new Bishop[size];
+    public Pawn[] newArray(int size) {
+      return new Pawn[size];
     }
   };
 }

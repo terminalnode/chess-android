@@ -10,6 +10,13 @@ import com.google.gson.annotations.JsonAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An abstract class for the various chess pieces, used by ChessBoard to keep
+ * track of legal moves, appropriate graphics and more. Implements parcelable so
+ * we can send it from the PickGameScreen to the PlayScreen together with the rest
+ * of the game.
+ * @author Alexander Rundberg
+ */
 @JsonAdapter(PieceAdapter.class)
 public abstract class Piece implements Parcelable {
   public static final boolean WHITE = true;
@@ -32,6 +39,14 @@ public abstract class Piece implements Parcelable {
     this.y = y;
     this.moved = false;
     this.isWhite = isWhite;
+  }
+
+  public Piece(Parcel in) {
+    this.x = in.readInt();
+    this.y = in.readInt();
+    this.internalId = in.readInt();
+    this.isWhite = in.readByte() != 0;
+    this.moved = in.readByte() != 0;
   }
 
 
@@ -60,14 +75,6 @@ public abstract class Piece implements Parcelable {
     dest.writeInt(this.internalId);
     dest.writeByte(this.isWhite ? (byte) 1 : (byte) 0);
     dest.writeByte(this.moved ? (byte) 1 : (byte) 0);
-  }
-
-  public Piece(Parcel in) {
-    this.x = in.readInt();
-    this.y = in.readInt();
-    this.internalId = in.readInt();
-    this.isWhite = in.readByte() != 0;
-    this.moved = in.readByte() != 0;
   }
 
   List<int[]> getStraightMoves(List<Piece> pieces) {

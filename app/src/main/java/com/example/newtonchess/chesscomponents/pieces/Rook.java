@@ -6,6 +6,12 @@ import com.example.newtonchess.R;
 
 import java.util.List;
 
+/**
+ * A class representing a rook, used by ChessBoard to know what graphics to use,
+ * what moves should be allowed and so on. Implements parcelable so that it can be
+ * sent from the PickGameActivity to the PlayScreenActivity through intents.
+ * @author Alexander Rundberg
+ */
 public class Rook extends Piece {
   public Rook() {
     super();
@@ -34,15 +40,15 @@ public class Rook extends Piece {
     return PieceType.ROOK;
   }
 
-  public static final Creator<Bishop> CREATOR = new Creator<Bishop>() {
+  public static final Creator<Rook> CREATOR = new Creator<Rook>() {
     @Override
-    public Bishop createFromParcel(Parcel source) {
-      return new Bishop(source);
+    public Rook createFromParcel(Parcel source) {
+      return new Rook(source);
     }
 
     @Override
-    public Bishop[] newArray(int size) {
-      return new Bishop[size];
+    public Rook[] newArray(int size) {
+      return new Rook[size];
     }
   };
 }
