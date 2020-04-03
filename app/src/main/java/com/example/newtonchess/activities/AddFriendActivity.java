@@ -1,5 +1,6 @@
 package com.example.newtonchess.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.StaticValues;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
 import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
@@ -62,6 +64,13 @@ public class AddFriendActivity extends AppCompatActivity {
 
     // Set button listener
     searchFriendButton.setOnClickListener(this::getFriendsList);
+  }
+
+  @Override
+  public void onBackPressed() {
+    Intent intent = new Intent(this, FriendsListActivity.class);
+    intent.putExtra(StaticValues.INTENT_TOKEN, token);
+    startActivity(intent);
   }
 
   private void getFriendsList(View view) {
