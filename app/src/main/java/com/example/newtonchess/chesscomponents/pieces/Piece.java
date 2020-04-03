@@ -2,9 +2,13 @@ package com.example.newtonchess.chesscomponents.pieces;
 
 import android.util.Log;
 
+import com.example.newtonchess.api.entities.PieceAdapter;
+import com.google.gson.annotations.JsonAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonAdapter(PieceAdapter.class)
 public abstract class Piece {
   public static final boolean WHITE = true;
   public static final boolean BLACK = false;

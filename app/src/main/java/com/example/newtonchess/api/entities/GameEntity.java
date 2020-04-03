@@ -2,7 +2,10 @@ package com.example.newtonchess.api.entities;
 
 import androidx.annotation.NonNull;
 
+import com.example.newtonchess.chesscomponents.pieces.Piece;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
  * Entity class for deserializing GameEntities sent by the server.
@@ -33,9 +36,8 @@ public class GameEntity {
   @SerializedName("finished")
   private boolean finished;
 
-  //No good piece entity yet
-  //@SerializedName("pieces")
-  //List<Piece> pieces;
+  @SerializedName("pieces")
+  List<Piece> pieces;
 
   //----- Constructors -----//
   public GameEntity() {
@@ -47,8 +49,8 @@ public class GameEntity {
   @Override
   public String toString() {
     return String.format(
-        "<Game id=%s, whitePlayer=%s blackPlayer=%s, whitesTurn=%s, turnsTaken=%s, finished=%s>",
-        id, whitePlayer, blackPlayer, whitesTurn, turnsTaken, finished
+        "<Game id=%s, whitePlayer=%s blackPlayer=%s, whitesTurn=%s, turnsTaken=%s, finished=%s, pieces=%s>",
+        id, whitePlayer, blackPlayer, whitesTurn, turnsTaken, finished, pieces.size()
     );
   }
 
@@ -77,6 +79,10 @@ public class GameEntity {
     this.finished = finished;
   }
 
+  public void setPieces(List<Piece> pieces) {
+    this.pieces = pieces;
+  }
+
   //----- Getters -----//
   public long getId() {
     return id;
@@ -100,5 +106,9 @@ public class GameEntity {
 
   public boolean isFinished() {
     return finished;
+  }
+
+  public List<Piece> getPieces() {
+    return pieces;
   }
 }

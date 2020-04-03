@@ -1,21 +1,34 @@
 package com.example.newtonchess.api.retrofitservices;
 
+import com.example.newtonchess.api.entities.PieceAdapter;
+import com.example.newtonchess.chesscomponents.pieces.Piece;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Helper class for creating Retrofit objects used to make API calls
+ */
 public class RetrofitHelper {
   public static final String INTERNAL_SERVER_ERROR = "InternalServerErrorException";
   private static final String BASE_URL = "https://newton-sysjg3-chessapi.herokuapp.com/api/";
   private static final String DEV_URL = "http://10.0.2.2:8080/api/";
 
+
   private static Retrofit getBase() {
+    Gson gson = new GsonBuilder()
+        .registerTypeAdapter(Piece.class, new PieceAdapter())
+        .create();
+
     return new Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .build();
   }
 
-  public static PlayerService getPlayerService() {
+  public static PlayerService getPlayerService(){
     return getBase().create(PlayerService.class);
   }
 
