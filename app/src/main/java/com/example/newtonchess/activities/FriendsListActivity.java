@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.StaticValues;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
 import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
@@ -61,6 +62,13 @@ public class FriendsListActivity extends AppCompatActivity {
 
     // Fetch the friends list from server
     getFriendsList();
+  }
+
+  @Override
+  public void onBackPressed() {
+    Intent intent = new Intent(this, MainMenuActivity.class);
+    intent.putExtra(StaticValues.INTENT_TOKEN, token);
+    startActivity(intent);
   }
 
   private void goToFindFriends(View view) {
