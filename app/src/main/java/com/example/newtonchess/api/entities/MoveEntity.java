@@ -1,0 +1,43 @@
+package com.example.newtonchess.api.entities;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * MoveEntity is sent to the API in order to say what move we want to make.
+ * @author Alexander Rundberg
+ */
+public class MoveEntity {
+  @SerializedName("pieceNumber")
+  private int pieceNumber;
+
+  @SerializedName("destination")
+  private int[] destination;
+
+  //----- Constructors -----//
+  public MoveEntity() {
+    // Empty default constructor
+  }
+
+  public MoveEntity(int pieceNumber, int[] destination) {
+    this.pieceNumber = pieceNumber;
+    this.destination = destination;
+  }
+
+  //----- Setters -----//
+  public void setPieceNumber(int pieceNumber) {
+    this.pieceNumber = pieceNumber;
+  }
+
+  public void setDestination(int[] destination) {
+    this.destination = destination;
+  }
+
+  //----- Getters -----//
+  public int getPieceNumber() {
+    return pieceNumber;
+  }
+
+  public int[] getDestination() {
+    return destination;
+  }
+}
