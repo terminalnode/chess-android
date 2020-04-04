@@ -29,6 +29,7 @@
   <dimen name="challengeReplyButtonHeight">40dp</dimen>
   <dimen name="challengeReplyButtonText">20sp</dimen>
   <dimen name="gameOverTextSize">110sp</dimen>
+  <dimen name="chessBoardHeight">380dp</dimen>
 
   <!-- Find friends screen -->
   <dimen name="searchButtonWidth">70dp</dimen>

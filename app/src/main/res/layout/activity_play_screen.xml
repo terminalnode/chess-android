@@ -38,8 +38,11 @@
     app:srcCompat="@drawable/wknight" />
 
   <include
-    android:id="@+id/include"
-    layout="@layout/newton_chess_banner" />
+    android:id="@+id/newtonChessBanner"
+    layout="@layout/newton_chess_banner"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/opponentLabel"
@@ -53,7 +56,7 @@
     android:textSize="@dimen/playScreenOpponentText"
     android:textStyle="bold"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/include" />
+    app:layout_constraintTop_toBottomOf="@+id/newtonChessBanner" />
 
   <TextView
     android:id="@+id/opponentName"
@@ -66,16 +69,16 @@
     android:textSize="@dimen/playScreenOpponentText"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@+id/opponentLabel"
-    app:layout_constraintTop_toBottomOf="@+id/include" />
+    app:layout_constraintTop_toBottomOf="@+id/newtonChessBanner" />
 
   <com.example.newtonchess.chesscomponents.ChessBoard
     android:id="@+id/chessBoard"
     android:layout_width="match_parent"
-    android:layout_height="380dp"
+    android:layout_height="@dimen/chessBoardHeight"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/include" />
+    app:layout_constraintTop_toBottomOf="@+id/newtonChessBanner" />
 
   <Button
     android:id="@+id/refreshButton"
@@ -93,7 +96,7 @@
   <TextView
     android:id="@+id/gameOverTextView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/chessBoardHeight"
     android:alpha="0.5"
     android:focusableInTouchMode="false"
     android:gravity="center"
@@ -101,10 +104,10 @@
     android:text="@string/gameOver"
     android:textColor="@color/colorAccentDark"
     android:textSize="@dimen/gameOverTextSize"
-    android:visibility="invisible"
+    android:visibility="visible"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toBottomOf="@id/newtonChessBanner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

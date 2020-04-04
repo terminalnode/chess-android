@@ -9,8 +9,11 @@
   tools:context=".activities.LoginScreenActivity">
 
   <include
-    android:id="@+id/include"
-    layout="@layout/newton_chess_banner" />
+    android:id="@+id/newtonChessBanner"
+    layout="@layout/newton_chess_banner"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/loginScreenTitle"

@@ -8,8 +8,11 @@
   tools:context=".activities.PickGameActivity">
 
   <include
-    android:id="@+id/include"
-    layout="@layout/newton_chess_banner" />
+    android:id="@+id/newtonChessBanner"
+    layout="@layout/newton_chess_banner"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/gameScreenHeader"
@@ -21,7 +24,7 @@
     android:textSize="@dimen/headerTextSize"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/include" />
+    app:layout_constraintTop_toBottomOf="@+id/newtonChessBanner" />
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/midPointGuideLine"

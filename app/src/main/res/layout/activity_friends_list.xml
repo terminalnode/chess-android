@@ -9,8 +9,11 @@
   tools:context=".activities.FriendsListActivity">
 
   <include
-    android:id="@+id/include"
-    layout="@layout/newton_chess_banner" />
+    android:id="@+id/newtonChessBanner"
+    layout="@layout/newton_chess_banner"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/friendsListScreenTitle"
@@ -22,7 +25,7 @@
     app:layout_constraintBottom_toTopOf="@+id/friendsListView"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/include" />
+    app:layout_constraintTop_toBottomOf="@+id/newtonChessBanner" />
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/midpointGuideline"
@@ -38,7 +41,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/include" />
+    app:layout_constraintTop_toBottomOf="@+id/newtonChessBanner" />
 
   <TextView
     android:id="@+id/emptyListTextViewTop"
