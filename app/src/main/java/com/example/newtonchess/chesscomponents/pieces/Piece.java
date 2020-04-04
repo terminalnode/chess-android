@@ -183,7 +183,7 @@ public abstract class Piece implements Parcelable {
     return addMoveToList(moves, new int[]{x, y}, otherPieces);
   }
 
-  boolean addMoveToList(List<int[]> moves, int[] position, List<Piece> otherPieces) {
+  private boolean addMoveToList(List<int[]> moves, int[] position, List<Piece> otherPieces) {
     if (isPositionOutOfBounds(position)) {
       Log.i("PIECE", "Move is out of bounds, returning false");
       return false;
@@ -191,9 +191,11 @@ public abstract class Piece implements Parcelable {
 
     Piece pieceHere = pieceAtPosition(position, otherPieces);
     boolean blockedByPiece = pieceHere != null;
-    boolean blockedByOwnColor = blockedByPiece && pieceHere.isWhite() == isWhite();
+    boolean superBlocked =
+        (blockedByPiece && pieceHere.isWhite() == isWhite()) || // Blocked by own color
+            (blockedByPiece && pieceHere.getPieceType() == PieceType.KING); // Can't capture king
 
-    if (blockedByOwnColor) {
+    if (superBlocked) {
       Log.i("PIECE", "Blocked by own color, returning false");
       return false;
     } else if (blockedByPiece) {
