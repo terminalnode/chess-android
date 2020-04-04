@@ -28,7 +28,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
     // Set buttons
     playButton = findViewById(R.id.playButton);
-    newGameButton = findViewById(R.id.newGameButton);
     friendsListButton = findViewById(R.id.friendsListButton);
     logoutButton = findViewById(R.id.logoutButton);
     userNameTextView = findViewById(R.id.userNameTextView);
