@@ -9,6 +9,8 @@ public class StaticValues {
   public static final String PICKSCREEN = "PICKSCREEN";
   public static final String PLAYSCREEN = "PLAYSCREEN";
   public static final String CHESSBOARD = "CHESSBOARD";
+  public static final String ADDFRIEND = "ADDFRIEND";
+  public static final String FRIENDLIST = "FRIENDLIST";
 
   // API Errors
   public static final String INTERNAL_NAME = "internalName";

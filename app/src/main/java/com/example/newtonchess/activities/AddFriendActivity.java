@@ -20,6 +20,9 @@ import com.example.newtonchess.gui.FriendsListAdapter;
 import com.example.newtonchess.gui.FriendsListListenerType;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,45 +78,68 @@ public class AddFriendActivity extends AppCompatActivity {
 
   private void getFriendsList(View view) {
     showFetchText();
-
+    emptyListTextViewTop.setText(R.string.fetchingList);
+    emptyListTextViewBottom.setText(R.string.standBy);
     String searchTerm = searchFriendsEditText.getText().toString();
-    Call<List<PlayerEntity>> call = RetrofitHelper
-        .getPlayerService()
-        .searchFriend(token.getTokenString(), searchTerm);
 
-    call.enqueue(new Callback<List<PlayerEntity>>() {
-      @Override
-      @EverythingIsNonNull
-      public void onResponse(Call<List<PlayerEntity>> call, Response<List<PlayerEntity>> response) {
-        List<PlayerEntity> body = response.body();
-        if (body != null) {
-          friendsListAdapter.clear();
-          friendsListAdapter.addAll(body);
-          hideFetchText();
-        } else {
-          try {
-            Log.i("FRIENDS", "Error response: " + response.errorBody().string());
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-          unknownError(view);
-        }
+    RetrofitHelper
+        .getPlayerService()
+        .searchFriend(token.getTokenString(), searchTerm)
+        .enqueue(new Callback<List<PlayerEntity>>() {
+          @Override
+          @EverythingIsNonNull
+          public void onResponse(Call<List<PlayerEntity>> call, Response<List<PlayerEntity>> response) {
+            List<PlayerEntity> body = response.body();
+
+            friendsListAdapter.clear();
+            if (body != null && body.size() > 0) {
+              friendsListAdapter.addAll(body);
+              hideFetchText();
+              return; // all went well, no need for error checking
+
+            } else if (response.body() != null) {
+              emptyListTextViewTop.setText(R.string.emptyListText);
+              emptyListTextViewBottom.setText(R.string.thatsTooBad);
+              return; // all went well, no need for error checking
+
+            } else {
+              emptyListTextViewTop.setText(R.string.failedToFetchList);
+              emptyListTextViewBottom.setText(R.string.thatsTooBad);
+            }
+
+            String internalName = StaticValues.THIS_IS_NOT_AN_ERROR;
+            try {
+              internalName = new JSONObject(response.errorBody().string())
+                  .getString(StaticValues.INTERNAL_NAME);
+            } catch (IOException | JSONException | NullPointerException ignored) { }
+
+            switch (internalName) {
+              case StaticValues.NO_SUCH_TOKEN:
+              case StaticValues.TOKEN_INVALID:
+                showSnackbar(view, R.string.tokenInvalid);
+                break;
+
+              case StaticValues.INTERNAL_SERVER_ERROR:
+                showSnackbar(view, R.string.somethingWentWrong);
+                break;
+
+              default:
+                Log.w(StaticValues.ADDFRIEND, "Got an unknown error code: " + internalName);
+            }
       }
 
       @Override
       @EverythingIsNonNull
       public void onFailure(Call<List<PlayerEntity>> call, Throwable t) {
-        unknownError(view);
+        emptyListTextViewTop.setTextSize(R.string.failedToFetchList);
+        emptyListTextViewBottom.setText(R.string.thatsTooBad);
+        showSnackbar(view, R.string.somethingWentWrong);
       }
     });
   }
 
-  private void unknownError(View view) {
-    Snackbar.make(
-        view,
-        R.string.somethingWentWrong,
-        Snackbar.LENGTH_LONG
-    ).show();
+  private void showSnackbar(View view, int resourceId) {
+    Snackbar.make(view, resourceId, Snackbar.LENGTH_LONG).show();
   }
 
   private void hideFetchText() {
