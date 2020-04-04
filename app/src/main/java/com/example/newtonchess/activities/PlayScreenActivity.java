@@ -42,6 +42,7 @@ public class PlayScreenActivity extends AppCompatActivity {
     Log.i(StaticValues.PLAYSCREEN, "Play screen extracted contents from intent.");
     Log.i(StaticValues.PLAYSCREEN, "Got a token? " + (token != null));
     Log.i(StaticValues.PLAYSCREEN, "Got a game? " + (game != null));
+    Log.i(StaticValues.PLAYSCREEN, "Game is finished? " + game.isFinished());
 
     // Set opponent name
     String opponentsName;

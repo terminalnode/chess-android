@@ -30,6 +30,7 @@ public class GamesListStartGameListener implements View.OnClickListener {
     deactivateButton();
 
     Log.i("GAMES", "Creating playScreenIntent");
+    Log.i("GAMES", "Is the game finished? " + game.isFinished());
     Intent playScreenIntent = new Intent(view.getContext(), PlayScreenActivity.class);
     playScreenIntent.putExtra(StaticValues.INTENT_TOKEN, token);
     playScreenIntent.putExtra(StaticValues.INTENT_GAME, game);

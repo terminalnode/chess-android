@@ -5,6 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/colorBackground"
+  android:visibility="visible"
   tools:context=".activities.PlayScreenActivity">
 
   <TextView
@@ -104,7 +105,7 @@
     android:text="@string/gameOver"
     android:textColor="@color/colorAccentDark"
     android:textSize="@dimen/gameOverTextSize"
-    android:visibility="visible"
+    android:visibility="gone"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
