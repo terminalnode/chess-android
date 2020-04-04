@@ -90,4 +90,21 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/chessBoard" />
 
+  <TextView
+    android:id="@+id/gameOverTextView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.5"
+    android:focusableInTouchMode="false"
+    android:gravity="center"
+    android:rotation="45"
+    android:text="@string/gameOver"
+    android:textColor="@color/colorAccentDark"
+    android:textSize="@dimen/gameOverTextSize"
+    android:visibility="invisible"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

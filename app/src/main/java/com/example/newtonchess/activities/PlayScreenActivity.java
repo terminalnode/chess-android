@@ -58,6 +58,7 @@ public class PlayScreenActivity extends AppCompatActivity {
     // Set initial state of the chessboard
     chessBoard.setWhoseTurnPawn(findViewById(R.id.whoseTurnPawn));
     chessBoard.setWhoseTurnTextView(findViewById(R.id.whoseTurnTextView));
+    chessBoard.setGameOverTextView(findViewById(R.id.gameOverTextView));
     chessBoard.setToken(token);
     chessBoard.loadFromGameEntity(game, token.getPlayer());
 

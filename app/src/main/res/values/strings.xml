@@ -63,6 +63,7 @@
   <string name="yourTurn">Your turn</string>
   <string name="refresh">Refresh</string>
   <string name="playerColorDescription">A piece showing which color you\'re playing as.</string>
+  <string name="gameOver">Game over</string>
 
   <!-- Errors -->
   <string name="tokenInvalid">Your token is invalid or expired, try logging in again.</string>

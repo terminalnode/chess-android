@@ -6,6 +6,7 @@
 
 package com.example.newtonchess.chesscomponents;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -56,7 +57,7 @@ public class ChessBoard extends View {
   private boolean isWhite, isWhitesTurn, finished, flipped, inCheck;
   private List<Piece> pieces;
   private Piece selectedPiece;
-  TextView whoseTurnTextView;
+  TextView whoseTurnTextView, gameOverTextView;
   ImageView whoseTurnPawn;
   TokenEntity token;
 
@@ -148,6 +149,10 @@ public class ChessBoard extends View {
       whoseTurnTextView.setText(R.string.opponentsTurn);
     } else {
       Log.w(StaticValues.CHESSBOARD, "whoseTurnTextView is null!");
+    }
+
+    if (finished && gameOverTextView != null) {
+      gameOverTextView.setVisibility(View.VISIBLE);
     }
 
     invalidate();
@@ -565,6 +570,11 @@ public class ChessBoard extends View {
     this.token = token;
   }
 
+  @SuppressLint("ClickableViewAccessibility")
+  public void setGameOverTextView(TextView gameOverTextView) {
+    this.gameOverTextView = gameOverTextView;
+  }
+
   //----- Getters -----//
   public boolean isWhite() {
     return isWhite;
@@ -596,5 +606,9 @@ public class ChessBoard extends View {
 
   public TokenEntity getToken() {
     return token;
+  }
+
+  public TextView getGameOverTextView() {
+    return gameOverTextView;
   }
 }
