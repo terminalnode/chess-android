@@ -44,12 +44,14 @@ public class PlayScreenActivity extends AppCompatActivity {
     Log.i(StaticValues.PLAYSCREEN, "Got a game? " + (game != null));
 
     // Set opponent name
-    TextView opponentName = findViewById(R.id.opponentName);
-    if (game != null && game.isGettingPlayerWhite()) {
-      opponentName.setText(game.getWhitePlayer().getName());
-    } else if (game != null) {
-      opponentName.setText(game.getBlackPlayer().getName());
+    String opponentsName;
+    if (game != null) {
+      opponentsName = game.isGettingPlayerWhite() ?
+          game.getBlackPlayer().getName() : game.getWhitePlayer().getName();
+    } else {
+      opponentsName = getString(R.string.userUnknown);
     }
+    ((TextView) findViewById(R.id.opponentName)).setText(opponentsName);
 
     // Find views then update the game
     refreshButton = findViewById(R.id.refreshButton);
