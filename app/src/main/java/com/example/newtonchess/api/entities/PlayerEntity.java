@@ -3,6 +3,8 @@ package com.example.newtonchess.api.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 public class PlayerEntity implements Parcelable {
@@ -62,6 +64,18 @@ public class PlayerEntity implements Parcelable {
         "<PlayerEntity name=\"%s\">",
         name
     );
+  }
+
+  @Override
+  public boolean equals(@Nullable Object obj) {
+    if (obj == null) {
+      return false;
+    } else if (obj.getClass() != this.getClass()) {
+      return false;
+    }
+
+    PlayerEntity other = (PlayerEntity) obj;
+    return other.getId() == this.getId();
   }
 
   //----- Getters -----//
