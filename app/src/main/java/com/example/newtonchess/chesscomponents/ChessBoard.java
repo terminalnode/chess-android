@@ -135,27 +135,46 @@ public class ChessBoard extends View {
     Log.i(StaticValues.CHESSBOARD, "isWhite: " + isWhite);
     Log.i(StaticValues.CHESSBOARD, "whoseTurnTextView is not null: " + (whoseTurnTextView != null));
 
-    if (isWhitesTurn && whoseTurnPawn != null) {
-      whoseTurnPawn.setImageResource(R.drawable.wknight);
-    } else if (whoseTurnPawn != null) {
-      whoseTurnPawn.setImageResource(R.drawable.bknight);
-    } else {
-      Log.w(StaticValues.CHESSBOARD, "whoseTurnPawn is null!");
-    }
-
-    if (isWhitesTurn == isWhite && whoseTurnTextView != null) {
-      whoseTurnTextView.setText(R.string.yourTurn);
-    } else if (whoseTurnTextView != null) {
-      whoseTurnTextView.setText(R.string.opponentsTurn);
-    } else {
-      Log.w(StaticValues.CHESSBOARD, "whoseTurnTextView is null!");
-    }
+    updateWhoseTurnPawn();
+    updateWhoseTurnTextView();
 
     if (finished && gameOverTextView != null) {
       gameOverTextView.setVisibility(View.VISIBLE);
     }
 
     invalidate();
+  }
+
+  /**
+   * Update the ImageView that shows a white or black pawn depending on whose turn it is.
+   */
+  private void updateWhoseTurnPawn() {
+    if (whoseTurnPawn == null) {
+      // Nothing to do here
+      Log.w(StaticValues.CHESSBOARD, "whoseTurnPawn is null!");
+
+    } else if (isWhitesTurn) {
+      whoseTurnPawn.setImageResource(R.drawable.wknight);
+
+    } else {
+      whoseTurnPawn.setImageResource(R.drawable.bknight);
+    }
+  }
+
+  /**
+   * Set the textView that says whether it's your turn or your opponents turn.
+   */
+  private void updateWhoseTurnTextView() {
+    if (whoseTurnTextView == null) {
+      // Nothing to do here
+      Log.w(StaticValues.CHESSBOARD, "whoseTurnTextView is null!");
+
+    } else if (isWhitesTurn == isWhite) {
+      whoseTurnTextView.setText(R.string.yourTurn);
+
+    } else {
+      whoseTurnTextView.setText(R.string.opponentsTurn);
+    }
   }
 
   /**
@@ -361,6 +380,8 @@ public class ChessBoard extends View {
    */
   private void flipPlayerTurn() {
     isWhitesTurn = !isWhitesTurn;
+    updateWhoseTurnPawn();
+    updateWhoseTurnTextView();
   }
 
   /**
