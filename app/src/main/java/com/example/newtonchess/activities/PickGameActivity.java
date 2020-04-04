@@ -73,7 +73,8 @@ public class PickGameActivity extends AppCompatActivity {
         R.layout.list_single_game,
         new ArrayList<>(),
         token,
-        getString(R.string.userUnknown));
+        getString(R.string.userUnknown),
+        getResources().getColor(R.color.colorAccentDark));
 
     // Set button listeners
     showGamesButton.setOnClickListener(this::activateGamesListAdapter);

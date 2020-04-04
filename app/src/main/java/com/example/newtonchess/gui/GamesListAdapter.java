@@ -30,13 +30,15 @@ public class GamesListAdapter extends ArrayAdapter<GameEntity> {
   private TokenEntity token;
   private PlayerEntity thisPlayer;
   private String userUnknownString;
+  private int redColor;
 
   public GamesListAdapter(
       @NonNull Context context,
       int listLayout,
       @NonNull List<GameEntity> objects,
       TokenEntity token,
-      String userUnknownString) {
+      String userUnknownString,
+      int redColor) {
 
     super(context, listLayout, objects);
     this.context = context;
@@ -44,6 +46,7 @@ public class GamesListAdapter extends ArrayAdapter<GameEntity> {
     this.token = token;
     thisPlayer = token.getPlayer();
     this.userUnknownString = userUnknownString;
+    this.redColor = redColor;
   }
 
   @NonNull
@@ -71,6 +74,12 @@ public class GamesListAdapter extends ArrayAdapter<GameEntity> {
     // Set the views to correct values
     opponentNameTV.setText(opponentName);
     numGamesTV.setText(turnsTaken);
+
+    if (game != null && game.isFinished()) {
+      TextView turnTV = convertView.findViewById(R.id.turnTextView);
+      turnTV.setTextColor(redColor);
+      numGamesTV.setTextColor(redColor);
+    }
 
     // Set button listener
     gameListEntryButton.setOnClickListener(
