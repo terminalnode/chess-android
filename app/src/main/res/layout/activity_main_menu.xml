@@ -30,7 +30,7 @@
       android:id="@+id/friendsListButton"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/buttonSpacing"
+      android:layout_marginTop="40dp"
       android:width="@dimen/mainMenuButtonWidth"
       android:height="@dimen/mainMenuButtonHeight"
       android:background="@color/colorPrimaryDark"
@@ -39,20 +39,6 @@
       android:textColor="@color/colorComplementary"
       android:textSize="@dimen/mainMenuButtonTextSize"
       app:layout_constraintTop_toBottomOf="@+id/playButton" />
-
-    <Button
-      android:id="@+id/newGameButton"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/buttonSpacing"
-      android:width="@dimen/mainMenuButtonWidth"
-      android:height="@dimen/mainMenuButtonHeight"
-      android:background="@color/colorPrimaryDark"
-      android:text="@string/startNewGameButton"
-      android:textAlignment="center"
-      android:textColor="@color/colorComplementary"
-      android:textSize="@dimen/mainMenuButtonTextSize"
-      app:layout_constraintTop_toBottomOf="@+id/friendsListButton" />
 
     <Button
       android:id="@+id/playButton"
@@ -71,7 +57,7 @@
       android:id="@+id/logoutButton"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/buttonSpacing"
+      android:layout_marginTop="40dp"
       android:width="@dimen/mainMenuButtonWidth"
       android:height="@dimen/mainMenuButtonHeight"
       android:background="@color/colorPrimaryDark"
@@ -79,7 +65,7 @@
       android:textAlignment="center"
       android:textColor="@color/colorComplementary"
       android:textSize="@dimen/mainMenuButtonTextSize"
-      app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
+      app:layout_constraintTop_toBottomOf="@+id/friendsListButton" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <androidx.constraintlayout.widget.ConstraintLayout

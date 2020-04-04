@@ -15,7 +15,7 @@
   <dimen name="mainMenuButtonHeight">70dp</dimen>
   <dimen name="mainMenuButtonWidth">350dp</dimen>
   <dimen name="mainMenuButtonTextSize">25sp</dimen>
-  <dimen name="mainMenuButtonConstraintLayoutHeight">400dp</dimen>
+  <dimen name="mainMenuButtonConstraintLayoutHeight">350dp</dimen>
   <dimen name="buttonSpacing">20dp</dimen>
   <dimen name="mainMenuHeaderConstraintLayoutHeight">120dp</dimen>
 
