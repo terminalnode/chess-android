@@ -74,6 +74,8 @@ public class AddFriendActivity extends AppCompatActivity {
   }
 
   private void getFriendsList(View view) {
+    showFetchText();
+
     String searchTerm = searchFriendsEditText.getText().toString();
     Call<List<PlayerEntity>> call = RetrofitHelper
         .getPlayerService()
@@ -87,6 +89,7 @@ public class AddFriendActivity extends AppCompatActivity {
         if (body != null) {
           friendsListAdapter.clear();
           friendsListAdapter.addAll(body);
+          hideFetchText();
         } else {
           try {
             Log.i("FRIENDS", "Error response: " + response.errorBody().string());
@@ -111,5 +114,15 @@ public class AddFriendActivity extends AppCompatActivity {
         R.string.somethingWentWrong,
         Snackbar.LENGTH_LONG
     ).show();
+  }
+
+  private void hideFetchText() {
+    emptyListTextViewTop.setVisibility(View.GONE);
+    emptyListTextViewBottom.setVisibility(View.GONE);
+  }
+
+  private void showFetchText() {
+    emptyListTextViewTop.setVisibility(View.VISIBLE);
+    emptyListTextViewBottom.setVisibility(View.VISIBLE);
   }
 }

@@ -48,9 +48,22 @@
     android:text="@string/fetchingList"
     android:textColor="@color/colorComplementary"
     android:textSize="@dimen/emptyListTextSize"
+    android:visibility="invisible"
     app:layout_constraintBottom_toTopOf="@+id/midpointGuideline"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
+
+  <TextView
+    android:id="@+id/emptyListTextViewBottom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/standBy"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/emptyListTextSize"
+    android:visibility="invisible"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/midpointGuideline" />
 
   <EditText
     android:id="@+id/searchFriendsEditText"
@@ -66,17 +79,6 @@
     android:textSize="@dimen/searchTextFieldFontSize"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/addFriendsListScreenTitle" />
-
-  <TextView
-    android:id="@+id/emptyListTextViewBottom"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/standBy"
-    android:textColor="@color/colorComplementary"
-    android:textSize="@dimen/emptyListTextSize"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/midpointGuideline" />
 
   <Button
     android:id="@+id/searchFriendsButton"

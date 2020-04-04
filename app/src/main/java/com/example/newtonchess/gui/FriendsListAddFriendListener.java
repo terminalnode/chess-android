@@ -14,12 +14,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FriendsListAddFriendListener implements View.OnClickListener {
-  private View view;
   private PlayerEntity friend;
   private String token;
   private Button button;
 
-  FriendsListAddFriendListener(PlayerEntity friend, TokenEntity token, Button button) {
+  FriendsListAddFriendListener(
+      PlayerEntity friend,
+      TokenEntity token,
+      Button button) {
     this.friend = friend;
     this.token = token.getTokenString();
     this.button = button;
@@ -27,7 +29,6 @@ public class FriendsListAddFriendListener implements View.OnClickListener {
 
   @Override
   public void onClick(View view) {
-    this.view = view;
     deactivateButton();
 
     Call<PlayerEntity> call = RetrofitHelper
@@ -41,18 +42,18 @@ public class FriendsListAddFriendListener implements View.OnClickListener {
         if (body != null) {
           button.setText(R.string.addedFriendButton);
         } else {
-          unknownError();
+          unknownError(view);
         }
       }
 
       @Override
       public void onFailure(Call<PlayerEntity> call, Throwable t) {
-        unknownError();
+        unknownError(view);
       }
     });
   }
 
-  private void unknownError() {
+  private void unknownError(View view) {
     Snackbar.make(
         view,
         R.string.somethingWentWrong,
