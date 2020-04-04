@@ -39,8 +39,8 @@ public class FriendsListActivity extends AppCompatActivity {
     setContentView(R.layout.activity_friends_list);
 
     // Retrieve the token
-    token = getIntent().getParcelableExtra("TokenEntity");
-    Log.i("ACTIVITY", String.format("Friends list started, token: %s", token));
+    token = getIntent().getParcelableExtra(StaticValues.INTENT_TOKEN);
+    Log.i(StaticValues.FRIENDLIST, String.format("Friends list started, token: %s", token));
 
     // Find the views
     friendsListView = findViewById(R.id.friendsListView);
@@ -73,50 +73,53 @@ public class FriendsListActivity extends AppCompatActivity {
 
   private void goToFindFriends(View view) {
     Intent addFriendIntent = new Intent(view.getContext(), AddFriendActivity.class);
-    addFriendIntent.putExtra("TokenEntity", token);
+    addFriendIntent.putExtra(StaticValues.INTENT_TOKEN, token);
     startActivity(addFriendIntent);
   }
 
   private void getFriendsList() {
-    Call<List<PlayerEntity>> call = RetrofitHelper
+    RetrofitHelper
         .getPlayerService()
-        .getFriends(token.getTokenString());
-    call.enqueue(new Callback<List<PlayerEntity>>() {
-      @Override
-      @EverythingIsNonNull
-      public void onResponse(Call<List<PlayerEntity>> call, Response<List<PlayerEntity>> response) {
-        if (response.body() != null && response.body().size() > 0) {
-          friendsListAdapter.addAll(response.body());
-          emptyListTextViewTop.setVisibility(View.INVISIBLE);
-          emptyListTextViewBottom.setVisibility(View.INVISIBLE);
-        } else if (response.body() != null) {
-          emptyListTextViewTop.setText(R.string.emptyListText);
-          emptyListTextViewBottom.setText(R.string.thatsTooBad);
-          emptyListTextViewTop.setVisibility(View.VISIBLE);
-          emptyListTextViewBottom.setVisibility(View.VISIBLE);
-        } else {
-          emptyListTextViewTop.setText(R.string.failedToFetchList);
-          emptyListTextViewBottom.setText(R.string.thatsTooBad);
-          emptyListTextViewTop.setVisibility(View.VISIBLE);
-          emptyListTextViewBottom.setVisibility(View.VISIBLE);
-        }
-      }
+        .getFriends(token.getTokenString())
+        .enqueue(new Callback<List<PlayerEntity>>() {
+          @Override
+          @EverythingIsNonNull
+          public void onResponse(Call<List<PlayerEntity>> call, Response<List<PlayerEntity>> response) {
+            List<PlayerEntity> body = response.body();
 
-      @Override
-      @EverythingIsNonNull
-      public void onFailure(Call<List<PlayerEntity>> call, Throwable t) {
-        emptyListTextViewTop.setTextSize(R.string.failedToFetchList);
-        emptyListTextViewBottom.setText(R.string.thatsTooBad);
-        emptyListTextViewTop.setVisibility(View.VISIBLE);
-        emptyListTextViewBottom.setVisibility(View.VISIBLE);
-      }
-    });
+            if (body != null && body.size() > 0) {
+              friendsListAdapter.addAll(body);
+              hideFetchText();
+
+            } else if (body != null) {
+              emptyListTextViewTop.setText(R.string.emptyListText);
+              emptyListTextViewBottom.setText(R.string.thatsTooBad);
+              showFetchText();
+
+            } else {
+              emptyListTextViewTop.setText(R.string.failedToFetchList);
+              emptyListTextViewBottom.setText(R.string.thatsTooBad);
+              showFetchText();
+            }
+          }
+
+          @Override
+          @EverythingIsNonNull
+          public void onFailure(Call<List<PlayerEntity>> call, Throwable t) {
+            emptyListTextViewTop.setTextSize(R.string.failedToFetchList);
+            emptyListTextViewBottom.setText(R.string.thatsTooBad);
+            showFetchText();
+          }
+        });
+  }
+
+  private void hideFetchText() {
+    emptyListTextViewTop.setVisibility(View.GONE);
+    emptyListTextViewBottom.setVisibility(View.GONE);
+  }
+
+  private void showFetchText() {
+    emptyListTextViewTop.setVisibility(View.VISIBLE);
+    emptyListTextViewBottom.setVisibility(View.VISIBLE);
   }
 }
-
-
-
-
-
-
-
