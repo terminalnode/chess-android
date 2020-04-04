@@ -15,9 +15,15 @@ public class ApiGame {
         .getAllGames(token);
   }
 
-  public static Call<String> makeMove(String token, long gameId, MoveEntity move) {
+  public static Call<MoveEntity> makeMove(String token, long gameId, MoveEntity move) {
     return RetrofitHelper
         .getGameService()
         .makeMove(token, gameId, move);
+  }
+
+  public static Call<GameEntity> getGame(String token, long gameId) {
+    return RetrofitHelper
+        .getGameService()
+        .getGame(token, gameId);
   }
 }

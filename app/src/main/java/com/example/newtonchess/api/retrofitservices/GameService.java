@@ -21,8 +21,13 @@ public interface GameService {
   Call<List<GameEntity>> getAllGames(
       @Header("Token") String token);
 
-  @POST("game/{gameId}")
-  Call<String> makeMove(
+  @GET("games/{gameId}")
+  Call<GameEntity> getGame(
+      @Header("Token") String token,
+      @Path("gameId") long gameId);
+
+  @POST("games/{gameId}")
+  Call<MoveEntity> makeMove(
       @Header("Token") String token,
       @Path("gameId") long gameId,
       @Body MoveEntity move);

@@ -20,6 +20,7 @@ public class RetrofitHelper {
   private static Retrofit getBase() {
     Gson gson = new GsonBuilder()
         .registerTypeAdapter(Piece.class, new PieceAdapter())
+        .setLenient()
         .create();
 
     return new Retrofit.Builder()

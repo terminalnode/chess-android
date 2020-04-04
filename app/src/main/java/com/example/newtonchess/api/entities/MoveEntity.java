@@ -2,6 +2,8 @@ package com.example.newtonchess.api.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * MoveEntity is sent to the API in order to say what move we want to make.
  * @author Alexander Rundberg
@@ -11,14 +13,14 @@ public class MoveEntity {
   private int pieceNumber;
 
   @SerializedName("destination")
-  private int[] destination;
+  private List<Integer> destination;
 
   //----- Constructors -----//
   public MoveEntity() {
     // Empty default constructor
   }
 
-  public MoveEntity(int pieceNumber, int[] destination) {
+  public MoveEntity(int pieceNumber, List<Integer> destination) {
     this.pieceNumber = pieceNumber;
     this.destination = destination;
   }
@@ -28,7 +30,7 @@ public class MoveEntity {
     this.pieceNumber = pieceNumber;
   }
 
-  public void setDestination(int[] destination) {
+  public void setDestination(List<Integer> destination) {
     this.destination = destination;
   }
 
@@ -37,7 +39,7 @@ public class MoveEntity {
     return pieceNumber;
   }
 
-  public int[] getDestination() {
+  public List<Integer> getDestination() {
     return destination;
   }
 }

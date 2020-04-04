@@ -377,6 +377,17 @@ public class ChessBoard extends View {
     }
   }
 
+  private void finalizeMove(int x, int y) {
+    Log.i(
+        StaticValues.CHESSBOARD,
+        String.format("Finalizing move to (%s,%s) with %s", x, y, selectedPiece));
+    removePieceInPosition(x, y);
+    selectedPiece.move(x, y);
+    selectedX = -1;
+    selectedY = -1;
+    invalidate();
+  }
+
   /**
    * Make the call to the API to make a move.
    * @param x The new x-position in the grid.
@@ -390,21 +401,24 @@ public class ChessBoard extends View {
     }
 
     // Create the move
+    List<Integer> coordinates = new ArrayList<>();
+    coordinates.add(x);
+    coordinates.add(y);
     MoveEntity move = new MoveEntity(
         selectedPiece.getInternalId(),
-        new int[]{x, y});
+        coordinates);
 
     // Make call
     RetrofitHelper
         .getGameService()
         .makeMove(token.getTokenString(), gameId, move)
-        .enqueue(new Callback<String>() {
+        .enqueue(new Callback<MoveEntity>() {
           @Override
           @EverythingIsNonNull
-          public void onResponse(Call<String> call, Response<String> response) {
+          public void onResponse(Call<MoveEntity> call, Response<MoveEntity> response) {
             // If response was OK, finalize the move and return
             if (response.code() == 200) {
-              selectedPiece.move(x, y);
+              finalizeMove(x, y);
               return;
             }
 
@@ -440,7 +454,7 @@ public class ChessBoard extends View {
 
           @Override
           @EverythingIsNonNull
-          public void onFailure(Call<String> call, Throwable t) {
+          public void onFailure(Call<MoveEntity> call, Throwable t) {
             Log.e(StaticValues.CHESSBOARD, "API move call failed, got this: " + t.getMessage());
             showSnackbar(R.string.somethingWentWrong);
           }
@@ -504,8 +518,7 @@ public class ChessBoard extends View {
       // Try to make a move
       Log.i("TOUCH", String.format("New square, selecting. selectedPiece is %s", selectedPiece));
       makeMove(x, y);
-      selectedX = -1;
-      selectedY = -1;
+      return false;
 
     } else {
       // Just select the tile
