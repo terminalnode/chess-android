@@ -53,14 +53,12 @@ public class GamesListAdapter extends ArrayAdapter<GameEntity> {
   @Override
   public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
     GameEntity game = getItem(position);
-    PlayerEntity blackPlayer = game == null ? null : game.getBlackPlayer();
-    PlayerEntity whitePlayer = game == null ? null : game.getWhitePlayer();
     String turnsTaken = game == null ? "???" : "#" + game.getTurnsTaken();
     String opponentName = userUnknownString;
 
-    if (blackPlayer != null && whitePlayer != null) {
-      opponentName = blackPlayer.equals(thisPlayer) ?
-          blackPlayer.getName() : whitePlayer.getName();
+    if (game != null) {
+      opponentName = game.isGettingPlayerWhite() ?
+          game.getBlackPlayer().getName() : game.getWhitePlayer().getName();
     }
 
     LayoutInflater inflater = LayoutInflater.from(context);
