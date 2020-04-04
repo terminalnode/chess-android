@@ -66,7 +66,7 @@
   <string name="gameOver">Game over</string>
 
   <!-- Errors -->
-  <string name="tokenInvalid">Your token is invalid or expired, try logging in again.</string>
+  <string name="tokenInvalid">Your token is invalid, try logging in again.</string>
   <string name="noSuchGame">This game doesn\'t exist, so we can\'t make a move.</string>
   <string name="notPartofGame">You\'re not a part of this game.</string>
 </resources>

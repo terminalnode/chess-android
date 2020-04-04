@@ -47,4 +47,12 @@
   <string name="showChallengesText">受けた挑戦</string>
   <string name="deny">否定する</string>
   <string name="addedFriendButton">追加しました</string>
+  <string name="noSuchGame">ゲームは存在してませんので、動きは出来ません</string>
+  <string name="notPartofGame">ユーザーはこのゲームに参加してません</string>
+  <string name="gameOver">終了</string>
+  <string name="tokenInvalid">トークン無効、もう一度ログインして見てください</string>
+  <string name="playerColorDescription">あなたがプレイする色を示す駒</string>
+  <string name="yourTurn">あなたの番</string>
+  <string name="opponentsTurn">相手の番</string>
+  <string name="refresh">更新</string>
 </resources>

@@ -47,4 +47,12 @@
   <string name="showChallengesText">Utmaningar</string>
   <string name="showGamesText">Spel</string>
   <string name="addedFriendButton">Tillagd</string>
+  <string name="opponentsTurn">Motståndarens tur</string>
+  <string name="yourTurn">Din tur</string>
+  <string name="refresh">Uppdatera</string>
+  <string name="playerColorDescription">En pjäs som indikerar vilken färg du spelar med</string>
+  <string name="gameOver">Spelet slut</string>
+  <string name="tokenInvalid">Din token är ogiltig, pröva att logga in på nytt.</string>
+  <string name="noSuchGame">Partiet existerar inte, så vi kan inte göra något drag.</string>
+  <string name="notPartofGame">Du är inte del av det här partiet.</string>
 </resources>
