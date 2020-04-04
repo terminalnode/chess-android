@@ -12,7 +12,6 @@
   <string name="missingUsernamePasswordSnackbar">続けるためにロユーザー名とパスワードを入力してください</string>
   <string name="missingPasswordSnackbar">パスワードを入力してください</string>
   <string name="missingUsernameSnackbar">"ユーザー名を入力してください "</string>
-  <string name="incorrectLoginCredentialsSnackbar">"ユーザー名それかパスワードに間違いがあります "</string>
   <string name="playScreenOpponentLabel">相手：</string>
   <string name="playScreenOpponentName">だれも！</string>
   <string name="mainMenuWelcome">いらっしゃい</string>
@@ -55,4 +54,7 @@
   <string name="yourTurn">あなたの番</string>
   <string name="opponentsTurn">相手の番</string>
   <string name="refresh">更新</string>
+  <string name="incorrectPassword">それはあのユーザーのパスワードではない</string>
+  <string name="incorrectUsername">ユーザー名は存在してません</string>
+  <string name="failedToCreateToken">トークン作れませんでした、もう一度ログインして下さい</string>
 </resources>

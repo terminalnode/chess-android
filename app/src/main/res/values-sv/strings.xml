@@ -12,7 +12,6 @@
   <string name="missingUsernamePasswordSnackbar">Ange användarnamn och lösenord för att fortsätta.</string>
   <string name="missingUsernameSnackbar">Du glömde att ange ett användarnamn.</string>
   <string name="missingPasswordSnackbar">Du glömde att ange ett lösenord.</string>
-  <string name="incorrectLoginCredentialsSnackbar">Felaktigt användarnamn eller lösenord.</string>
   <string name="playScreenOpponentLabel">Motståndare:</string>
   <string name="playScreenOpponentName">Ingen!</string>
   <string name="mainMenuWelcome">Välkommen</string>
@@ -55,4 +54,7 @@
   <string name="tokenInvalid">Din token är ogiltig, pröva att logga in på nytt.</string>
   <string name="noSuchGame">Partiet existerar inte, så vi kan inte göra något drag.</string>
   <string name="notPartofGame">Du är inte del av det här partiet.</string>
+  <string name="incorrectPassword">Det angivna lösenordet är felaktigt.</string>
+  <string name="incorrectUsername">Den användaren existerar inte.</string>
+  <string name="failedToCreateToken">Token kunde inte skapas, försök igen.</string>
 </resources>

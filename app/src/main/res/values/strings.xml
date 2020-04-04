@@ -18,7 +18,10 @@
   <string name="missingUsernamePasswordSnackbar">Please enter a username and password to continue.</string>
   <string name="missingUsernameSnackbar">You forgot to enter a username.</string>
   <string name="missingPasswordSnackbar">You forgot to enter a password.</string>
-  <string name="incorrectLoginCredentialsSnackbar">Incorrect username and/or password.</string>
+  <string name="incorrectPassword">That\'s not the correct password for that user.</string>
+  <string name="incorrectUsername">That username doesn\'t exist.</string>
+  <string name="failedToCreateToken">The token could not be created, please try again.</string>
+
   <string name="accountCreationSuccessful">Account created: %1$s</string>
   <string name="somethingWentWrong">Oops, something went wrong! Please try again.</string>
   <string name="accountCreationMissingFields">Please enter a username and password</string>

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.StaticValues;
 import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.ApiPlayer;
 import com.example.newtonchess.api.entities.PlayerEntity;
@@ -50,7 +51,7 @@ public class LoginScreenActivity extends AppCompatActivity {
   }
 
   private void loginButtonPress(View view) {
-    Log.i("LOGIN", "Sign In-button pressed");
+    Log.i(StaticValues.LOGINSCREEN, "Sign In-button pressed");
     // Disable the sign up button to avoid double clicking
     // They will be reenabled once we get a response.
     disableButtons();
@@ -59,22 +60,16 @@ public class LoginScreenActivity extends AppCompatActivity {
     // Fetch the input username and password
     String username = userNameTextBox.getText().toString().trim();
     String password = passwordTextBox.getText().toString().trim();
-    Snackbar snackbar = Snackbar.make(
-        view, R.string.missingUsernamePasswordSnackbar, Snackbar.LENGTH_LONG);
 
     // Verify that login credentials were filled in and correct.
     if (username.isEmpty() && password.isEmpty()) {
-      snackbar.setText(R.string.missingUsernamePasswordSnackbar);
-      snackbar.show();
+      showSnackbar(view, R.string.missingUsernamePasswordSnackbar);
 
     } else if (username.isEmpty()) {
-      snackbar.setText(R.string.missingUsernameSnackbar);
-      snackbar.show();
+      showSnackbar(view, R.string.missingUsernameSnackbar);
 
     } else if (password.isEmpty()) {
-      snackbar.setText(R.string.missingPasswordSnackbar);
-      snackbar.show();
-
+      showSnackbar(view, R.string.missingPasswordSnackbar);
     }
 
     // Create the user we will send to the API
@@ -86,11 +81,15 @@ public class LoginScreenActivity extends AppCompatActivity {
       @Override
       @EverythingIsNonNull
       public void onResponse(Call<TokenEntity> call, Response<TokenEntity> response) {
-        Log.i("LOGIN", "Inside onResponse of loginButtonClicked");
-        if (response.code() == 200) {
-          handleSuccessfulLogin(response, view);
+        Log.i(StaticValues.LOGINSCREEN, "Inside onResponse of loginButtonClicked");
+        TokenEntity token = response.body();
+
+        if (token != null) {
+          Intent mainMenuIntent = new Intent(view.getContext(), MainMenuActivity.class);
+          mainMenuIntent.putExtra(StaticValues.INTENT_TOKEN, token);
+          startActivity(mainMenuIntent);
         } else {
-          handleUnsuccessfulLogin(response, snackbar);
+          showError(view, response);
         }
         enableButtons();
       }
@@ -98,9 +97,8 @@ public class LoginScreenActivity extends AppCompatActivity {
       @Override
       @EverythingIsNonNull
       public void onFailure(Call<TokenEntity> call, Throwable t) {
-        Log.w("LOGIN", "Inside onFailure of loginButtonClicked");
-        snackbar.setText(R.string.somethingWentWrong);
-        snackbar.show();
+        Log.w(StaticValues.LOGINSCREEN, "Inside onFailure of loginButtonClicked");
+        showSnackbar(view, R.string.somethingWentWrong);
         enableButtons();
       }
     });
@@ -124,7 +122,9 @@ public class LoginScreenActivity extends AppCompatActivity {
       @Override
       @EverythingIsNonNull
       public void onResponse(Call<PlayerEntity> call, Response<PlayerEntity> response) {
-        if (response.isSuccessful() && response.body() != null) {
+        PlayerEntity body = response.body();
+
+        if (body != null) {
           PlayerEntity player = response.body();
           Snackbar.make(
               view,
@@ -133,7 +133,7 @@ public class LoginScreenActivity extends AppCompatActivity {
           ).show();
 
         } else {
-          accountNotCreatedSnackbar(view, response);
+          showError(view, response);
         }
         enableButtons();
       }
@@ -141,65 +141,58 @@ public class LoginScreenActivity extends AppCompatActivity {
       @Override
       @EverythingIsNonNull
       public void onFailure(Call<PlayerEntity> call, Throwable t) {
-        Snackbar.make(
-            view,
-            R.string.somethingWentWrong,
-            Snackbar.LENGTH_LONG
-        ).show();
+        showSnackbar(view, R.string.somethingWentWrong);
         enableButtons();
       }
     });
   }
 
   /**
-   * Status code of login API call was 200, we should be able to get a token.
-   * @param response The response containing the token.
-   * @param view The view we're in.
+   * Try to read the error response in order to figure out what went wrong, then
+   * show a snackbar with the appropriate error.
+   * @param view The view in which the snackbar should be shown.
+   * @param response The API error response we're diagnosing.
    */
-  private void handleSuccessfulLogin(Response<TokenEntity> response, View view) {
-    Intent mainMenuIntent = new Intent(view.getContext(), MainMenuActivity.class);
-    mainMenuIntent.putExtra("TokenEntity", response.body());
-    startActivity(mainMenuIntent);
+  private void showError(View view, Response response) {
+    String internalName = StaticValues.THIS_IS_NOT_AN_ERROR;
+    try {
+      internalName = new JSONObject(response.errorBody().string())
+          .getString(StaticValues.INTERNAL_NAME);
+    } catch (IOException | JSONException | NullPointerException ignored) { }
+
+    switch (internalName) {
+      case StaticValues.MISSING_FIELDS_EXCEPTION:
+        showSnackbar(view, R.string.accountCreationMissingFields);
+        break;
+
+      case StaticValues.USERNAME_TAKEN:
+        showSnackbar(view, R.string.accountCreationUsernameTaken);
+        break;
+
+      case StaticValues.NO_SUCH_USER:
+        showSnackbar(view, R.string.incorrectUsername);
+        break;
+
+      case StaticValues.WRONG_PASSWORD:
+        showSnackbar(view, R.string.incorrectPassword);
+        break;
+
+      case StaticValues.FAILED_TO_CREATE_TOKEN:
+        showSnackbar(view, R.string.failedToCreateToken);
+        break;
+
+      default:
+        showSnackbar(view, R.string.somethingWentWrong);
+    }
   }
 
   /**
-   * Status code of login API call was not 200, something wen't wrong. We need to know what.
-   * @param response The response containing the error message.
-   * @param snackbar A snackbar for showing useful messages.
+   * Show a snackbar in the given view containing the string with the given resource id.
+   * @param view The view in which the snackbar should be shown.
+   * @param resourceId The resource id of the string.
    */
-  private void handleUnsuccessfulLogin(Response<TokenEntity> response, Snackbar snackbar) {
-  }
-
-  private void accountNotCreatedSnackbar(View view, Response response) {
-    String internalName = null;
-    int error = R.string.somethingWentWrong;
-
-    // Try to read the message body to identify the error
-    try {
-      JSONObject responseBody = new JSONObject(response.errorBody().string());
-      internalName = responseBody.getString("internalName");
-    } catch (IOException | JSONException | NullPointerException ignored) { }
-
-    // Set the error message in accord with internalName
-    if (internalName != null) {
-      switch(internalName) {
-        case "PlayerCreateMissingFieldsException":
-          error = R.string.accountCreationMissingFields;
-          break;
-
-        case "PlayerCreateUsernameTaken":
-          error = R.string.accountCreationUsernameTaken;
-          break;
-
-        default: break;
-      }
-    }
-
-    Snackbar.make(
-        view,
-        error,
-        Snackbar.LENGTH_LONG
-    ).show();
+  private void showSnackbar(View view, int resourceId) {
+    Snackbar.make(view, resourceId, Snackbar.LENGTH_LONG).show();
   }
 
   private void disableButtons() {
