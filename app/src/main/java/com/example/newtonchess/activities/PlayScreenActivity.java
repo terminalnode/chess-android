@@ -89,6 +89,9 @@ public class PlayScreenActivity extends AppCompatActivity {
             GameEntity gameEntity = response.body();
             if (gameEntity != null) {
               game = gameEntity;
+              chessBoard.setSelectedX(-1);
+              chessBoard.setSelectedY(-1);
+              chessBoard.setSelectedPiece(null);
               chessBoard.loadFromGameEntity(game, token.getPlayer());
               activateButton();
               return;

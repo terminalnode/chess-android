@@ -273,6 +273,7 @@ public class ChessBoard extends View {
    */
   private void drawPieces(Canvas canvas) {
     selectedPiece = null;
+
     for (Piece piece : pieces) {
       int x = piece.getX();
       int y = piece.getY();
@@ -368,9 +369,9 @@ public class ChessBoard extends View {
    * @param y The new y-position in the grid.
    */
   public void makeMove(int x, int y) {
-    flipPlayerTurn();
     List<int[]> validMoves = selectedPiece.getMoves(pieces);
 
+    // See if we're trying to make a move
     for (int[] move : validMoves) {
       int newX = move[0];
       int newY = move[1];
@@ -380,9 +381,15 @@ public class ChessBoard extends View {
         return;
       }
     }
+
+    // Did not make a move, change selection and invalidate
+    selectedX = x;
+    selectedY = y;
+    invalidate();
   }
 
   private void finalizeMove(int x, int y) {
+    flipPlayerTurn();
     Log.i(
         StaticValues.CHESSBOARD,
         String.format("Finalizing move to (%s,%s) with %s", x, y, selectedPiece));
@@ -575,6 +582,18 @@ public class ChessBoard extends View {
     this.gameOverTextView = gameOverTextView;
   }
 
+  public void setSelectedX(int selectedX) {
+    this.selectedX = selectedX;
+  }
+
+  public void setSelectedY(int selectedY) {
+    this.selectedY = selectedY;
+  }
+
+  public void setSelectedPiece(Piece selectedPiece) {
+    this.selectedPiece = selectedPiece;
+  }
+
   //----- Getters -----//
   public boolean isWhite() {
     return isWhite;
@@ -610,5 +629,17 @@ public class ChessBoard extends View {
 
   public TextView getGameOverTextView() {
     return gameOverTextView;
+  }
+
+  public int getSelectedX() {
+    return selectedX;
+  }
+
+  public int getSelectedY() {
+    return selectedY;
+  }
+
+  public Piece getSelectedPiece() {
+    return selectedPiece;
   }
 }
