@@ -162,7 +162,6 @@ public class PlayScreenActivity extends AppCompatActivity {
     refreshButton.setAlpha(0.5F);
     refreshButton.setClickable(false);
     refreshButton.setText(R.string.refreshing);
-    chessBoard.setEnabled(false);
   }
 
   @SuppressLint("ClickableViewAccessibility")
@@ -170,6 +169,5 @@ public class PlayScreenActivity extends AppCompatActivity {
     refreshButton.setAlpha(1F);
     refreshButton.setClickable(true);
     refreshButton.setText(R.string.refresh);
-    chessBoard.setEnabled(true);
   }
 }
