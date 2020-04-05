@@ -57,4 +57,5 @@
   <string name="incorrectPassword">それはあのユーザーのパスワードではない</string>
   <string name="incorrectUsername">ユーザー名は存在してません</string>
   <string name="failedToCreateToken">トークン作れませんでした、もう一度ログインして下さい</string>
+  <string name="refreshing">更新中</string>
 </resources>

@@ -64,9 +64,10 @@
   <string name="turnNum" translatable="false">\?\?\?</string>
   <string name="opponentsTurn">Opponents turn</string>
   <string name="yourTurn">Your turn</string>
-  <string name="refresh">Refresh</string>
   <string name="playerColorDescription">A piece showing which color you\'re playing as.</string>
   <string name="gameOver">Game over</string>
+  <string name="refresh">Refresh</string>
+  <string name="refreshing">Refreshing...</string>
 
   <!-- Errors -->
   <string name="tokenInvalid">Your token is invalid, try logging in again.</string>

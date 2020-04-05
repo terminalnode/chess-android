@@ -3,11 +3,13 @@ package com.example.newtonchess.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
@@ -28,6 +30,10 @@ public class PlayScreenActivity extends AppCompatActivity {
   private TokenEntity token;
   private GameEntity game;
   private Button refreshButton;
+  private long lastRefresh;
+  private long refreshRate;
+  private Handler threadHandler;
+  private Runnable autoUpdateFunction;
 
   @SuppressLint("ClickableViewAccessibility")
   @Override
@@ -68,6 +74,31 @@ public class PlayScreenActivity extends AppCompatActivity {
     // Bind button listener
     chessBoard.setOnTouchListener(chessBoard::onTouch);
     refreshButton.setOnClickListener(this::refreshButtonClicked);
+
+    // Create handler to automatically check for updates
+    autoUpdateFunction = () -> {
+      long nextRefresh = lastRefresh + refreshRate;
+
+      if (System.currentTimeMillis() > nextRefresh) {
+        if (chessBoard.isWhitesTurn() != chessBoard.isWhite()) {
+          refreshButtonClicked(null);
+        } else {
+          Log.i(StaticValues.PLAYSCREEN, "Still my turn, not refreshing.");
+        }
+        lastRefresh = System.currentTimeMillis();
+        nextRefresh = lastRefresh + refreshRate;
+      }
+
+      // Run again in 10 seconds
+      Log.i(StaticValues.PLAYSCREEN, "Next refresh in: " + (nextRefresh - System.currentTimeMillis()));
+      threadHandler.postDelayed(autoUpdateFunction, nextRefresh - System.currentTimeMillis());
+    };
+
+    // Start the auto updater
+    refreshRate = 10000;
+    lastRefresh = System.currentTimeMillis();
+    threadHandler = new Handler();
+    threadHandler.postDelayed(autoUpdateFunction, refreshRate + 100);
   }
 
   @Override
@@ -77,9 +108,11 @@ public class PlayScreenActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
-  private void refreshButtonClicked(View view) {
+  private void refreshButtonClicked(@Nullable View view) {
+    Log.i(StaticValues.PLAYSCREEN, "Doing a refresh!");
     deactivateButton();
     int currentTurnsTaken = game.getTurnsTaken();
+    lastRefresh = System.currentTimeMillis();
 
     RetrofitHelper
         .getGameService()
@@ -101,14 +134,17 @@ public class PlayScreenActivity extends AppCompatActivity {
               return;
             }
 
-            // TODO add better error reporting
-            showSnackbar(R.string.somethingWentWrong, view);
+            if (view != null) {
+              showSnackbar(R.string.somethingWentWrong, view);
+            }
           }
 
           @Override
           @EverythingIsNonNull
           public void onFailure(Call<GameEntity> call, Throwable t) {
-            showSnackbar(R.string.somethingWentWrong, view);
+            if (view != null) {
+              showSnackbar(R.string.somethingWentWrong, view);
+            }
           }
         });
   }
@@ -125,6 +161,7 @@ public class PlayScreenActivity extends AppCompatActivity {
   private void deactivateButton() {
     refreshButton.setAlpha(0.5F);
     refreshButton.setClickable(false);
+    refreshButton.setText(R.string.refreshing);
     chessBoard.setEnabled(false);
   }
 
@@ -132,6 +169,7 @@ public class PlayScreenActivity extends AppCompatActivity {
   private void activateButton() {
     refreshButton.setAlpha(1F);
     refreshButton.setClickable(true);
+    refreshButton.setText(R.string.refresh);
     chessBoard.setEnabled(true);
   }
 }
