@@ -79,6 +79,8 @@ public class PlayScreenActivity extends AppCompatActivity {
 
   private void refreshButtonClicked(View view) {
     deactivateButton();
+    int currentTurnsTaken = game.getTurnsTaken();
+
     RetrofitHelper
         .getGameService()
         .getGame(token.getTokenString(), game.getId())
@@ -88,11 +90,13 @@ public class PlayScreenActivity extends AppCompatActivity {
           public void onResponse(Call<GameEntity> call, Response<GameEntity> response) {
             GameEntity gameEntity = response.body();
             if (gameEntity != null) {
-              game = gameEntity;
-              chessBoard.setSelectedX(-1);
-              chessBoard.setSelectedY(-1);
-              chessBoard.setSelectedPiece(null);
-              chessBoard.loadFromGameEntity(game, token.getPlayer());
+              if (gameEntity.getTurnsTaken() != currentTurnsTaken) {
+                game = gameEntity;
+                chessBoard.setSelectedX(-1);
+                chessBoard.setSelectedY(-1);
+                chessBoard.setSelectedPiece(null);
+                chessBoard.loadFromGameEntity(game, token.getPlayer());
+              }
               activateButton();
               return;
             }
