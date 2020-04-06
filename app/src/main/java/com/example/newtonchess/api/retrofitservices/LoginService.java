@@ -10,8 +10,14 @@ import retrofit2.http.POST;
 
 public interface LoginService {
   @POST("login")
-  Call<TokenEntity> login(@Body PlayerEntity player);
+  Call<TokenEntity> login(
+      @Body PlayerEntity player);
 
   @POST("logout")
-  Call<String> logout(@Header("Token") String token);
+  Call<String> logout(
+      @Header("Token") String token);
+
+  @POST("validate")
+  Call<TokenEntity> validateToken(
+      @Header("Token") String token);
 }

@@ -32,4 +32,10 @@ public class ApiLogin {
       }
     });
   }
+
+  public static Call<TokenEntity> validateToken(String token) {
+    return RetrofitHelper
+        .getLoginService()
+        .validateToken(token);
+  }
 }

@@ -12,6 +12,7 @@ public class StaticValues {
   public static final String ADDFRIEND = "ADDFRIEND";
   public static final String FRIENDLIST = "FRIENDLIST";
   public static final String LOGINSCREEN = "LOGINSCREEN";
+  public static final String SPLASHSCREEN = "SPLASHSCREEN";
 
   // API Errors
   public static final String INTERNAL_NAME = "internalName";
