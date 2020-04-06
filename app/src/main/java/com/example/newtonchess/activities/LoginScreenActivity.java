@@ -116,9 +116,10 @@ public class LoginScreenActivity extends AppCompatActivity {
           sp.putString(StaticValues.PREF_TOKEN, body.getTokenString());
           sp.apply();
 
-          Intent mainMenuIntent = new Intent(view.getContext(), MainMenuActivity.class);
-          mainMenuIntent.putExtra(StaticValues.INTENT_TOKEN, body);
-          startActivity(mainMenuIntent);
+          Intent intent = new Intent(view.getContext(), MainMenuActivity.class);
+          intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+          intent.putExtra(StaticValues.INTENT_TOKEN, body);
+          startActivity(intent);
         } else {
           showError(view, response);
         }

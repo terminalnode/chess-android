@@ -108,6 +108,7 @@ public class SplashScreenActivity extends AppCompatActivity {
    * @param intent
    */
   private void startActivityAtTime(long preferredStartTime, Intent intent) {
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     long startIn = preferredStartTime - System.currentTimeMillis();
     Log.i(StaticValues.SPLASHSCREEN, "Starting activity in " + startIn);
 

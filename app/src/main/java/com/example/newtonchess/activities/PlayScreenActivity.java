@@ -105,6 +105,7 @@ public class PlayScreenActivity extends AppCompatActivity {
   public void onBackPressed() {
     Intent intent = new Intent(this, PickGameActivity.class);
     intent.putExtra(StaticValues.INTENT_TOKEN, token);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     startActivity(intent);
   }
 

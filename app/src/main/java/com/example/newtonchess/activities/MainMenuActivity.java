@@ -57,24 +57,27 @@ public class MainMenuActivity extends AppCompatActivity {
   }
 
   private void playButtonPress(@Nullable View view) {
-    Intent playIntent = new Intent(this, PickGameActivity.class);
-    playIntent.putExtra("TokenEntity", token);
-    startActivity(playIntent);
+    Intent intent = new Intent(this, PickGameActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.putExtra("TokenEntity", token);
+    startActivity(intent);
   }
 
   private void friendsButtonPress(@Nullable View view) {
     Intent intent = new Intent(this, FriendsListActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     intent.putExtra("TokenEntity", token);
     startActivity(intent);
   }
 
   private void logoutButtonPress(@Nullable View view) {
     ApiLogin.logout(token.getTokenString());
-    Intent loginScreenIntent = new Intent(this, LoginScreenActivity.class);
+    Intent intent = new Intent(this, LoginScreenActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
     sp.remove(StaticValues.PREF_TOKEN);
     sp.apply();
 
-    startActivity(loginScreenIntent);
+    startActivity(intent);
   }
 }

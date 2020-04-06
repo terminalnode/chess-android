@@ -31,12 +31,13 @@ public class GamesListStartGameListener implements View.OnClickListener {
 
     Log.i("GAMES", "Creating playScreenIntent");
     Log.i("GAMES", "Is the game finished? " + game.isFinished());
-    Intent playScreenIntent = new Intent(view.getContext(), PlayScreenActivity.class);
-    playScreenIntent.putExtra(StaticValues.INTENT_TOKEN, token);
-    playScreenIntent.putExtra(StaticValues.INTENT_GAME, game);
+    Intent intent = new Intent(view.getContext(), PlayScreenActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.putExtra(StaticValues.INTENT_TOKEN, token);
+    intent.putExtra(StaticValues.INTENT_GAME, game);
 
     Log.i("GAMES", "Starting activity playScreenIntent");
-    context.startActivity(playScreenIntent);
+    context.startActivity(intent);
   }
 
   private void deactivateButton() {

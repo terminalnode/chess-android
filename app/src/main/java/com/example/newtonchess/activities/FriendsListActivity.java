@@ -67,14 +67,16 @@ public class FriendsListActivity extends AppCompatActivity {
   @Override
   public void onBackPressed() {
     Intent intent = new Intent(this, MainMenuActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     intent.putExtra(StaticValues.INTENT_TOKEN, token);
     startActivity(intent);
   }
 
   private void goToFindFriends(View view) {
-    Intent addFriendIntent = new Intent(view.getContext(), AddFriendActivity.class);
-    addFriendIntent.putExtra(StaticValues.INTENT_TOKEN, token);
-    startActivity(addFriendIntent);
+    Intent intent = new Intent(view.getContext(), AddFriendActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.putExtra(StaticValues.INTENT_TOKEN, token);
+    startActivity(intent);
   }
 
   private void getFriendsList() {
