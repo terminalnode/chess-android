@@ -26,8 +26,12 @@ public class StaticValues {
   public static final String NO_SUCH_USER = "LoginNoSuchUserException";
   public static final String WRONG_PASSWORD = "LoginIncorrectPasswordException";
   public static final String FAILED_TO_CREATE_TOKEN = "LoginFailedToCreateTokenException";
-
   // We use this error as a default value for out error strings,
   // if something goes wrong and we see this we know the server didn't send it.
   public static final String THIS_IS_NOT_AN_ERROR = "'tis not a real error my dude";
+
+  // Preferences names
+  public static final String PREF_USERNAME = "Username";
+  public static final String PREF_PASSWORD = "Password";
+  public static final String PREF_TOKEN = "Token";
 }

@@ -1,6 +1,8 @@
 package com.example.newtonchess.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,7 @@ import retrofit2.internal.EverythingIsNonNull;
 public class LoginScreenActivity extends AppCompatActivity {
   private Button signInButton, signUpButton;
   private EditText userNameTextBox, passwordTextBox;
+  private SharedPreferences sharedPreferences;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,27 @@ public class LoginScreenActivity extends AppCompatActivity {
 
     signInButton.setOnClickListener(this::loginButtonPress);
     signUpButton.setOnClickListener(this::signUpButtonPress);
+
+    sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+
+    // Fill in previous username/password if we have it
+    String savedName = sharedPreferences.getString(StaticValues.PREF_USERNAME, null);
+    String savedPassword = sharedPreferences.getString(StaticValues.PREF_PASSWORD, null);
+    if (savedName != null) {
+      Log.i(StaticValues.LOGINSCREEN, "Found saved username, filling it in.");
+      userNameTextBox.setText(savedName);
+    }
+
+    if (savedPassword != null) {
+      Log.i(StaticValues.LOGINSCREEN, "Found saved password, filling it in.");
+      passwordTextBox.setText(savedPassword);
+    }
+
+    // Log what we have in preferences for sanity's sake
+    Log.i(StaticValues.LOGINSCREEN, "Values in shared preferences: " + sharedPreferences.getAll().size());
+    for (String key : sharedPreferences.getAll().keySet()) {
+      Log.i(StaticValues.LOGINSCREEN, ">>> Key: " + key);
+    }
   }
 
   @Override
@@ -82,11 +106,18 @@ public class LoginScreenActivity extends AppCompatActivity {
       @EverythingIsNonNull
       public void onResponse(Call<TokenEntity> call, Response<TokenEntity> response) {
         Log.i(StaticValues.LOGINSCREEN, "Inside onResponse of loginButtonClicked");
-        TokenEntity token = response.body();
+        TokenEntity body = response.body();
 
-        if (token != null) {
+        if (body != null) {
+          Log.i(StaticValues.LOGINSCREEN, "Login successful, saving token and user info.");
+          SharedPreferences.Editor sp = sharedPreferences.edit();
+          sp.putString(StaticValues.PREF_USERNAME, username);
+          sp.putString(StaticValues.PREF_PASSWORD, password);
+          sp.putString(StaticValues.PREF_TOKEN, body.getTokenString());
+          sp.apply();
+
           Intent mainMenuIntent = new Intent(view.getContext(), MainMenuActivity.class);
-          mainMenuIntent.putExtra(StaticValues.INTENT_TOKEN, token);
+          mainMenuIntent.putExtra(StaticValues.INTENT_TOKEN, body);
           startActivity(mainMenuIntent);
         } else {
           showError(view, response);
@@ -125,10 +156,15 @@ public class LoginScreenActivity extends AppCompatActivity {
         PlayerEntity body = response.body();
 
         if (body != null) {
-          PlayerEntity player = response.body();
+          Log.i(StaticValues.LOGINSCREEN, "Sign up successful, user info.");
+          SharedPreferences.Editor sp = sharedPreferences.edit();
+          sp.putString(StaticValues.PREF_USERNAME, userNameTextBox.getText().toString());
+          sp.putString(StaticValues.PREF_PASSWORD, passwordTextBox.getText().toString());
+          sp.apply();
+
           Snackbar.make(
               view,
-              getString(R.string.accountCreationSuccessful, player.getName()),
+              getString(R.string.accountCreationSuccessful, body.getName()),
               Snackbar.LENGTH_LONG
           ).show();
 
