@@ -15,7 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChallengesListAcceptListener implements View.OnClickListener {
+class ChallengesListAcceptListener implements View.OnClickListener {
   private View view;
   private ChallengeEntity challenge;
   private String token;

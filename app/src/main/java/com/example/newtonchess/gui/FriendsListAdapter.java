@@ -21,8 +21,8 @@ import java.util.List;
 public class FriendsListAdapter extends ArrayAdapter<PlayerEntity> {
   private Context context;
   private int listLayout;
-  FriendsListListenerType listenerType;
-  TokenEntity token;
+  private FriendsListListenerType listenerType;
+  private TokenEntity token;
 
   public FriendsListAdapter(
       @NonNull Context context,

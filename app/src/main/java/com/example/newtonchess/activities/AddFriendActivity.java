@@ -33,12 +33,13 @@ import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
 public class AddFriendActivity extends AppCompatActivity {
-  TokenEntity token;
-  ListView friendsListView;
-  FriendsListAdapter friendsListAdapter;
-  TextView emptyListTextViewTop, emptyListTextViewBottom;
-  Button searchFriendButton;
-  EditText searchFriendsEditText;
+  private TokenEntity token;
+  private ListView friendsListView;
+  private FriendsListAdapter friendsListAdapter;
+  private TextView emptyListTextViewTop;
+  private TextView emptyListTextViewBottom;
+  private Button searchFriendButton;
+  private EditText searchFriendsEditText;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

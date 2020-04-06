@@ -41,6 +41,7 @@ public class GameEntity implements Parcelable {
   private boolean finished;
 
   @SerializedName("pieces")
+  private
   List<Piece> pieces;
 
   @SerializedName("gettingPlayerWhite")

@@ -57,9 +57,10 @@ public class ChessBoard extends View {
   private boolean isWhite, isWhitesTurn, finished, flipped, inCheck;
   private List<Piece> pieces;
   private Piece selectedPiece;
-  TextView whoseTurnTextView, gameOverTextView;
-  ImageView whoseTurnPawn;
-  TokenEntity token;
+  private TextView whoseTurnTextView;
+  private TextView gameOverTextView;
+  private ImageView whoseTurnPawn;
+  private TokenEntity token;
 
 
   /**
@@ -389,7 +390,7 @@ public class ChessBoard extends View {
    * @param x The new x-position in the grid.
    * @param y The new y-position in the grid.
    */
-  public void makeMove(int x, int y) {
+  private void makeMove(int x, int y) {
     List<int[]> validMoves = selectedPiece.getMoves(pieces);
 
     // See if we're trying to make a move
