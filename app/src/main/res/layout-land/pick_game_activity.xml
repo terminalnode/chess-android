@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/colorBackground"
+  tools:context=".activities.PickGameActivity">
+
+  <include
+    android:id="@+id/newtonChessBanner"
+    layout="@layout/newton_chess_banner" />
+
+  <TextView
+    android:id="@+id/gameScreenHeader"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/showGamesText"
+    android:textAlignment="center"
+    android:textColor="@color/colorPrimary"
+    android:textSize="@dimen/headerTextSize"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/newtonChessBanner"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+    android:id="@+id/showGamesButton"
+    android:layout_width="@dimen/switchModeButtonWidth"
+    android:layout_height="@dimen/switchModeButtonHeight"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="30dp"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/showGamesText"
+    android:textAlignment="center"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/switchModeButtonText"
+    app:layout_constrainedWidth="false"
+    app:layout_constraintBottom_toTopOf="@+id/midpointGuideline"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <Button
+    android:id="@+id/showChallengesButton"
+    android:layout_width="@dimen/switchModeButtonWidth"
+    android:layout_height="@dimen/switchModeButtonHeight"
+    android:layout_marginTop="30dp"
+    android:layout_marginEnd="20dp"
+    android:background="@color/colorPrimaryDark"
+    android:text="@string/showChallengesText"
+    android:textAlignment="center"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/switchModeButtonText"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/midpointGuideline" />
+
+  <ListView
+    android:id="@+id/gameScreenListView"
+    android:layout_width="350dp"
+    android:layout_height="300dp"
+    android:layout_marginTop="20dp"
+    app:layout_constraintEnd_toStartOf="@+id/showGamesButton"
+    app:layout_constraintStart_toEndOf="@+id/newtonChessBanner"
+    app:layout_constraintTop_toBottomOf="@+id/gameScreenHeader" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/midpointGuideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.6" />
+
+  <TextView
+    android:id="@+id/pickActivityEmptyListTop"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/fetchingList"
+    android:textColor="@color/colorComplementary"
+    android:textSize="@dimen/emptyListTextSize"
+    android:visibility="gone"
+    app:layout_constraintBottom_toTopOf="@+id/midpointGuideline"
+    app:layout_constraintEnd_toEndOf="@+id/gameScreenListView"
+    app:layout_constraintStart_toStartOf="@+id/gameScreenListView" />
+
+  <TextView
+    android:id="@+id/pickActivityEmptyListBottom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/standBy"
+    android:textColor="@color/colorComplementary"
+    android:textColorHighlight="@color/colorComplementary"
+    android:textSize="@dimen/emptyListTextSize"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="@+id/gameScreenListView"
+    app:layout_constraintStart_toStartOf="@+id/gameScreenListView"
+    app:layout_constraintTop_toTopOf="@+id/midpointGuideline" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
