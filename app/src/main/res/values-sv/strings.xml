@@ -41,8 +41,8 @@
   <string name="challengeAlreadyExistsSnackbar">Du har redan en utmaning mot den här spelaren</string>
   <string name="turn">Tur</string>
   <string name="viewBoard">Se Bräde</string>
-  <string name="deny">Neka</string>
-  <string name="accept">Acceptera</string>
+  <string name="deny">Nej</string>
+  <string name="accept">Ja</string>
   <string name="showChallengesText">Utmaningar</string>
   <string name="showGamesText">Spel</string>
   <string name="addedFriendButton">Tillagd</string>
