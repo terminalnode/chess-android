@@ -1,10 +1,10 @@
 package com.example.newtonchess.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +29,14 @@ public class SplashScreenActivity extends AppCompatActivity {
     long startTime = System.currentTimeMillis() + 4000;
 
     // Check if there's a saved token available
-    SharedPreferences sp = getPreferences(Context.MODE_PRIVATE);
-    String previous_token = sp.getString(StaticValues.INTENT_TOKEN, null);
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+    String previous_token = sp.getString(StaticValues.PREF_TOKEN, null);
+
+    // See what's in the preferences
+    Log.i(StaticValues.SPLASHSCREEN, "Values in shared preferences: " + sp.getAll().size());
+    for (String preferenceKey : sp.getAll().keySet()) {
+      Log.i(StaticValues.SPLASHSCREEN, ">>> Key: " + preferenceKey);
+    }
     Log.i(StaticValues.SPLASHSCREEN, "Previous token is: " + previous_token);
 
     // Validate the token and start the activity

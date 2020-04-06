@@ -2,7 +2,9 @@
 package com.example.newtonchess.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.newtonchess.R;
+import com.example.newtonchess.StaticValues;
 import com.example.newtonchess.api.ApiLogin;
 import com.example.newtonchess.api.entities.PlayerEntity;
 import com.example.newtonchess.api.entities.TokenEntity;
@@ -68,6 +71,10 @@ public class MainMenuActivity extends AppCompatActivity {
   private void logoutButtonPress(@Nullable View view) {
     ApiLogin.logout(token.getTokenString());
     Intent loginScreenIntent = new Intent(this, LoginScreenActivity.class);
+    SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
+    sp.remove(StaticValues.PREF_TOKEN);
+    sp.apply();
+
     startActivity(loginScreenIntent);
   }
 }

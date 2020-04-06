@@ -1,9 +1,9 @@
 package com.example.newtonchess.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +47,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     signInButton.setOnClickListener(this::loginButtonPress);
     signUpButton.setOnClickListener(this::signUpButtonPress);
 
-    sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+    sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
     // Fill in previous username/password if we have it
     String savedName = sharedPreferences.getString(StaticValues.PREF_USERNAME, null);
