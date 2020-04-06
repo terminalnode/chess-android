@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Skapad av Alexander -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/splashConstraintLayout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/colorBackground">
+
+  <ImageView
+    android:id="@+id/splashLogo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:contentDescription="@string/newtonLogoDescription"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/newton_java_logo" />
+
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/splashLogoGuideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.5" />
+
+  <TextView
+    android:id="@+id/splashTextNewton"
+    style="@style/TitleText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:shadowColor="@color/colorPrimaryDark"
+    android:text="@string/titleNewton"
+    android:textAlignment="center"
+    android:textColor="@color/colorPrimary"
+    app:layout_constraintBottom_toTopOf="@+id/splashLogoGuideline"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/splashLogo" />
+
+  <TextView
+    android:id="@+id/splashTextChess"
+    style="@style/TitleText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:shadowColor="@color/colorPrimaryDark"
+    android:text="@string/titleChess"
+    android:textAlignment="center"
+    android:textColor="@color/colorPrimary"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/splashLogo"
+    app:layout_constraintTop_toTopOf="@+id/splashLogoGuideline" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
