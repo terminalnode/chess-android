@@ -59,4 +59,6 @@
   <string name="failedToCreateToken">トークン作れませんでした、もう一度ログインして下さい</string>
   <string name="refreshing">更新中</string>
   <string name="emptyListTextInanimate">ここは何もありません</string>
+  <string name="titleNewtonVertical">ニ\nュ\nー\nト\nン</string>
+  <string name="titleChessVertical">チ\nェ\nス</string>
 </resources>

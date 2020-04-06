@@ -8,6 +8,8 @@
   <!-- Splash screen -->
   <string name="titleNewton">N e w t o n</string>
   <string name="titleChess">C h e s s</string>
+  <string name="titleNewtonVertical">N\ne\nw\nt\no\nn</string>
+  <string name="titleChessVertical">C\nh\ne\ns\ns</string>
 
   <!-- Login screen -->
   <string name="loginScreenTitle">Sign in</string>
