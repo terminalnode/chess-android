@@ -58,4 +58,5 @@
   <string name="incorrectUsername">Den användaren existerar inte.</string>
   <string name="failedToCreateToken">Token kunde inte skapas, försök igen.</string>
   <string name="refreshing">Uppdaterar...</string>
+  <string name="emptyListTextInanimate">Det är inget här…</string>
 </resources>

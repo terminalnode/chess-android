@@ -18,9 +18,7 @@ import com.example.newtonchess.api.entities.TokenEntity;
 import com.example.newtonchess.api.retrofitservices.RetrofitHelper;
 import com.example.newtonchess.gui.ChallengesListAdapter;
 import com.example.newtonchess.gui.GamesListAdapter;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +42,7 @@ public class PickGameActivity extends AppCompatActivity {
   ListView listView;
   ChallengesListAdapter challengesListAdapter;
   GamesListAdapter gamesListAdapter;
-  TextView header;
+  TextView header, emptyListTop, emptyListBottom;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +58,8 @@ public class PickGameActivity extends AppCompatActivity {
     showChallengesButton = findViewById(R.id.showChallengesButton);
     listView = findViewById(R.id.gameScreenListView);
     header = findViewById(R.id.gameScreenHeader);
+    emptyListTop = findViewById(R.id.pickActivityEmptyListTop);
+    emptyListBottom = findViewById(R.id.pickActivityEmptyListBottom);
 
     // Set up list adapters
     challengesListAdapter = new ChallengesListAdapter(
@@ -95,6 +95,7 @@ public class PickGameActivity extends AppCompatActivity {
   private void activateGamesListAdapter(View view) {
     deactivateButton(showGamesButton);
     activateButton(showChallengesButton);
+    gamesListAdapter.clear();
     listView.setAdapter(gamesListAdapter);
     header.setText(R.string.showGamesText);
     updateGames(view);
@@ -103,6 +104,7 @@ public class PickGameActivity extends AppCompatActivity {
   private void activateChallengesListAdapter(View view) {
     deactivateButton(showChallengesButton);
     activateButton(showGamesButton);
+    challengesListAdapter.clear();
     listView.setAdapter(challengesListAdapter);
     header.setText(R.string.showChallengesText);
     updateChallenges(view);
@@ -119,75 +121,99 @@ public class PickGameActivity extends AppCompatActivity {
   }
 
   private void updateGames(View view) {
-    Log.i("GAMES", "Updating games, my token is: " + token);
-    Call<List<GameEntity>> call = RetrofitHelper
+    setFetchTextFetchingList();
+
+    RetrofitHelper
         .getGameService()
-        .getAllGames(token.getTokenString());
-    Log.i("GAMES", "Created Retrofit call: " + call);
+        .getAllGames(token.getTokenString())
+        .enqueue(new Callback<List<GameEntity>>() {
+          @Override
+          @EverythingIsNonNull
+          public void onResponse(Call<List<GameEntity>> call, Response<List<GameEntity>> response) {
+            List<GameEntity> games = response.body();
 
-    call.enqueue(new Callback<List<GameEntity>>() {
-      @Override
-      @EverythingIsNonNull
-      public void onResponse(Call<List<GameEntity>> call, Response<List<GameEntity>> response) {
-        List<GameEntity> games = response.body();
-        Log.i("GAMES", "Fetched games, got this: " + games);
+            if (games != null && games.size() > 0) {
+              gamesListAdapter.clear();
+              gamesListAdapter.addAll(games);
+              hideFetchText();
 
-        if (games != null) {
-          gamesListAdapter.clear();
-          gamesListAdapter.addAll(games);
-          if (games.size() > 0) {
-            Log.i("GAMES", "Fetched a list of games, first one: " + games.get(0));
+            } else if (games != null) {
+              gamesListAdapter.clear();
+              setFetchTextNothingHere();
+
+            } else {
+              setFetchTextFailed();
+            }
           }
-        } else {
-          try {
-            Log.i("GAMES", "Error body: " + response.errorBody().string());
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-        }
-      }
 
-      @Override
-      @EverythingIsNonNull
-      public void onFailure(Call<List<GameEntity>> call, Throwable t) {
-        unknownError(view);
-      }
-    });
+          @Override
+          @EverythingIsNonNull
+          public void onFailure(Call<List<GameEntity>> call, Throwable t) {
+            setFetchTextFailed();
+          }
+        });
   }
 
   private void updateChallenges(View view) {
-    Log.i("CHALLENGES", "Updating challenges, my token is: " + token);
+    setFetchTextFetchingList();
 
-    Call<List<ChallengeEntity>> call = RetrofitHelper
+    RetrofitHelper
         .getChallengeService()
-        .getChallengesToMe(token.getTokenString());
+        .getChallengesToMe(token.getTokenString())
+        .enqueue(new Callback<List<ChallengeEntity>>() {
+          @Override
+          @EverythingIsNonNull
+          public void onResponse(Call<List<ChallengeEntity>> call, Response<List<ChallengeEntity>> response) {
+            List<ChallengeEntity> challenges = response.body();
 
-    call.enqueue(new Callback<List<ChallengeEntity>>() {
-      @Override
-      public void onResponse(Call<List<ChallengeEntity>> call, Response<List<ChallengeEntity>> response) {
-        List<ChallengeEntity> challenges = response.body();
+            if (challenges != null && challenges.size() > 0) {
+              challengesListAdapter.clear();
+              challengesListAdapter.addAll(challenges);
+              hideFetchText();
 
-        if (challenges != null) {
-          challengesListAdapter.clear();
-          challengesListAdapter.addAll(challenges);
-          Log.i("CHALLENGES", "Got challenges, there are: " + challenges.size());
-        } else {
-          Log.i("CHALLENGES", "Challenges is null!");
-        }
-      }
+            } else if (challenges != null) {
+              challengesListAdapter.clear();
+              setFetchTextNothingHere();
 
-      @Override
-      public void onFailure(Call<List<ChallengeEntity>> call, Throwable t) {
+            } else {
+              setFetchTextFailed();
+              Log.i("CHALLENGES", "Challenges is null!");
+            }
+          }
 
-      }
-    });
+          @Override
+          @EverythingIsNonNull
+          public void onFailure(Call<List<ChallengeEntity>> call, Throwable t) {
+            setFetchTextFailed();
+          }
+        });
   }
 
-  private void unknownError(View view) {
-    Snackbar.make(
-        view,
-        R.string.somethingWentWrong,
-        Snackbar.LENGTH_LONG
-    ).show();
+  private void setFetchTextNothingHere() {
+    emptyListTop.setText(R.string.emptyListTextInanimate);
+    emptyListBottom.setText(R.string.thatsTooBad);
+    showFetchText();
+  }
+
+  private void setFetchTextFetchingList() {
+    emptyListTop.setText(R.string.fetchingList);
+    emptyListBottom.setText(R.string.standBy);
+    showFetchText();
+  }
+
+  private void setFetchTextFailed() {
+    emptyListTop.setText(R.string.failedToFetchList);
+    emptyListBottom.setText(R.string.thatsTooBad);
+    showFetchText();
+  }
+
+  private void showFetchText() {
+    emptyListTop.setVisibility(View.VISIBLE);
+    emptyListBottom.setVisibility(View.VISIBLE);
+  }
+
+  private void hideFetchText() {
+    emptyListTop.setVisibility(View.GONE);
+    emptyListBottom.setVisibility(View.GONE);
   }
 }

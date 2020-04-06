@@ -39,6 +39,7 @@
   <string name="addFriendButton">Add friend</string>
   <string name="addedFriendButton">Added</string>
   <string name="emptyListText">There\'s no one here…</string>
+  <string name="emptyListTextInanimate">There\'s nothing here…</string>
   <string name="thatsTooBad">That\'s too bad.</string>
   <string name="failedToFetchList">Failed to fetch friends list!</string>
   <string name="fetchingList">Fetching list…</string>
