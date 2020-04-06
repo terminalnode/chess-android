@@ -50,6 +50,7 @@
     android:text="@string/fetchingList"
     android:textColor="@color/colorComplementary"
     android:textSize="@dimen/emptyListTextSize"
+    android:visibility="visible"
     app:layout_constraintBottom_toTopOf="@+id/emptyListTextViewBottom"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
@@ -61,6 +62,7 @@
     android:text="@string/standBy"
     android:textColor="@color/colorComplementary"
     android:textSize="@dimen/emptyListTextSize"
+    android:visibility="visible"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="@+id/midpointGuideline" />
