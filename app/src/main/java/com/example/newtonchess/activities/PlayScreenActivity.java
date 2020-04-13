@@ -80,7 +80,7 @@ public class PlayScreenActivity extends AppCompatActivity {
       long nextRefresh = lastRefresh + refreshRate;
 
       if (System.currentTimeMillis() > nextRefresh) {
-        if (chessBoard.isWhitesTurn() != chessBoard.isWhite()) {
+        if (chessBoard.isWhitesTurn() != chessBoard.isWhite() && !chessBoard.isFinished()) {
           refreshButtonClicked(null);
         } else {
           Log.i(StaticValues.PLAYSCREEN, "Still my turn, not refreshing.");
@@ -106,6 +106,7 @@ public class PlayScreenActivity extends AppCompatActivity {
     Intent intent = new Intent(this, PickGameActivity.class);
     intent.putExtra(StaticValues.INTENT_TOKEN, token);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    threadHandler.removeCallbacks(autoUpdateFunction);
     startActivity(intent);
   }
 
